@@ -1,0 +1,2024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Miskatonic University · Medieval Institute</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet" />
+
+    <style>
+        /* ----- RESET & BASE ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5ede3;
+            color: #2d1f12;
+            line-height: 1.6;
+        }
+
+        /* ----- COLOR TOKENS: BURNT SIENNA & MEDIEVAL BROWN ----- */
+        :root {
+            --brown-900: #3d2415;
+            --brown-800: #5a3420;
+            --brown-700: #6b4423;
+            --brown-600: #8b5a34;
+            --brown-500: #a67a52;
+            --brown-400: #c49a7a;
+            --brown-300: #dbb89a;
+            --brown-200: #e8d4be;
+            --brown-100: #f0e4d6;
+
+            --sienna-500: #e97451;
+            --sienna-400: #f08a6a;
+            --sienna-300: #f5a88a;
+            --sienna-200: #f9c4ae;
+            --sienna-100: #fde2d4;
+
+            --white: #ffffff;
+            --parchment: #f5ede3;
+            --dark: #2d1f12;
+        }
+
+        /* ----- UTILITY ----- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.6rem;
+            font-weight: 700;
+            color: var(--brown-800);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .section-title .highlight {
+            color: var(--sienna-500);
+            font-style: italic;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--brown-600);
+            max-width: 640px;
+            margin-bottom: 2.5rem;
+            font-weight: 400;
+        }
+
+        .section-subtitle.centered {
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+
+        /* ----- BUTTONS ----- */
+        .btn {
+            display: inline-block;
+            padding: 14px 36px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            letter-spacing: 0.3px;
+        }
+
+        .btn-primary {
+            background: var(--sienna-500);
+            color: var(--white);
+            box-shadow: 0 6px 20px rgba(233, 116, 81, 0.35);
+        }
+
+        .btn-primary:hover {
+            background: var(--sienna-400);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(233, 116, 81, 0.45);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--sienna-500);
+        }
+
+        .btn-secondary:hover {
+            background: var(--sienna-500);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        .btn-outline-brown {
+            background: transparent;
+            color: var(--brown-700);
+            border: 2px solid var(--brown-700);
+            padding: 10px 28px;
+            font-size: 0.9rem;
+        }
+
+        .btn-outline-brown:hover {
+            background: var(--brown-700);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .btn-modal {
+            background: var(--brown-700);
+            color: var(--white);
+            padding: 8px 24px;
+            font-size: 0.85rem;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-weight: 600;
+        }
+
+        .btn-modal:hover {
+            background: var(--brown-600);
+        }
+
+        /* ----- HEADER / NAV ----- */
+        .topbar {
+            background: var(--brown-900);
+            padding: 12px 0;
+            border-bottom: 4px solid var(--sienna-500);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .topbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px 24px;
+        }
+
+        .topbar .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .topbar .logo img {
+            height: 44px;
+            width: auto;
+            border-radius: 4px;
+        }
+
+        .topbar .logo .brand {
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1.15rem;
+            letter-spacing: -0.3px;
+        }
+
+        .topbar .logo .brand span {
+            color: var(--sienna-500);
+        }
+
+        .topbar .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .topbar .nav-links a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.25s;
+            letter-spacing: 0.2px;
+        }
+
+        .topbar .nav-links a:hover {
+            color: var(--sienna-400);
+        }
+
+        /* ----- HERO with castle background ----- */
+        .hero {
+            background: linear-gradient(135deg, rgba(61, 36, 21, 0.85) 0%, rgba(107, 68, 35, 0.70) 100%),
+                url('Medieval Institute/castle.jpg');
+            background-size: cover;
+            background-position: center 30%;
+            padding: 90px 0 80px;
+            color: var(--white);
+            position: relative;
+        }
+
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.8rem;
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+
+        .hero-content h1 .highlight {
+            color: var(--sienna-400);
+            font-style: italic;
+        }
+
+        .hero-content p {
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.88);
+            max-width: 540px;
+            margin-bottom: 28px;
+            line-height: 1.7;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-height: 380px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.50);
+            border: 2px solid rgba(255, 255, 255, 0.10);
+        }
+
+        .hero-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px 32px;
+            margin-top: 8px;
+        }
+
+        .hero-badges .badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .hero-badges .badge img {
+            height: 28px;
+            width: 28px;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+
+        /* ----- DISTINCTIONS ----- */
+        .distinctions {
+            padding: 60px 0;
+            background: var(--white);
+            border-bottom: 1px solid var(--brown-200);
+        }
+
+        .distinctions-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .distinctions-grid .item {
+            text-align: center;
+            padding: 20px 12px;
+            border-radius: 12px;
+            background: var(--brown-100);
+            border: 1px solid var(--brown-200);
+            transition: transform 0.25s ease;
+        }
+
+        .distinctions-grid .item:hover {
+            transform: translateY(-4px);
+        }
+
+        .distinctions-grid .item img {
+            height: 48px;
+            width: 48px;
+            object-fit: contain;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+
+        .distinctions-grid .item .number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--brown-800);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .distinctions-grid .item .label {
+            font-size: 0.9rem;
+            color: var(--brown-600);
+            font-weight: 500;
+        }
+
+        /* ----- MISSION & VISION ----- */
+        .mission-vision {
+            padding: 70px 0;
+            background: var(--parchment);
+        }
+
+        .mv-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .mv-grid .card {
+            background: var(--white);
+            padding: 36px 32px;
+            border-radius: 18px;
+            border-left: 6px solid var(--sienna-500);
+            box-shadow: 0 4px 24px rgba(61, 36, 21, 0.06);
+        }
+
+        .mv-grid .card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--brown-800);
+            margin-bottom: 12px;
+        }
+
+        .mv-grid .card p {
+            color: #4d3728;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        /* ----- ACADEMIC OFFERINGS ----- */
+        .academics {
+            padding: 70px 0;
+            background: var(--white);
+        }
+
+        .offerings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
+        }
+
+        .offerings-grid .card {
+            background: var(--parchment);
+            border-radius: 18px;
+            padding: 28px 24px;
+            border: 1px solid var(--brown-200);
+            transition: transform 0.25s ease, box-shadow 0.3s ease;
+        }
+
+        .offerings-grid .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 36px rgba(61, 36, 21, 0.08);
+        }
+
+        .offerings-grid .card h3 {
+            font-size: 1.25rem;
+            color: var(--brown-800);
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .offerings-grid .card p {
+            color: #4d3728;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .offerings-grid .card .tag {
+            display: inline-block;
+            margin-top: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--white);
+            background: var(--brown-700);
+            padding: 4px 14px;
+            border-radius: 20px;
+            letter-spacing: 0.3px;
+        }
+
+        /* ----- FACILITIES ----- */
+        .facilities-section {
+            padding: 70px 0;
+            background: var(--brown-100);
+        }
+
+        .facilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 28px;
+        }
+
+        .facilities-grid .item {
+            background: var(--white);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(61, 36, 21, 0.06);
+            border: 1px solid var(--brown-200);
+            transition: transform 0.25s ease;
+        }
+
+        .facilities-grid .item:hover {
+            transform: translateY(-4px);
+        }
+
+        .facilities-grid .item img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .facilities-grid .item .info {
+            padding: 18px 22px 24px;
+        }
+
+        .facilities-grid .item .info h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--brown-800);
+            margin-bottom: 4px;
+        }
+
+        .facilities-grid .item .info p {
+            font-size: 0.92rem;
+            color: #4d3728;
+            line-height: 1.5;
+            margin-bottom: 14px;
+        }
+
+        /* ----- MODAL ----- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(6px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--white);
+            max-width: 720px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            border-radius: 24px;
+            padding: 40px 36px;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
+            position: relative;
+            animation: modalIn 0.3s ease;
+        }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal .close-btn {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            font-size: 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--brown-600);
+            font-weight: 300;
+            line-height: 1;
+        }
+
+        .modal .close-btn:hover {
+            color: var(--brown-900);
+        }
+
+        .modal h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--brown-800);
+            margin-bottom: 8px;
+        }
+
+        .modal .subhead {
+            color: var(--brown-600);
+            font-weight: 500;
+            margin-bottom: 16px;
+            font-size: 1rem;
+        }
+
+        .modal ul {
+            list-style: none;
+            padding: 0;
+            margin: 12px 0 0;
+        }
+
+        .modal ul li {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--brown-200);
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            font-size: 0.95rem;
+            color: #2d1f12;
+        }
+
+        .modal ul li::before {
+            content: "▸";
+            color: var(--sienna-500);
+            font-weight: 700;
+        }
+
+        .modal ul li:last-child {
+            border-bottom: none;
+        }
+
+        /* ----- RESEARCH ----- */
+        .research-section {
+            padding: 70px 0;
+            background: var(--white);
+        }
+
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 28px;
+        }
+
+        .research-grid .card {
+            background: var(--parchment);
+            border-radius: 18px;
+            padding: 28px 24px;
+            border-top: 5px solid var(--sienna-500);
+            transition: transform 0.25s ease;
+        }
+
+        .research-grid .card:hover {
+            transform: translateY(-4px);
+        }
+
+        .research-grid .card h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--brown-800);
+            margin-bottom: 6px;
+        }
+
+        .research-grid .card p {
+            font-size: 0.92rem;
+            color: #4d3728;
+            line-height: 1.6;
+        }
+
+        /* ----- FACULTY ----- */
+        .faculty-section {
+            padding: 70px 0;
+            background: var(--brown-100);
+        }
+
+        .faculty-table-wrap {
+            overflow-x: auto;
+            background: var(--white);
+            border-radius: 18px;
+            box-shadow: 0 4px 32px rgba(61, 36, 21, 0.06);
+            border: 1px solid var(--brown-200);
+        }
+
+        .faculty-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.92rem;
+            min-width: 700px;
+        }
+
+        .faculty-table thead {
+            background: var(--brown-800);
+            color: var(--white);
+        }
+
+        .faculty-table thead th {
+            padding: 16px 18px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .faculty-table tbody tr {
+            border-bottom: 1px solid var(--brown-200);
+            transition: background 0.2s ease;
+        }
+
+        .faculty-table tbody tr:hover {
+            background: var(--brown-100);
+        }
+
+        .faculty-table tbody td {
+            padding: 14px 18px;
+            vertical-align: middle;
+            color: #2d1f12;
+        }
+
+        .faculty-table .faculty-photo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--sienna-400);
+            display: block;
+        }
+
+        .faculty-table .name {
+            font-weight: 600;
+            color: var(--brown-800);
+        }
+
+        .faculty-table .position {
+            font-weight: 500;
+            color: var(--brown-600);
+            font-size: 0.85rem;
+        }
+
+        .faculty-table .edu {
+            font-size: 0.82rem;
+            color: #5a4030;
+        }
+
+        .faculty-table .expertise {
+            font-size: 0.82rem;
+            color: #4d3728;
+            line-height: 1.4;
+        }
+
+        /* ----- FOOTER ----- */
+        .footer {
+            background: var(--brown-900);
+            padding: 32px 0 28px;
+            border-top: 4px solid var(--sienna-500);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.92rem;
+        }
+
+        .footer .container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px 24px;
+        }
+
+        .footer a {
+            color: var(--sienna-400);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: var(--sienna-300);
+            text-decoration: underline;
+        }
+
+        .footer .small-print {
+            font-size: 0.82rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* ----- RESPONSIVE ----- */
+        @media (max-width: 1024px) {
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-badges {
+                justify-content: center;
+            }
+
+            .distinctions-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .mv-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .topbar .container {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+
+            .topbar .nav-links {
+                justify-content: center;
+                gap: 16px;
+            }
+
+            .hero-content h1 {
+                font-size: 2.4rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .distinctions-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 16px;
+            }
+
+            .faculty-table {
+                font-size: 0.82rem;
+                min-width: 600px;
+            }
+
+            .faculty-table tbody td {
+                padding: 10px 12px;
+            }
+
+            .modal {
+                padding: 28px 20px;
+            }
+
+            .hero-badges {
+                flex-direction: column;
+                align-items: center;
+                gap: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .distinctions-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .distinctions-grid .item .number {
+                font-size: 1.4rem;
+            }
+
+            .offerings-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .facilities-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .research-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== TOP NAV ===== -->
+    <header class="topbar">
+        <div class="container">
+            <div class="logo">
+                <img
+                src="logo.png"
+                alt="Miskatonic University seal"
+                />
+                <span class="brand">Miskatonic <span>Medieval</span></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#distinctions">Distinctions</a></li>
+                <li><a href="#mission-vision">Mission</a></li>
+                <li><a href="#academics">Academics</a></li>
+                <li><a href="#facilities">Facilities</a></li>
+                <li><a href="#research">Research</a></li>
+                <li><a href="#faculty">Faculty</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- ===== HERO with castle background ===== -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>
+                    The Medieval<br />
+                    <span class="highlight">World</span> Reimagined
+                </h1>
+                <p>
+                    The Medieval Institute at Miskatonic University is a premier
+                    center for the study of the Middle Ages — from the fall of Rome
+                    to the dawn of the Renaissance. We bring together scholars of
+                    history, literature, art, philosophy, and theology to explore
+                    the rich complexity of medieval civilization.
+                </p>
+                <div class="hero-badges">
+                    <span class="badge">
+                        <img
+                        src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=60&h=60&fit=crop&crop=center"
+                        alt="Manuscript icon"
+                        />
+                        24 Core Faculty
+                    </span>
+                    <span class="badge">
+                        <img
+                        src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=60&h=60&fit=crop&crop=center"
+                        alt="Castle icon"
+                        />
+                        Chamberlain Castle
+                    </span>
+                    <span class="badge">
+                        <img
+                        src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=60&h=60&fit=crop&crop=center"
+                        alt="Book icon"
+                        />
+                        150+ Affiliated Faculty
+                    </span>
+                </div>
+                <div style="margin-top:28px;">
+                    <a href="#academics" class="btn btn-primary">Explore Programs</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img
+                src="Medieval Institute/art.jpg"
+                alt="Chamberlain Castle, home of the Medieval Institute"
+                />
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== DISTINCTIONS ===== -->
+    <section class="distinctions" id="distinctions">
+        <div class="container">
+            <div class="distinctions-grid">
+                <div class="item">
+                    <img
+                    src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=80&h=80&fit=crop&crop=center"
+                    alt="Manuscript collection"
+                    />
+                    <div class="number">25,000+</div>
+                    <div class="label">Medieval Manuscripts &amp; Incunabula</div>
+                </div>
+                <div class="item">
+                    <img
+                    src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=80&h=80&fit=crop&crop=center"
+                    alt="Castle icon"
+                    />
+                    <div class="number">1671</div>
+                    <div class="label">Chamberlain Castle — Est.</div>
+                </div>
+                <div class="item">
+                    <img
+                    src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=80&h=80&fit=crop&crop=center"
+                    alt="Research icon"
+                    />
+                    <div class="number">40+</div>
+                    <div class="label">Active Research Projects</div>
+                </div>
+                <div class="item">
+                    <img
+                    src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=80&h=80&fit=crop&crop=center"
+                    alt="Fellows icon"
+                    />
+                    <div class="number">14</div>
+                    <div class="label">Post-Doctoral Fellows</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MISSION & VISION ===== -->
+    <section class="mission-vision" id="mission-vision">
+        <div class="container">
+            <div class="mv-grid">
+                <div class="card">
+                    <h3>Mission</h3>
+                    <p>
+                        The Medieval Institute is dedicated to the interdisciplinary
+                        study of the Middle Ages through rigorous scholarship, critical
+                        inquiry, and the preservation of cultural heritage. We advance
+                        understanding of medieval societies — their institutions,
+                        beliefs, artistic expressions, and intellectual traditions —
+                        while training the next generation of medievalists to engage
+                        with the past in ways that illuminate the present.
+                    </p>
+                </div>
+                <div class="card">
+                    <h3>Vision</h3>
+                    <p>
+                        To be a global leader in medieval studies, fostering innovative
+                        research that bridges disciplines, geographies, and time periods.
+                        We envision an institute where scholars, students, and the public
+                        come together to explore the enduring legacy of the Middle Ages
+                        and its relevance to contemporary questions of identity, power,
+                        and cultural exchange.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ACADEMIC OFFERINGS ===== -->
+    <section class="academics" id="academics">
+        <div class="container">
+            <h2 class="section-title" style="text-align:center;">
+                Academic <span class="highlight">Offerings</span>
+            </h2>
+            <p class="section-subtitle centered">
+                Comprehensive programs that equip students with the skills and
+                knowledge to become leaders in medieval scholarship and beyond.
+            </p>
+
+            <div class="offerings-grid">
+                <div class="card">
+                    <h3>Bachelor of Arts in Medieval Studies</h3>
+                    <p>
+                        An interdisciplinary undergraduate program exploring the
+                        history, literature, art, philosophy, and religion of the
+                        Middle Ages through coursework and independent research.
+                    </p>
+                    <span class="tag">B.A. Medieval Studies</span>
+                </div>
+                <div class="card">
+                    <h3>Master of Arts in Medieval Studies</h3>
+                    <p>
+                        A flexible graduate program offering advanced training in
+                        medieval history, literature, and material culture. Students
+                        may pursue thesis or non-thesis tracks with faculty mentorship.
+                    </p>
+                    <span class="tag">M.A. Medieval Studies</span>
+                </div>
+                <div class="card">
+                    <h3>Doctor of Philosophy in Medieval Studies</h3>
+                    <p>
+                        A research-intensive doctoral program that prepares scholars
+                        for academic careers in medieval studies. Students work with
+                        faculty across disciplines to produce original contributions
+                        to the field.
+                    </p>
+                    <span class="tag">Ph.D. Medieval Studies</span>
+                </div>
+                <div class="card">
+                    <h3>Certificate in Paleography &amp; Codicology</h3>
+                    <p>
+                        A professional certificate program training students in the
+                        reading, transcription, and analysis of medieval manuscripts,
+                        with hands-on experience in the institute's collections.
+                    </p>
+                    <span class="tag">Certificate</span>
+                </div>
+                <div class="card">
+                    <h3>Joint Program: History &amp; Medieval Studies</h3>
+                    <p>
+                        An interdisciplinary joint degree offered in partnership with
+                        the Department of History, combining rigorous historical
+                        training with specialized medieval studies coursework.
+                    </p>
+                    <span class="tag">M.A./Ph.D. Joint</span>
+                </div>
+                <div class="card">
+                    <h3>Summer Institute in Medieval Culture</h3>
+                    <p>
+                        An intensive summer program offering courses, workshops, and
+                        field study in medieval art, architecture, and manuscript
+                        culture, open to visiting scholars and advanced students.
+                    </p>
+                    <span class="tag">Summer Program</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FACILITIES ===== -->
+    <section class="facilities-section" id="facilities">
+        <div class="container">
+            <h2 class="section-title" style="text-align:center;">
+                Institute <span class="highlight">Facilities</span>
+            </h2>
+            <p class="section-subtitle centered">
+                Chamberlain Castle and its associated resources provide an unparalleled
+                environment for medieval research and teaching.
+            </p>
+
+            <div class="facilities-grid">
+                <!-- Facility 1: Chamberlain Castle -->
+                <div class="item">
+                    <img
+                    src="Medieval Institute/throne.jpg"
+                    alt="Chamberlain Castle exterior"
+                    />
+                    <div class="info">
+                        <h4>Chamberlain Castle</h4>
+                        <p>
+                            A historic castle built in 1671, donated by Francis Chamberlain.
+                            The castle houses lecture rooms, offices, a grand dining hall,
+                            and extensive research collections.
+                        </p>
+                        <button class="btn-modal" data-modal="modal-castle">View Details</button>
+                    </div>
+                </div>
+
+                <!-- Facility 2: Albert Richmond Medieval Library -->
+                <div class="item">
+                    <img
+                    src="Medieval Institute/library.jpg"
+                    alt="Albert Richmond Medieval Library"
+                    />
+                    <div class="info">
+                        <h4>Albert Richmond Medieval Library</h4>
+                        <p>
+                            A specialized research library housing over 25,000 medieval
+                            manuscripts, incunabula, and rare printed works, with
+                            reading rooms and research carrels.
+                        </p>
+                        <button class="btn-modal" data-modal="modal-library">View Details</button>
+                    </div>
+                </div>
+
+                <!-- Facility 3: Castle Armory & Collections -->
+                <div class="item">
+                    <img
+                    src="Medieval Institute/armory.jpg"
+                    alt="Castle Armory"
+                    />
+                    <div class="info">
+                        <h4>Castle Armory &amp; Collections</h4>
+                        <p>
+                            A curated collection of medieval weapons, armor, and
+                            ceremonial objects used for teaching, research, and
+                            public exhibitions.
+                        </p>
+                        <button class="btn-modal" data-modal="modal-armory">View Details</button>
+                    </div>
+                </div>
+
+                <!-- Facility 4: Castle Catacombs & Lower Levels -->
+                <div class="item">
+                    <img
+                    src="Medieval Institute/catacombs.jpg"
+                    alt="Castle Catacombs"
+                    />
+                    <div class="info">
+                        <h4>Castle Catacombs &amp; Lower Levels</h4>
+                        <p>
+                            The historic lower levels of Chamberlain Castle, including
+                            dungeons and catacombs, preserved for historical research
+                            and archaeological study.
+                        </p>
+                        <button class="btn-modal" data-modal="modal-catacombs">View Details</button>
+                    </div>
+                </div>
+
+                <!-- Facility 5: Conservation Laboratory -->
+                <div class="item">
+                    <img
+                    src="Medieval Institute/lab.jpg"
+                    alt="Conservation Laboratory"
+                    />
+                    <div class="info">
+                        <h4>Conservation Laboratory</h4>
+                        <p>
+                            A specialized facility for the preservation and restoration
+                            of medieval manuscripts, parchment, seals, and other
+                            historical materials.
+                        </p>
+                        <button class="btn-modal" data-modal="modal-conservation">View Details</button>
+                    </div>
+                </div>
+
+                <!-- Facility 6: Medieval Garden & Grounds -->
+                <div class="item">
+                    <img
+                    src="Medieval Institute/garden.jpg"
+                    alt="Medieval Garden"
+                    />
+                    <div class="info">
+                        <h4>Medieval Garden &amp; Grounds</h4>
+                        <p>
+                            A recreated medieval garden featuring plants, herbs, and
+                            flowers documented in period sources, used for teaching
+                            and sensory engagement.
+                        </p>
+                        <button class="btn-modal" data-modal="modal-garden">View Details</button>
+                    </div>
+                </div>
+
+                <!-- Facility 7: Grand Medieval Dining Hall -->
+                <div class="item">
+                    <img
+                    src="Medieval Institute/dininghall.jpg"
+                    alt="Grand Medieval Dining Hall"
+                    />
+                    <div class="info">
+                        <h4>Grand Medieval Dining Hall</h4>
+                        <p>
+                            A magnificent medieval-inspired hall serving as the institute's
+                            primary venue for formal banquets, academic receptions,
+                            guest lectures, and ceremonial events.
+                        </p>
+                        <button class="btn-modal" data-modal="modal-dininghall">View Details</button>
+                    </div>
+                </div>
+
+                <!-- Facility 8: Lecture Rooms -->
+                <div class="item">
+                    <img
+                    src="Medieval Institute/classroom.jpg"
+                    alt="Lecture Rooms"
+                    />
+                    <div class="info">
+                        <h4>Lecture Rooms</h4>
+                        <p>
+                            Historic chambers converted into modern teaching spaces while
+                            preserving the architectural character of Chamberlain Castle.
+                        </p>
+                        <button class="btn-modal" data-modal="modal-lecture">View Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MODALS ===== -->
+
+    <!-- Modal: Chamberlain Castle -->
+    <div class="modal-overlay" id="modal-castle">
+        <div class="modal">
+            <button class="close-btn" data-close="modal-castle">&times;</button>
+            <h2>Chamberlain Castle</h2>
+            <div class="subhead">The Heart of the Medieval Institute</div>
+            <p style="margin-bottom:12px; color:#4d3728;">
+                Built in 1671 and donated to the university by Francis Chamberlain,
+                this historic castle serves as the primary facility for the Medieval
+                Institute. The castle combines period architecture with modern
+                research and teaching amenities.
+            </p>
+            <ul>
+                <li><strong>Main Area:</strong> 50 lecture rooms (converted function rooms), 50 offices, 50 bedrooms for visiting scholars and guests</li>
+                <li><strong>Grand Dining Hall:</strong> A 100-seat hall for formal events, academic gatherings, and community meals</li>
+                <li><strong>Kitchen:</strong> Modernized facilities supporting the dining hall and residential programs</li>
+                <li><strong>Castle Basement — Level I:</strong> Chamberlain Armory (public display) and Albert Richmond Medieval Library</li>
+                <li><strong>Castle Basement — Level II:</strong> Historical dungeons preserved for archaeological and historical research</li>
+                <li><strong>Castle Basement — Levels III &amp; IV:</strong> Restricted collections and catacombs accessible to qualified researchers</li>
+                <li><strong>Secret Elevator:</strong> Provides access to the university's underground tunnel network</li>
+            </ul>
+            <div style="margin-top:20px; display:flex; gap:12px; flex-wrap:wrap;">
+                <span style="background:var(--brown-100); padding:4px 16px; border-radius:20px; font-size:0.8rem; color:var(--brown-700); font-weight:600;">Historic Building</span>
+                <span style="background:var(--brown-100); padding:4px 16px; border-radius:20px; font-size:0.8rem; color:var(--brown-700); font-weight:600;">Research Facility</span>
+                <span style="background:var(--brown-100); padding:4px 16px; border-radius:20px; font-size:0.8rem; color:var(--brown-700); font-weight:600;">Residential</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Library -->
+    <div class="modal-overlay" id="modal-library">
+        <div class="modal">
+            <button class="close-btn" data-close="modal-library">&times;</button>
+            <h2>Albert Richmond Medieval Library</h2>
+            <div class="subhead">A Premier Research Collection</div>
+            <p style="margin-bottom:12px; color:#4d3728;">
+                Named after its benefactor, the Albert Richmond Medieval Library
+                houses one of the most comprehensive collections of medieval
+                manuscripts and early printed books in North America.
+            </p>
+            <ul>
+                <li><strong>Manuscripts:</strong> Over 25,000 medieval manuscripts spanning the 8th to 16th centuries</li>
+                <li><strong>Incunabula:</strong> More than 1,200 examples of early printing from the 15th century</li>
+                <li><strong>Rare Printed Works:</strong> Extensive collections of early modern editions, chronicles, and travel accounts</li>
+                <li><strong>Special Collections:</strong> Focus areas include monastic chronicles, cartularies, liturgical manuscripts, and vernacular literature</li>
+                <li><strong>Reading Room:</strong> A quiet, light-filled space for scholars, with access to reference works and finding aids</li>
+                <li><strong>Research Carrels:</strong> Dedicated workspaces for graduate students and visiting fellows</li>
+                <li><strong>Digital Resources:</strong> High-resolution digitization of selected manuscripts available through the institute's portal</li>
+            </ul>
+            <div style="margin-top:20px; display:flex; gap:12px; flex-wrap:wrap;">
+                <span style="background:var(--brown-100); padding:4px 16px; border-radius:20px; font-size:0.8rem; color:var(--brown-700); font-weight:600;">Open to Researchers</span>
+                <span style="background:var(--brown-100); padding:4px 16px; border-radius:20px; font-size:0.8rem; color:var(--brown-700); font-weight:600;">Digitization Available</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Armory -->
+    <div class="modal-overlay" id="modal-armory">
+        <div class="modal">
+            <button class="close-btn" data-close="modal-armory">&times;</button>
+            <h2>Castle Armory &amp; Collections</h2>
+            <div class="subhead">Weapons, Armor, and Material Culture</div>
+            <p style="margin-bottom:12px; color:#4d3728;">
+                The armory houses a significant collection of medieval and early
+                modern weapons and armor, used for teaching, research, and public
+                exhibitions.
+            </p>
+            <ul>
+                <li><strong>Authentic Medieval Weapons:</strong> Swords, axes, polearms, and projectile weapons from the 12th to 16th centuries</li>
+                <li><strong>Armor Collection:</strong> Full suits of plate armor, mail, helmets, and shields from various periods and regions</li>
+                <li><strong>Ceremonial Objects:</strong> Maces, staffs, and decorative weapons used in academic and civic ceremonies</li>
+                <li><strong>Teaching Collection:</strong> Replicas and reproductions for hands-on pedagogical use</li>
+                <li><strong>Research Access:</strong> Weapons are available for scholarly examination by appointment</li>
+                <li><strong>Exhibition Space:</strong> Public displays rotate throughout the year highlighting different aspects of medieval martial culture</li>
+                <li><strong>Documentation:</strong> Comprehensive cataloguing including provenance, dimensions, and material analysis</li>
+            </ul>
+            <div style="margin-top:20px; display:flex; gap:12px; flex-wrap:wrap;">
+                <span style="background:var(--brown-100); padding:4px 16px; border-radius:20px; font-size:0.8rem; color:var(--brown-700); font-weight:600;">Public Exhibitions</span>
+                <span style="background:var(--brown-100); padding:4px 16px; border-radius:20px; font-size:0.8rem; color:var(--brown-700); font-weight:600;">By Appointment</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Catacombs -->
+    <div class="modal-overlay" id="modal-catacombs">
+        <div class="modal">
+            <button class="close-btn" data-close="modal-catacombs">&times;</button>
+            <h2>Castle Catacombs &amp; Lower Levels</h2>
+            <div class="subhead">Archaeology and Historical Preservation</div>
+            <p style="margin-bottom:12px; color:#4d3728;">
+                The lower levels of Chamberlain Castle offer unique opportunities
+                for archaeological and historical research, preserving centuries
+                of material history.
+            </p>
+            <ul>
+                <li><strong>Historical Dungeons:</strong> Original prison cells and holding areas preserved as they were in the 17th and 18th centuries</li>
+                <li><strong>Catacombs:</strong> Extended underground passages and chambers used for storage and, historically, for burial</li>
+                <li><strong>Archaeological Context:</strong> The lower levels contain stratified deposits with artifacts spanning the castle's history</li>
+                <li><strong>Research Access:</strong> Controlled access for archaeological investigation and historical documentation</li>
+                <li><strong>Conservation Efforts:</strong> Ongoing stabilization and environmental monitoring to preserve historic fabric</li>
+                <li><strong>Interpretation:</strong> Educational programming explores the social and cultural history of the castle's lower levels</li>
+                <li><strong>Connections:</strong> The catacombs connect to the university's wider tunnel network via a secure elevator</li>
+            </ul>
+            <div style="margin-top:20px; display:flex; gap:12px; flex-wrap:wrap;">
+                <span style="background:var(--brown-100); padding:4px 16px; border-radius:20px; font-size:0.8rem; color:var(--brown-700); font-weight:600;">Research Access</span>
+                <span style="background:var(--brown-100); padding:4px 16px; border-radius:20px; font-size:0.8rem; color:var(--brown-700); font-weight:600;">Archaeological Site</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Conservation -->
+    <div class="modal-overlay" id="modal-conservation">
+        <div class="modal">
+            <button class="close-btn" data-close="modal-conservation">&times;</button>
+            <h2>Conservation Laboratory</h2>
+            <div class="subhead">Preserving the Material Past</div>
+            <p style="margin-bottom:12px; color:#4d3728;">
+                The Conservation Laboratory is a specialized facility dedicated to
+                the preservation, restoration, and analysis of medieval manuscripts,
+                documents, and artifacts.
+            </p>
+            <ul>
+                <li><strong>Manuscript Conservation:</strong> Treatment of parchment, vellum, and paper manuscripts including repair, cleaning, and binding</li>
+                <li><strong>Seal and Wax Preservation:</strong> Specialized techniques for preserving medieval seals and wax impressions</li>
+                <li><strong>Textile Conservation:</strong> Care and preservation of medieval textiles, tapestries, and vestments</li>
+                <li><strong>Analytical Equipment:</strong> Microscopy, spectrometry, and other tools for material analysis</li>
+                <li><strong>Environmental Control:</strong> Climate-controlled storage and work areas to ensure optimal preservation conditions</li>
+                <li><strong>Training Program:</strong> Offers practical training for students and early-career conservators</li>
+                <li><strong>Collaboration:</strong> Works with libraries, museums, and archives to advance conservation science</li>
+            </ul>
+            <div style="margin-top:20px; display:flex; gap:12px; flex-wrap:wrap;">
+                <span style="background:var(--brown-100); padding:4px 16px; border-radius:20px; font-size:0.8rem; color:var(--brown-700); font-weight:600;">Training Available</span>
+                <span style="background:var(--brown-100); padding:4px 16px; border-radius:20px; font-size:0.8rem; color:var(--brown-700); font-weight:600;">By Appointment</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Garden -->
+    <div class="modal-overlay" id="modal-garden">
+        <div class="modal">
+            <button class="close-btn" data-close="modal-garden">&times;</button>
+            <h2>Medieval Garden &amp; Grounds</h2>
+            <div class="subhead">A Living History Experience</div>
+            <p style="margin-bottom:12px; color:#4d3728;">
+                The Medieval Garden recreates the horticultural traditions of the
+                Middle Ages, offering students and visitors a sensory engagement
+                with the past.
+            </p>
+            <ul>
+                <li><strong>Plant Collection:</strong> Over 200 species of plants, herbs, and flowers documented in medieval sources</li>
+                <li><strong>Medicinal Herbs:</strong> A curated collection of plants used in medieval medicine and apothecary</li>
+                <li><strong>Culinary Herbs:</strong> Plants used in medieval cooking, preserving, and food preparation</li>
+                <li><strong>Dye Plants:</strong> Species used for textile dyeing in the medieval period</li>
+                <li><strong>Ornamental Garden:</strong> Formal planting inspired by medieval monastic and aristocratic gardens</li>
+                <li><strong>Teaching Resource:</strong> Used for courses in material culture, food history, and environmental history</li>
+                <li><strong>Public Access:</strong> The garden is open to the public during institute hours</li>
+            </ul>
+            <div style="margin-top:20px; display:flex; gap:12px; flex-wrap:wrap;">
+                <span style="background:var(--brown-100); padding:4px 16px; border-radius:20px; font-size:0.8rem; color:var(--brown-700); font-weight:600;">Open to Public</span>
+                <span style="background:var(--brown-100); padding:4px 16px; border-radius:20px; font-size:0.8rem; color:var(--brown-700); font-weight:600;">Teaching Resource</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Grand Medieval Dining Hall -->
+    <div class="modal-overlay" id="modal-dininghall">
+        <div class="modal">
+            <button class="close-btn" data-close="modal-dininghall">&times;</button>
+            <h2>Grand Medieval Dining Hall</h2>
+            <div class="subhead">Tradition, Scholarship, and Fellowship</div>
+
+            <p style="margin-bottom:12px; color:#4d3728;">
+                Located within Chamberlain Castle, the Grand Medieval Dining Hall
+                serves as the social and ceremonial heart of the institute. Inspired
+                by the great halls of medieval castles and colleges, it hosts
+                academic banquets, conferences, receptions, and formal dinners while
+                continuing centuries-old traditions of scholarly fellowship.
+            </p>
+
+            <ul>
+                <li><strong>Capacity:</strong> Seats approximately 100 guests for formal dining and academic functions</li>
+                <li><strong>Academic Banquets:</strong> Hosts graduation dinners, visiting scholars, and institute celebrations</li>
+                <li><strong>Conference Venue:</strong> Used for keynote lectures, symposium receptions, and international meetings</li>
+                <li><strong>Historic Design:</strong> Features timber beams, stone fireplaces, heraldic banners, and handcrafted furnishings</li>
+                <li><strong>Modern Kitchen:</strong> Adjacent commercial kitchen supporting institute events and catered functions</li>
+                <li><strong>Cultural Programming:</strong> Venue for medieval-themed feasts, music performances, and historical reenactments</li>
+                <li><strong>Private Events:</strong> Available for university ceremonies and approved institutional gatherings</li>
+            </ul>
+
+            <div style="margin-top:20px; display:flex; gap:12px; flex-wrap:wrap;">
+                <span style="background:var(--brown-100); padding:4px 16px; border-radius:20px; font-size:0.8rem; color:var(--brown-700); font-weight:600;">100 Seats</span>
+                <span style="background:var(--brown-100); padding:4px 16px; border-radius:20px; font-size:0.8rem; color:var(--brown-700); font-weight:600;">Ceremonial Venue</span>
+                <span style="background:var(--brown-100); padding:4px 16px; border-radius:20px; font-size:0.8rem; color:var(--brown-700); font-weight:600;">Conference Events</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Lecture Rooms -->
+    <div class="modal-overlay" id="modal-lecture">
+        <div class="modal">
+            <button class="close-btn" data-close="modal-lecture">&times;</button>
+            <h2>Lecture Rooms</h2>
+            <div class="subhead">Historic Spaces for Modern Learning</div>
+
+            <p style="margin-bottom:12px; color:#4d3728;">
+                Chamberlain Castle contains fifty lecture rooms created through the
+                adaptive reuse of its historic chambers. Each classroom preserves the
+                architectural character of the castle while incorporating modern
+                instructional technology for teaching and collaborative learning.
+            </p>
+
+            <ul>
+                <li><strong>Teaching Spaces:</strong> 50 lecture rooms distributed throughout the castle</li>
+                <li><strong>Class Sizes:</strong> Rooms accommodate seminars of 15–30 students and lectures of up to 60 participants</li>
+                <li><strong>Instructional Technology:</strong> Multimedia projectors, presentation systems, wireless connectivity, and lecture capture capability</li>
+                <li><strong>Seminar Rooms:</strong> Dedicated spaces designed for graduate discussions, manuscript workshops, and language instruction</li>
+                <li><strong>Historic Interiors:</strong> Original stone walls, vaulted ceilings, fireplaces, and wood paneling carefully preserved</li>
+                <li><strong>Flexible Layout:</strong> Movable furniture supports lectures, tutorials, workshops, and collaborative activities</li>
+                <li><strong>Accessibility:</strong> Modern accessibility features integrated sensitively into the historic structure</li>
+            </ul>
+
+            <div style="margin-top:20px; display:flex; gap:12px; flex-wrap:wrap;">
+                <span style="background:var(--brown-100); padding:4px 16px; border-radius:20px; font-size:0.8rem; color:var(--brown-700); font-weight:600;">50 Classrooms</span>
+                <span style="background:var(--brown-100); padding:4px 16px; border-radius:20px; font-size:0.8rem; color:var(--brown-700); font-weight:600;">Modern Technology</span>
+                <span style="background:var(--brown-100); padding:4px 16px; border-radius:20px; font-size:0.8rem; color:var(--brown-700); font-weight:600;">Historic Interiors</span>
+            </div>
+        </div>
+    </div>
+    <!-- ===== RESEARCH ===== -->
+    <section class="research-section" id="research">
+        <div class="container">
+            <h2 class="section-title" style="text-align:center;">
+                Research <span class="highlight">Areas</span>
+            </h2>
+            <p class="section-subtitle centered">
+                Our faculty and students pursue innovative research across the full
+                spectrum of medieval studies.
+            </p>
+
+            <div class="research-grid">
+                <div class="card">
+                    <h4>Medieval History &amp; Society</h4>
+                    <p>
+                        Political, social, and economic history of medieval Europe,
+                        including the study of kingship, feudalism, urban life, and
+                        rural communities from the 5th to the 15th centuries.
+                    </p>
+                </div>
+                <div class="card">
+                    <h4>Medieval Literature &amp; Philology</h4>
+                    <p>
+                        The study of medieval literary traditions across languages
+                        including Latin, Old English, Old Norse, French, German, and
+                        Celtic languages, with attention to manuscript transmission.
+                    </p>
+                </div>
+                <div class="card">
+                    <h4>Medieval Art &amp; Architecture</h4>
+                    <p>
+                        The visual and material culture of the Middle Ages, including
+                        manuscript illumination, sculpture, painting, stained glass,
+                        and the built environment of castles, cathedrals, and monasteries.
+                    </p>
+                </div>
+                <div class="card">
+                    <h4>Medieval Philosophy &amp; Theology</h4>
+                    <p>
+                        The intellectual traditions of the Middle Ages, including
+                        scholasticism, mysticism, patristics, and the development of
+                        philosophical and theological systems.
+                    </p>
+                </div>
+                <div class="card">
+                    <h4>Medieval Material Culture</h4>
+                    <p>
+                        The study of objects, artifacts, and material remains from the
+                        Middle Ages, including ceramics, metalwork, textiles, and
+                        everyday items that illuminate medieval life.
+                    </p>
+                </div>
+                <div class="card">
+                    <h4>Manuscript Studies &amp; Codicology</h4>
+                    <p>
+                        The physical study of medieval manuscripts, including their
+                        production, transmission, and reception, with attention to
+                        paleography, codicology, and textual criticism.
+                    </p>
+                </div>
+                <div class="card">
+                    <h4>Medieval Music &amp; Liturgy</h4>
+                    <p>
+                        The study of medieval musical traditions, including plainchant,
+                        polyphony, and the liturgical practices that shaped musical
+                        expression in monastic and cathedral settings.
+                    </p>
+                </div>
+                <div class="card">
+                    <h4>Medieval Law &amp; Governance</h4>
+                    <p>
+                        The study of legal systems, governance structures, and
+                        administrative practices in medieval Europe, including
+                        canon law, customary law, and royal administration.
+                    </p>
+                </div>
+                <div class="card">
+                    <h4>Medieval Environmental History</h4>
+                    <p>
+                        The relationship between medieval societies and their natural
+                        environments, including climate, agriculture, landscapes, and
+                        the human impact on ecosystems.
+                    </p>
+                </div>
+                <div class="card">
+                    <h4>Medieval Religious &amp; Devotional Culture</h4>
+                    <p>
+                        The study of religious life, devotional practices, pilgrimage,
+                        and the material culture of faith in the medieval world,
+                        including monasticism and lay piety.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FACULTY ===== -->
+    <section class="faculty-section" id="faculty">
+        <div class="container">
+            <h2 class="section-title" style="text-align:center;">
+                Institute <span class="highlight">Faculty</span>
+            </h2>
+            <p class="section-subtitle centered">
+                Distinguished scholars and teachers whose research defines the field
+                of medieval studies.
+            </p>
+
+            <div class="faculty-table-wrap">
+                <table class="faculty-table">
+                    <thead>
+                        <tr>
+                            <th style="width:80px;">Photo</th>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Education</th>
+                            <th>Areas of Expertise</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Row 1 -->
+                        <tr>
+                            <td>
+                                <img
+                                src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=120&h=120&fit=crop&crop=face&facepad=2"
+                                alt="Prof. Rosalind Stark"
+                                class="faculty-photo"
+                                />
+                            </td>
+                            <td class="name">Rosalind Stark</td>
+                            <td class="position">Professor &amp; Dean</td>
+                            <td class="edu">Ph.D., Miskatonic University</td>
+                            <td class="expertise">Medieval Folkloristics, Supernatural Weapons</td>
+                        </tr>
+                        <!-- Row 2 -->
+                        <tr>
+                            <td>
+                                <img
+                                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop&crop=face&facepad=2"
+                                alt="Prof. Felix Flammingham"
+                                class="faculty-photo"
+                                />
+                            </td>
+                            <td class="name">Felix Flammingham</td>
+                            <td class="position">Distinguished Professor</td>
+                            <td class="edu">Ph.D., Miskatonic University</td>
+                            <td class="expertise">Medieval Warfare Studies, Weapon Analysis</td>
+                        </tr>
+                        <!-- Row 3 -->
+                        <tr>
+                            <td>
+                                <img
+                                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&h=120&fit=crop&crop=face&facepad=2"
+                                alt="Prof. Yelena Warren-Grant"
+                                class="faculty-photo"
+                                />
+                            </td>
+                            <td class="name">Yelena Warren-Grant</td>
+                            <td class="position">Professor</td>
+                            <td class="edu">Ph.D., Miskatonic University</td>
+                            <td class="expertise">Medieval Esoteric Literature, Comparative Traditions</td>
+                        </tr>
+                        <!-- Row 4 -->
+                        <tr>
+                            <td>
+                                <img
+                                src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=120&h=120&fit=crop&crop=face&facepad=2"
+                                alt="Prof. Gero Harris"
+                                class="faculty-photo"
+                                />
+                            </td>
+                            <td class="name">Gero Harris</td>
+                            <td class="position">Professor</td>
+                            <td class="edu">Ph.D., Miskatonic University</td>
+                            <td class="expertise">Comparative Legal Systems, Social Structures</td>
+                        </tr>
+                        <!-- Row 5 -->
+                        <tr>
+                            <td>
+                                <img
+                                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=120&h=120&fit=crop&crop=face&facepad=2"
+                                alt="Prof. Sharon Wilmore"
+                                class="faculty-photo"
+                                />
+                            </td>
+                            <td class="name">Sharon Wilmore</td>
+                            <td class="position">Professor</td>
+                            <td class="edu">Ph.D., UC Berkeley</td>
+                            <td class="expertise">Medieval French Literature, Courtly Culture</td>
+                        </tr>
+                        <!-- Row 6 -->
+                        <tr>
+                            <td>
+                                <img
+                                src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&h=120&fit=crop&crop=face&facepad=2"
+                                alt="Prof. Viktor A. Grünwald"
+                                class="faculty-photo"
+                                />
+                            </td>
+                            <td class="name">Viktor A. Grünwald</td>
+                            <td class="position">Professor</td>
+                            <td class="edu">Ph.D., Miskatonic University</td>
+                            <td class="expertise">European History, Medieval Intellectual Culture</td>
+                        </tr>
+                        <!-- Row 7 -->
+                        <tr>
+                            <td>
+                                <img
+                                src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&h=120&fit=crop&crop=face&facepad=2"
+                                alt="Prof. Kaito M. Uehara"
+                                class="faculty-photo"
+                                />
+                            </td>
+                            <td class="name">Kaito M. Uehara</td>
+                            <td class="position">Professor</td>
+                            <td class="edu">Ph.D., University of Tokyo</td>
+                            <td class="expertise">Comparative Literature, Eurasian Traditions</td>
+                        </tr>
+                        <!-- Row 8 -->
+                        <tr>
+                            <td>
+                                <img
+                                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop&crop=face&facepad=2"
+                                alt="Prof. Catherine Mosley"
+                                class="faculty-photo"
+                                />
+                            </td>
+                            <td class="name">Catherine Mosley</td>
+                            <td class="position">Associate Professor</td>
+                            <td class="edu">Ph.D., Stanford University</td>
+                            <td class="expertise">Medieval German Intellectual &amp; Religious Culture</td>
+                        </tr>
+                        <!-- Row 9 -->
+                        <tr>
+                            <td>
+                                <img
+                                src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=120&h=120&fit=crop&crop=face&facepad=2"
+                                alt="Prof. Carl Bridgerton"
+                                class="faculty-photo"
+                                />
+                            </td>
+                            <td class="name">Carl Bridgerton</td>
+                            <td class="position">Associate Professor</td>
+                            <td class="edu">Ph.D., Harvard University</td>
+                            <td class="expertise">Byzantine-Islamic Literary Exchanges, Comparative Literature</td>
+                        </tr>
+                        <!-- Row 10 -->
+                        <tr>
+                            <td>
+                                <img
+                                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&h=120&fit=crop&crop=face&facepad=2"
+                                alt="Prof. Dina Reeves"
+                                class="faculty-photo"
+                                />
+                            </td>
+                            <td class="name">Dina Reeves</td>
+                            <td class="position">Assistant Professor</td>
+                            <td class="edu">Ph.D., Harvard University</td>
+                            <td class="expertise">Italian History, Petrarch, Early Humanism</td>
+                        </tr>
+                        <!-- Row 11 -->
+                        <tr>
+                            <td>
+                                <img
+                                src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=120&h=120&fit=crop&crop=face&facepad=2"
+                                alt="Prof. Fatima Levinstein"
+                                class="faculty-photo"
+                                />
+                            </td>
+                            <td class="name">Fatima Levinstein</td>
+                            <td class="position">Associate Professor</td>
+                            <td class="edu">Ph.D., UC Berkeley</td>
+                            <td class="expertise">Comparative Iberian Literature, Castilian-Catalan Studies</td>
+                        </tr>
+                        <!-- Row 12 -->
+                        <tr>
+                            <td>
+                                <img
+                                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=120&h=120&fit=crop&crop=face&facepad=2"
+                                alt="Prof. Avery MgGuirre"
+                                class="faculty-photo"
+                                />
+                            </td>
+                            <td class="name">Avery MgGuirre</td>
+                            <td class="position">Assistant Professor</td>
+                            <td class="edu">Ph.D., Columbia University</td>
+                            <td class="expertise">History of Emotions, Medieval Social History</td>
+                        </tr>
+                        <!-- Row 13 -->
+                        <tr>
+                            <td>
+                                <img
+                                src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&h=120&fit=crop&crop=face&facepad=2"
+                                alt="Prof. Giselle Martin"
+                                class="faculty-photo"
+                                />
+                            </td>
+                            <td class="name">Giselle Martin</td>
+                            <td class="position">Associate Professor</td>
+                            <td class="edu">Ph.D., Miskatonic University</td>
+                            <td class="expertise">Comparative History, Medieval Social Institutions</td>
+                        </tr>
+                        <!-- Row 14 -->
+                        <tr>
+                            <td>
+                                <img
+                                src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=120&h=120&fit=crop&crop=face&facepad=2"
+                                alt="Prof. Helen Travinsky"
+                                class="faculty-photo"
+                                />
+                            </td>
+                            <td class="name">Helen Travinsky</td>
+                            <td class="position">Assistant Professor</td>
+                            <td class="edu">Ph.D., UC Berkeley</td>
+                            <td class="expertise">Eastern European History, Medieval Eastern Europe</td>
+                        </tr>
+                        <!-- Row 15 -->
+                        <tr>
+                            <td>
+                                <img
+                                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop&crop=face&facepad=2"
+                                alt="Prof. James R. Calloway"
+                                class="faculty-photo"
+                                />
+                            </td>
+                            <td class="name">James R. Calloway</td>
+                            <td class="position">Assistant Professor</td>
+                            <td class="edu">Ph.D., Miskatonic University</td>
+                            <td class="expertise">Medieval Literature, Insular Traditions</td>
+                        </tr>
+                        <!-- Row 16 -->
+                        <tr>
+                            <td>
+                                <img
+                                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&h=120&fit=crop&crop=face&facepad=2"
+                                alt="Prof. Jondra Galvinston"
+                                class="faculty-photo"
+                                />
+                            </td>
+                            <td class="name">Jondra Galvinston</td>
+                            <td class="position">Associate Professor</td>
+                            <td class="edu">Ph.D., University of Exeter</td>
+                            <td class="expertise">Castle History, Fortification Studies</td>
+                        </tr>
+                        <!-- Row 17 -->
+                        <tr>
+                            <td>
+                                <img
+                                src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=120&h=120&fit=crop&crop=face&facepad=2"
+                                alt="Prof. Laura K. McAlpin"
+                                class="faculty-photo"
+                                />
+                            </td>
+                            <td class="name">Laura K. McAlpin</td>
+                            <td class="position">Associate Professor</td>
+                            <td class="edu">Ph.D., Miskatonic University</td>
+                            <td class="expertise">Medieval Literature, Narrative Traditions</td>
+                        </tr>
+                        <!-- Row 18 -->
+                        <tr>
+                            <td>
+                                <img
+                                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=120&h=120&fit=crop&crop=face&facepad=2"
+                                alt="Prof. Layla R. Hassan"
+                                class="faculty-photo"
+                                />
+                            </td>
+                            <td class="name">Layla R. Hassan</td>
+                            <td class="position">Assistant Professor</td>
+                            <td class="edu">Ph.D., Harvard University</td>
+                            <td class="expertise">Medieval History, Islamic-Christian Encounters</td>
+                        </tr>
+                        <!-- Row 19 -->
+                        <tr>
+                            <td>
+                                <img
+                                src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&h=120&fit=crop&crop=face&facepad=2"
+                                alt="Prof. Luna Abercrombie"
+                                class="faculty-photo"
+                                />
+                            </td>
+                            <td class="name">Luna Abercrombie</td>
+                            <td class="position">Associate Professor</td>
+                            <td class="edu">Ph.D., Miskatonic University</td>
+                            <td class="expertise">Medieval Greek, Byzantine Studies</td>
+                        </tr>
+                        <!-- Row 20 -->
+                        <tr>
+                            <td>
+                                <img
+                                src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=120&h=120&fit=crop&crop=face&facepad=2"
+                                alt="Prof. Marga Downs"
+                                class="faculty-photo"
+                                />
+                            </td>
+                            <td class="name">Marga Downs</td>
+                            <td class="position">Associate Professor</td>
+                            <td class="edu">Ph.D., Miskatonic University</td>
+                            <td class="expertise">Comparative Literature, Medieval Poetics</td>
+                        </tr>
+                        <!-- Row 21 -->
+                        <tr>
+                            <td>
+                                <img
+                                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop&crop=face&facepad=2"
+                                alt="Prof. Meera S. Gowda"
+                                class="faculty-photo"
+                                />
+                            </td>
+                            <td class="name">Meera S. Gowda</td>
+                            <td class="position">Assistant Professor</td>
+                            <td class="edu">Ph.D., University of Washington</td>
+                            <td class="expertise">Medieval Archaeology, South Asian Connections</td>
+                        </tr>
+                        <!-- Row 22 -->
+                        <tr>
+                            <td>
+                                <img
+                                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&h=120&fit=crop&crop=face&facepad=2"
+                                alt="Prof. Penelope Oliphant"
+                                class="faculty-photo"
+                                />
+                            </td>
+                            <td class="name">Penelope Oliphant</td>
+                            <td class="position">Associate Professor</td>
+                            <td class="edu">Ph.D., UC Berkeley</td>
+                            <td class="expertise">Medieval History, Anglo-Saxon England</td>
+                        </tr>
+                        <!-- Row 23 -->
+                        <tr>
+                            <td>
+                                <img
+                                src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=120&h=120&fit=crop&crop=face&facepad=2"
+                                alt="Prof. Sian E. Penrhys"
+                                class="faculty-photo"
+                                />
+                            </td>
+                            <td class="name">Sian E. Penrhys</td>
+                            <td class="position">Associate Professor</td>
+                            <td class="edu">Ph.D., Miskatonic University</td>
+                            <td class="expertise">Renaissance Literature, Transitional Traditions</td>
+                        </tr>
+                        <!-- Row 24 -->
+                        <tr>
+                            <td>
+                                <img
+                                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=120&h=120&fit=crop&crop=face&facepad=2"
+                                alt="Prof. Ximena J. Agramonte"
+                                class="faculty-photo"
+                                />
+                            </td>
+                            <td class="name">Ximena J. Agramonte</td>
+                            <td class="position">Assistant Professor</td>
+                            <td class="edu">Ph.D., Columbia University</td>
+                            <td class="expertise">Medieval History, Mediterranean Studies</td>
+                        </tr>
+                        <!-- Row 25 -->
+                        <tr>
+                            <td>
+                                <img
+                                src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&h=120&fit=crop&crop=face&facepad=2"
+                                alt="Prof. Vivian S. Yuen"
+                                class="faculty-photo"
+                                />
+                            </td>
+                            <td class="name">Vivian S. Yuen</td>
+                            <td class="position">Assistant Professor</td>
+                            <td class="edu">Ph.D., Harvard University</td>
+                            <td class="expertise">French Literature, Medieval Romance</td>
+                        </tr>
+                        <!-- Row 26 -->
+                        <tr>
+                            <td>
+                                <img
+                                src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=120&h=120&fit=crop&crop=face&facepad=2"
+                                alt="Dr. Jondra Galvinston"
+                                class="faculty-photo"
+                                />
+                            </td>
+                            <td class="name">Eilir P. Cadogan</td>
+                            <td class="position">Post-Doctoral Fellow</td>
+                            <td class="edu">Ph.D., Cardiff University</td>
+                            <td class="expertise">Roman History, Insular Traditions</td>
+                        </tr>
+                        <!-- Row 27 -->
+                        <tr>
+                            <td>
+                                <img
+                                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop&crop=face&facepad=2"
+                                alt="Dr. Kendall Skinner"
+                                class="faculty-photo"
+                                />
+                            </td>
+                            <td class="name">Kendall Skinner</td>
+                            <td class="position">Post-Doctoral Fellow</td>
+                            <td class="edu">Ph.D., Harvard University</td>
+                            <td class="expertise">Classical Greek, Reception Studies</td>
+                        </tr>
+                        <!-- Row 28 -->
+                        <tr>
+                            <td>
+                                <img
+                                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&h=120&fit=crop&crop=face&facepad=2"
+                                alt="Dr. Savana Thompson"
+                                class="faculty-photo"
+                                />
+                            </td>
+                            <td class="name">Savana Thompson</td>
+                            <td class="position">Post-Doctoral Fellow</td>
+                            <td class="edu">Ph.D., Princeton University</td>
+                            <td class="expertise">Byzantine Studies, Eastern Mediterranean</td>
+                        </tr>
+                        <!-- Row 29 -->
+                        <tr>
+                            <td>
+                                <img
+                                src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=120&h=120&fit=crop&crop=face&facepad=2"
+                                alt="Dr. Nathan K. Lai"
+                                class="faculty-photo"
+                                />
+                            </td>
+                            <td class="name">Nathan K. Lai</td>
+                            <td class="position">Post-Doctoral Fellow</td>
+                            <td class="edu">Ph.D., Harvard University</td>
+                            <td class="expertise">Comparative Literature, Digital Humanities</td>
+                        </tr>
+                        <!-- Row 30 -->
+                        <tr>
+                            <td>
+                                <img
+                                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=120&h=120&fit=crop&crop=face&facepad=2"
+                                alt="Dr. Danica Williams"
+                                class="faculty-photo"
+                                />
+                            </td>
+                            <td class="name">Danica Williams</td>
+                            <td class="position">Post-Doctoral Fellow</td>
+                            <td class="edu">Ph.D., UC Berkeley</td>
+                            <td class="expertise">Classical Linguistics, Historical Linguistics</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="margin-top:20px; text-align:center; font-size:0.9rem; color:var(--brown-600);">
+                <em>Full faculty listing available upon request. The institute also maintains 150 courtesy-appointed faculty from across the university.</em>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <span>
+                &copy; 2026 Miskatonic University · Medieval Institute
+            </span>
+            <span>
+                <a href="#">Ex Ignorantia Ad Sapientiam</a>
+                &nbsp;·&nbsp;
+                <span class="small-print">Est. 1710</span>
+            </span>
+        </div>
+    </footer>
+
+    <!-- ===== MODAL SCRIPT ===== -->
+    <script>
+        (function() {
+            // open modal
+            const modalButtons = document.querySelectorAll('[data-modal]');
+            modalButtons.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const modalId = this.getAttribute('data-modal');
+                    const overlay = document.getElementById(modalId);
+                    if (overlay) {
+                        overlay.classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                    }
+                });
+            });
+
+            // close modal: click on close button
+            const closeButtons = document.querySelectorAll('[data-close]');
+            closeButtons.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const modalId = this.getAttribute('data-close');
+                    const overlay = document.getElementById(modalId);
+                    if (overlay) {
+                        overlay.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                });
+            });
+
+            // close modal: click on overlay (outside modal)
+            const overlays = document.querySelectorAll('.modal-overlay');
+            overlays.forEach(overlay => {
+                overlay.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        this.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                });
+            });
+
+            // close modal: Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    const activeOverlay = document.querySelector('.modal-overlay.active');
+                    if (activeOverlay) {
+                        activeOverlay.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                }
+            });
+        })();
+    </script>
+
+</body>
+</html>

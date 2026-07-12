@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Miskatonic University · Physics Department</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700;14..32,800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet" />
+
+    <style>
+        /* ----- RESET & BASE ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #faf8f5;
+            color: #1e1a2b;
+            line-height: 1.6;
+        }
+
+        /* ----- COLOR TOKENS ----- */
+        :root {
+            --purple-900: #2d1b4e;
+            --purple-800: #4a2b7a;
+            --purple-700: #6a3d9a;
+            --purple-600: #8b4fc4;
+            --purple-500: #a86be0;
+            --purple-400: #c79aff;
+            --purple-300: #dfc0ff;
+            --purple-100: #f3ebff;
+
+            --yellow-500: #f5c518;
+            --yellow-400: #ffd93d;
+            --yellow-300: #ffe770;
+            --yellow-200: #fff3b0;
+            --yellow-100: #fffbe6;
+
+            --gold: #d4a800;
+            --white: #ffffff;
+            --offwhite: #faf8f5;
+            --dark: #1e1a2b;
+        }
+
+        /* ----- UTILITY ----- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.6rem;
+            font-weight: 700;
+            color: var(--purple-800);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .section-title .highlight {
+            color: var(--yellow-500);
+            font-style: italic;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--purple-600);
+            max-width: 640px;
+            margin-bottom: 2.5rem;
+            font-weight: 400;
+        }
+
+        .section-subtitle.centered {
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+
+        /* ----- BUTTONS ----- */
+        .btn {
+            display: inline-block;
+            padding: 14px 36px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            letter-spacing: 0.3px;
+        }
+
+        .btn-primary {
+            background: var(--yellow-500);
+            color: var(--purple-900);
+            box-shadow: 0 6px 20px rgba(245, 197, 24, 0.35);
+        }
+
+        .btn-primary:hover {
+            background: var(--yellow-400);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(245, 197, 24, 0.45);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--yellow-500);
+        }
+
+        .btn-secondary:hover {
+            background: var(--yellow-500);
+            color: var(--purple-900);
+            transform: translateY(-3px);
+        }
+
+        /* ----- HEADER / NAV ----- */
+        .topbar {
+            background: var(--purple-900);
+            padding: 12px 0;
+            border-bottom: 4px solid var(--yellow-500);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(4px);
+        }
+
+        .topbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px 24px;
+        }
+
+        .topbar .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .topbar .logo img {
+            height: 44px;
+            width: auto;
+            border-radius: 4px;
+        }
+
+        .topbar .logo .brand {
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1.15rem;
+            letter-spacing: -0.3px;
+        }
+
+        .topbar .logo .brand span {
+            color: var(--yellow-500);
+        }
+
+        .topbar .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .topbar .nav-links a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.25s;
+            letter-spacing: 0.2px;
+        }
+
+        .topbar .nav-links a:hover {
+            color: var(--yellow-500);
+        }
+
+        /* ----- HERO ----- */
+        .hero {
+            background: linear-gradient(145deg, var(--purple-900) 0%, var(--purple-800) 60%, var(--purple-700) 100%);
+            padding: 80px 0 70px;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(245, 197, 24, 0.10) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.8rem;
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+
+        .hero-content h1 .highlight {
+            color: var(--yellow-500);
+            font-style: italic;
+        }
+
+        .hero-content p {
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 540px;
+            margin-bottom: 28px;
+            line-height: 1.7;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.40);
+            border: 2px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .hero-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px 32px;
+            margin-top: 8px;
+        }
+
+        .hero-badges .badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.80);
+        }
+
+        .hero-badges .badge img {
+            height: 28px;
+            width: 28px;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+
+        /* ----- SECTION: ABOUT ----- */
+        .about {
+            padding: 80px 0 70px;
+            background: var(--white);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-grid .text-block p {
+            font-size: 1.05rem;
+            color: #2d2a3a;
+            margin-bottom: 18px;
+        }
+
+        .about-grid .text-block p:last-child {
+            margin-bottom: 0;
+        }
+
+        .about-grid .image-block img {
+            width: 100%;
+            border-radius: 18px;
+            box-shadow: 0 16px 48px rgba(45, 27, 78, 0.15);
+            border: 1px solid var(--yellow-200);
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-top: 48px;
+            background: var(--purple-100);
+            border-radius: 20px;
+            padding: 32px 28px;
+            border: 1px solid var(--purple-300);
+        }
+
+        .stats-row .stat {
+            text-align: center;
+        }
+
+        .stats-row .stat .number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--purple-800);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .stats-row .stat .label {
+            font-size: 0.9rem;
+            color: var(--purple-600);
+            font-weight: 500;
+            margin-top: 2px;
+        }
+
+        /* ----- SECTION: RESEARCH ----- */
+        .research {
+            padding: 80px 0 70px;
+            background: var(--purple-100);
+        }
+
+        .research-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .research-cards .card {
+            background: var(--white);
+            border-radius: 18px;
+            padding: 28px 26px;
+            box-shadow: 0 6px 24px rgba(45, 27, 78, 0.07);
+            border-left: 6px solid var(--yellow-500);
+            transition: transform 0.25s ease, box-shadow 0.3s ease;
+        }
+
+        .research-cards .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 14px 40px rgba(45, 27, 78, 0.12);
+        }
+
+        .research-cards .card h3 {
+            font-size: 1.25rem;
+            color: var(--purple-800);
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .research-cards .card p {
+            color: #3d3a4a;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .research-cards .card .card-icon {
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        .research-cards .card .card-icon img {
+            height: 44px;
+            width: 44px;
+            object-fit: contain;
+            border-radius: 6px;
+        }
+
+        /* ----- SECTION: FACULTY (spotlight) ----- */
+        .faculty-spotlight {
+            padding: 80px 0 70px;
+            background: var(--white);
+        }
+
+        .faculty-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin-top: 10px;
+        }
+
+        .faculty-grid .person {
+            background: var(--purple-100);
+            border-radius: 18px;
+            padding: 24px 20px 28px;
+            text-align: center;
+            border: 1px solid var(--purple-300);
+            transition: transform 0.25s ease;
+        }
+
+        .faculty-grid .person:hover {
+            transform: translateY(-4px);
+        }
+
+        .faculty-grid .person img {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--yellow-500);
+            margin-bottom: 12px;
+            background: var(--white);
+        }
+
+        .faculty-grid .person h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--purple-800);
+        }
+
+        .faculty-grid .person .title {
+            font-size: 0.85rem;
+            color: var(--purple-600);
+            font-weight: 500;
+        }
+
+        .faculty-grid .person .dept {
+            font-size: 0.8rem;
+            color: #5a5570;
+            margin-top: 4px;
+        }
+
+        /* ----- SECTION: FACILITIES ----- */
+        .facilities {
+            padding: 80px 0 70px;
+            background: var(--yellow-100);
+        }
+
+        .facilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 28px;
+        }
+
+        .facilities-grid .item {
+            background: var(--white);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(45, 27, 78, 0.06);
+            border: 1px solid var(--yellow-200);
+            transition: transform 0.25s ease;
+        }
+
+        .facilities-grid .item:hover {
+            transform: translateY(-4px);
+        }
+
+        .facilities-grid .item img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .facilities-grid .item .info {
+            padding: 18px 22px 24px;
+        }
+
+        .facilities-grid .item .info h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--purple-800);
+            margin-bottom: 4px;
+        }
+
+        .facilities-grid .item .info p {
+            font-size: 0.92rem;
+            color: #4a4560;
+            line-height: 1.5;
+        }
+
+        /* ----- SECTION: PROGRAMS ----- */
+        .programs {
+            padding: 80px 0 70px;
+            background: var(--white);
+        }
+
+        .programs-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px 40px;
+            margin-top: 12px;
+        }
+
+        .programs-list li {
+            list-style: none;
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--purple-800);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .programs-list li img {
+            height: 28px;
+            width: 28px;
+            object-fit: contain;
+        }
+
+        /* ----- SECTION: CTA / CONTACT ----- */
+        .cta {
+            padding: 70px 0 60px;
+            background: linear-gradient(145deg, var(--purple-900), var(--purple-800));
+            color: var(--white);
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.6rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .cta h2 .highlight {
+            color: var(--yellow-500);
+            font-style: italic;
+        }
+
+        .cta p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto 32px;
+        }
+
+        .cta .btn-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ----- FOOTER ----- */
+        .footer {
+            background: var(--purple-900);
+            padding: 32px 0 28px;
+            border-top: 4px solid var(--yellow-500);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.92rem;
+        }
+
+        .footer .container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px 24px;
+        }
+
+        .footer a {
+            color: var(--yellow-400);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: var(--yellow-300);
+            text-decoration: underline;
+        }
+
+        .footer .small-print {
+            font-size: 0.82rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* ----- RESPONSIVE ----- */
+        @media (max-width: 1024px) {
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-badges {
+                justify-content: center;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .about-grid .text-block {
+                order: 2;
+            }
+            .about-grid .image-block {
+                order: 1;
+            }
+
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .topbar .container {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+
+            .topbar .nav-links {
+                justify-content: center;
+                gap: 16px;
+            }
+
+            .hero-content h1 {
+                font-size: 2.4rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .stats-row {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+                padding: 24px 16px;
+            }
+
+            .stats-row .stat .number {
+                font-size: 1.6rem;
+            }
+
+            .faculty-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .hero-badges {
+                flex-direction: column;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .cta h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .faculty-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== TOP NAV ===== -->
+    <header class="topbar">
+        <div class="container">
+            <div class="logo">
+                <!-- university seal / crest -->
+                <img
+                src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=100&h=100&fit=crop&crop=center"
+                alt="Miskatonic University seal"
+                />
+                <span class="brand">Miskatonic <span>Physics</span></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#research">Research</a></li>
+                <li><a href="#faculty">Faculty</a></li>
+                <li><a href="#facilities">Facilities</a></li>
+                <li><a href="#programs">Programs</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>
+                    Exploring the <br />
+                    <span class="highlight">Quantum Frontier</span>
+                </h1>
+                <p>
+                    The Department of Physics at Miskatonic University pushes the
+                    boundaries of known science — from quantum gravity and string
+                    theory to high-energy astrophysics and the structure of spacetime
+                    itself.
+                </p>
+                <div class="hero-badges">
+                    <span class="badge">
+                        <img
+                        src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=60&h=60&fit=crop&crop=center"
+                        alt="Nobel Prize icon"
+                        />
+                        2 Nobel Laureates (faculty)
+                    </span>
+                    <span class="badge">
+                        <img
+                        src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=60&h=60&fit=crop&crop=center"
+                        alt="Research icon"
+                        />
+                        220 PhD students
+                    </span>
+                    <span class="badge">
+                        <img
+                        src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=60&h=60&fit=crop&crop=center"
+                        alt="Lab icon"
+                        />
+                        54 faculty · 84 post-docs
+                    </span>
+                </div>
+                <div style="margin-top:28px;">
+                    <a href="#programs" class="btn btn-primary">Explore Programs</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img
+                src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=500&fit=crop&crop=center"
+                alt="Physics research at Miskatonic University"
+                />
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="text-block">
+                    <h2 class="section-title">
+                        A Legacy of <span class="highlight">Discovery</span>
+                    </h2>
+                    <p>
+                        The Physics Department at Miskatonic University traces its roots
+                        to the early 19th century, when natural philosophy gave way to
+                        experimental physics. Today, we are a global leader in
+                        theoretical and applied physics, with pioneering work in
+                        quantum information, condensed matter, cosmology, and
+                        high-energy particle physics.
+                    </p>
+                    <p>
+                        Our faculty includes recipients of the Nobel Prize, the Dirac
+                        Medal, and the Breakthrough Prize. We are home to the
+                        <strong>Warren Observatory</strong> and maintain close
+                        partnerships with the <strong>Arkham National Laboratory</strong>
+                        and the <strong>Miskatonic Light Source</strong> — a 5 GeV
+                        synchrotron that enables groundbreaking experiments in
+                        materials science and quantum phenomena.
+                    </p>
+                    <p>
+                        <em>“Out of Ignorance into Wisdom; Out of Light into Darkness.”</em>
+                        — University Motto
+                    </p>
+                </div>
+                <div class="image-block">
+                    <img
+                    src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=700&h=500&fit=crop&crop=center"
+                    alt="Physics laboratory at Miskatonic"
+                    />
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats-row">
+                <div class="stat">
+                    <div class="number">54</div>
+                    <div class="label">Faculty Members</div>
+                </div>
+                <div class="stat">
+                    <div class="number">84</div>
+                    <div class="label">Post-Doctoral Fellows</div>
+                </div>
+                <div class="stat">
+                    <div class="number">495</div>
+                    <div class="label">Undergraduate Students</div>
+                </div>
+                <div class="stat">
+                    <div class="number">220</div>
+                    <div class="label">PhD Candidates</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== RESEARCH ===== -->
+    <section class="research" id="research">
+        <div class="container">
+            <h2 class="section-title" style="text-align:center;">
+                Research <span class="highlight">Excellence</span>
+            </h2>
+            <p class="section-subtitle centered">
+                Our research spans the smallest scales of quantum fields to the
+                largest structures in the cosmos.
+            </p>
+
+            <div class="research-cards">
+                <div class="card">
+                    <div class="card-icon">
+                        <img
+                        src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=80&h=80&fit=crop&crop=center"
+                        alt="Quantum physics"
+                        />
+                    </div>
+                    <h3>Quantum Gravity &amp; Strings</h3>
+                    <p>
+                        Exploring Calabi–Yau manifolds, M-theory, and the quantum
+                        structure of spacetime. Our group works on compactification,
+                        duality, and emergent gravity.
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">
+                        <img
+                        src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=80&h=80&fit=crop&crop=center"
+                        alt="Astrophysics"
+                        />
+                    </div>
+                    <h3>High-Energy Astrophysics</h3>
+                    <p>
+                        From gamma-ray bursts to active galactic nuclei, we study the
+                        most energetic phenomena in the universe using space-based
+                        observatories and the Warren Observatory.
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">
+                        <img
+                        src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=80&h=80&fit=crop&crop=center"
+                        alt="Condensed matter"
+                        />
+                    </div>
+                    <h3>Condensed Matter &amp; Quantum Materials</h3>
+                    <p>
+                        Topological insulators, high-temperature superconductors,
+                        and 2D materials — investigated with advanced spectroscopy
+                        and nanofabrication at the ANL.
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">
+                        <img
+                        src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=80&h=80&fit=crop&crop=center"
+                        alt="Cosmology"
+                        />
+                    </div>
+                    <h3>Cosmology &amp; Dark Energy</h3>
+                    <p>
+                        Large-scale structure surveys, cosmic microwave background
+                        analysis, and theoretical modeling of dark energy and
+                        modified gravity.
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">
+                        <img
+                        src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=80&h=80&fit=crop&crop=center"
+                        alt="Quantum information"
+                        />
+                    </div>
+                    <h3>Quantum Information Science</h3>
+                    <p>
+                        Quantum computing, entanglement, and quantum metrology.
+                        Our group collaborates with the ANL–IBM Quantum Computing
+                        Facility to develop next-generation quantum processors.
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">
+                        <img
+                        src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=80&h=80&fit=crop&crop=center"
+                        alt="Particle physics"
+                        />
+                    </div>
+                    <h3>Particle Physics &amp; Accelerator Science</h3>
+                    <p>
+                        We are partners in the LHC, LIGO, and the Fermilab neutrino
+                        program. Our faculty contribute to the search for physics
+                        beyond the Standard Model.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FACULTY SPOTLIGHT ===== -->
+    <section class="faculty-spotlight" id="faculty">
+        <div class="container">
+            <h2 class="section-title" style="text-align:center;">
+                Distinguished <span class="highlight">Faculty</span>
+            </h2>
+            <p class="section-subtitle centered">
+                Leaders in their fields, mentors to the next generation of physicists.
+            </p>
+
+            <div class="faculty-grid">
+                <div class="person">
+                    <img
+                    src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=200&h=200&fit=crop&crop=face&facepad=2"
+                    alt="Prof. Raphael J. Williams"
+                    />
+                    <h4>Raphael J. Williams</h4>
+                    <div class="title">Nobel Laureate · Physics (2025)</div>
+                    <div class="dept">Quantum Tunnelling &amp; Macroscopic Quantisation</div>
+                </div>
+                <div class="person">
+                    <img
+                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face&facepad=2"
+                    alt="Prof. Charles Truslow"
+                    />
+                    <h4>Charles Truslow</h4>
+                    <div class="title">Chair · Physics Department</div>
+                    <div class="dept">Quantum Foundations &amp; High-Energy Theory</div>
+                </div>
+                <div class="person">
+                    <img
+                    src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&fit=crop&crop=face&facepad=2"
+                    alt="Prof. Evander G. Orne"
+                    />
+                    <h4>Evander G. Orne</h4>
+                    <div class="title">Chair · Materials Science</div>
+                    <div class="dept">Anomalous Materials &amp; Integrated Systems</div>
+                </div>
+                <div class="person">
+                    <img
+                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face&facepad=2"
+                    alt="Prof. Ulrich P. Kaiser"
+                    />
+                    <h4>Ulrich P. Kaiser</h4>
+                    <div class="title">Professor of Astronomy</div>
+                    <div class="dept">Astrobiology · Habitability Studies</div>
+                </div>
+                <div class="person">
+                    <img
+                    src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&h=200&fit=crop&crop=face&facepad=2"
+                    alt="Prof. Lalaine Smith"
+                    />
+                    <h4>Lalaine Smith</h4>
+                    <div class="title">Director · AMRI, ANL</div>
+                    <div class="dept">Quantum Engineering · Advanced Materials</div>
+                </div>
+                <div class="person">
+                    <img
+                    src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&crop=face&facepad=2"
+                    alt="Prof. Logan H. Gilmore"
+                    />
+                    <h4>Logan H. Gilmore</h4>
+                    <div class="title">Turing Award · Computer Science</div>
+                    <div class="dept">Combinatorics · Optimization · Quantum Algorithms</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FACILITIES ===== -->
+    <section class="facilities" id="facilities">
+        <div class="container">
+            <h2 class="section-title" style="text-align:center;">
+                World-Class <span class="highlight">Facilities</span>
+            </h2>
+            <p class="section-subtitle centered">
+                From the Arkham Hills to the subglacial labs of Antarctica — our
+                infrastructure is built for discovery.
+            </p>
+
+            <div class="facilities-grid">
+                <div class="item">
+                    <img
+                    src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&h=400&fit=crop&crop=center"
+                    alt="Warren Observatory"
+                    />
+                    <div class="info">
+                        <h4>Warren Observatory</h4>
+                        <p>
+                            150‑inch &amp; 100‑inch telescopes · radio array · exoplanet
+                            detection · located in the Arkham Hills.
+                        </p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img
+                    src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600&h=400&fit=crop&crop=center"
+                    alt="Miskatonic Light Source"
+                    />
+                    <div class="info">
+                        <h4>Miskatonic Light Source</h4>
+                        <p>
+                            5 GeV synchrotron with 23 beamlines · X‑ray spectroscopy ·
+                            materials science · located at ANL.
+                        </p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img
+                    src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop&crop=center"
+                    alt="ANL Quantum Computing Facility"
+                    />
+                    <div class="info">
+                        <h4>ANL–IBM Quantum Computing</h4>
+                        <p>
+                            Trapped-ion &amp; neutral-atom quantum processors · 800‑node
+                            Orion Cluster · 40 PB data center.
+                        </p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img
+                    src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&h=400&fit=crop&crop=center"
+                    alt="Pabodie Research Station"
+                    />
+                    <div class="info">
+                        <h4>Pabodie Research Station</h4>
+                        <p>
+                            Antarctica · ice‑core drilling · neutrino detection ·
+                            co‑managed with NOAA and Miskatonic University.
+                        </p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img
+                    src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600&h=400&fit=crop&crop=center"
+                    alt="Sebastian Duvall Hall"
+                    />
+                    <div class="info">
+                        <h4>Sebastian Duvall Hall</h4>
+                        <p>
+                            Main physics building · 20 teaching labs · 20 computer labs ·
+                            research electronics shop · modern expressionist architecture.
+                        </p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img
+                    src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&h=400&fit=crop&crop=center"
+                    alt="Cryogenics Lab"
+                    />
+                    <div class="info">
+                        <h4>Ultracold &amp; Cryogenics Lab</h4>
+                        <p>
+                            Dilution refrigerators · vacuum &amp; atom trapping ·
+                            metastable helium spectroscopy · < 10 mK base temperature.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PROGRAMS ===== -->
+    <section class="programs" id="programs">
+        <div class="container">
+            <h2 class="section-title" style="text-align:center;">
+                Academic <span class="highlight">Programs</span>
+            </h2>
+            <p class="section-subtitle centered">
+                Rigorous training for the physicists of tomorrow — from
+                undergraduate foundations to doctoral research.
+            </p>
+
+            <ul class="programs-list">
+                <li>
+                    <img
+                    src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=60&h=60&fit=crop&crop=center"
+                    alt="undergraduate icon"
+                    />
+                    Bachelor of Science (B.S.) in Physics
+                </li>
+                <li>
+                    <img
+                    src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=60&h=60&fit=crop&crop=center"
+                    alt="master icon"
+                    />
+                    Master of Science (M.S.) in Physics
+                </li>
+                <li>
+                    <img
+                    src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=60&h=60&fit=crop&crop=center"
+                    alt="phd icon"
+                    />
+                    Doctor of Philosophy (Ph.D.) in Physics
+                </li>
+                <li>
+                    <img
+                    src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=60&h=60&fit=crop&crop=center"
+                    alt="concentration icon"
+                    />
+                    Concentrations: Astrophysics · Condensed Matter · High‑Energy · Quantum
+                </li>
+                <li>
+                    <img
+                    src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=60&h=60&fit=crop&crop=center"
+                    alt="joint program icon"
+                    />
+                    Joint Program: M.S./Ph.D. with Arkham National Laboratory
+                </li>
+                <li>
+                    <img
+                    src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=60&h=60&fit=crop&crop=center"
+                    alt="minor icon"
+                    />
+                    Minor in Physics (open to all FAS students)
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ===== CTA / CONTACT ===== -->
+    <section class="cta" id="contact">
+        <div class="container">
+            <h2>
+                Join the <span class="highlight">Frontier</span>
+            </h2>
+            <p>
+                Whether you are a prospective student, a researcher, or a partner
+                in discovery — we invite you to be part of our community.
+            </p>
+            <div class="btn-group">
+                <a href="#" class="btn btn-primary">Visit the Department</a>
+                <a href="#" class="btn btn-secondary">Contact Us</a>
+            </div>
+            <div style="margin-top: 32px; font-size: 0.95rem; color: rgba(255,255,255,0.7);">
+                <strong>Physics Department</strong> · Sebastian Duvall Hall ·
+                555 Eerie Street · Arkham, Massachusetts
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <span>
+                &copy; 2026 Miskatonic University · Department of Physics
+            </span>
+            <span>
+                <a href="#">Ex Ignorantia Ad Sapientiam</a>
+                &nbsp;·&nbsp;
+                <span class="small-print">Est. 1710</span>
+            </span>
+        </div>
+    </footer>
+
+</body>
+</html>

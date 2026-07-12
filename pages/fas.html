@@ -1,0 +1,1974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Miskatonic University · Faculty of Arts and Sciences</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet" />
+
+    <style>
+        /* ----- RESET & BASE ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f4f2f0;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        /* ----- COLOR TOKENS (same as main) ----- */
+        :root {
+            --purple-900: #2b1a4a;
+            --purple-800: #3d2a6a;
+            --purple-700: #5a3d8a;
+            --purple-600: #7a52a8;
+            --purple-500: #9a72c0;
+            --purple-300: #cfbae6;
+            --purple-100: #f0e8f8;
+
+            --red-700: #a31c1c;
+            --red-600: #c42020;
+            --red-500: #d94a4a;
+            --red-400: #e07070;
+
+            --gray-900: #1a1a1a;
+            --gray-800: #2d2d2d;
+            --gray-700: #4a4a4a;
+            --gray-600: #6c757d;
+            --gray-400: #b0b0b0;
+            --gray-200: #e0ddd8;
+            --gray-100: #f4f2f0;
+
+            --white: #ffffff;
+        }
+
+        /* ----- UTILITY ----- */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--purple-800);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .section-title .highlight {
+            color: var(--red-600);
+            font-style: italic;
+        }
+
+        .section-subtitle {
+            font-size: 1.05rem;
+            color: var(--gray-700);
+            max-width: 700px;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            letter-spacing: 0.3px;
+            background: var(--red-600);
+            color: var(--white);
+            box-shadow: 0 4px 16px rgba(196, 32, 32, 0.25);
+        }
+
+        .btn:hover {
+            background: var(--red-700);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(196, 32, 32, 0.35);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--purple-700);
+            border: 2px solid var(--purple-700);
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background: var(--purple-700);
+            color: var(--white);
+            box-shadow: 0 8px 24px rgba(58, 42, 106, 0.25);
+        }
+
+        /* ----- TOP BAR (mini nav) ----- */
+        .topbar {
+            background: var(--gray-900);
+            padding: 8px 0;
+            border-bottom: 3px solid var(--red-600);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .topbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px 16px;
+        }
+
+        .topbar .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .topbar .logo img {
+            height: 38px;
+            width: auto;
+        }
+
+        .topbar .logo .brand {
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: -0.3px;
+        }
+
+        .topbar .logo .brand span {
+            color: var(--red-500);
+        }
+
+        .topbar .back-link {
+            color: var(--gray-400);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.25s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .topbar .back-link:hover {
+            color: var(--red-400);
+        }
+
+        /* ----- LAYOUT: SIDEBAR + CONTENT ----- */
+        .fas-layout {
+            display: flex;
+            gap: 0;
+            min-height: calc(100vh - 70px);
+            background: var(--gray-100);
+        }
+
+        /* ----- SIDEBAR ----- */
+        .sidebar {
+            width: 280px;
+            flex-shrink: 0;
+            background: var(--white);
+            border-right: 1px solid var(--gray-200);
+            padding: 28px 0 40px;
+            height: calc(100vh - 70px);
+            position: sticky;
+            top: 70px;
+            overflow-y: auto;
+            z-index: 100;
+        }
+
+        .sidebar .sidebar-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: var(--purple-800);
+            padding: 0 24px 12px;
+            border-bottom: 2px solid var(--red-600);
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+
+        .sidebar .sidebar-title span {
+            color: var(--red-600);
+        }
+
+        .sidebar nav {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .sidebar nav a {
+            display: flex;
+            align-items: center;
+            padding: 10px 24px;
+            color: var(--gray-700);
+            text-decoration: none;
+            font-size: 0.92rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+            cursor: pointer;
+            gap: 8px;
+        }
+
+        .sidebar nav a:hover {
+            background: var(--purple-100);
+            color: var(--purple-800);
+            border-left-color: var(--purple-500);
+        }
+
+        .sidebar nav a.active {
+            background: var(--purple-100);
+            color: var(--purple-800);
+            border-left-color: var(--red-600);
+            font-weight: 600;
+        }
+
+        /* Dropdown in sidebar */
+        .sidebar .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 24px;
+            color: var(--gray-700);
+            font-size: 0.92rem;
+            font-weight: 500;
+            cursor: pointer;
+            border-left: 3px solid transparent;
+            transition: all 0.2s ease;
+            background: none;
+            border-top: none;
+            border-right: none;
+            border-bottom: none;
+            width: 100%;
+            text-align: left;
+            font-family: inherit;
+        }
+
+        .sidebar .dropdown-toggle:hover {
+            background: var(--purple-100);
+            color: var(--purple-800);
+            border-left-color: var(--purple-500);
+        }
+
+        .sidebar .dropdown-toggle .arrow {
+            transition: transform 0.25s ease;
+            font-size: 0.7rem;
+            color: var(--gray-400);
+        }
+
+        .sidebar .dropdown-toggle.open .arrow {
+            transform: rotate(180deg);
+        }
+
+        .sidebar .dropdown-menu {
+            display: none;
+            padding-left: 20px;
+            background: var(--gray-100);
+            border-radius: 0 0 6px 6px;
+            margin: 0 12px 4px 12px;
+            overflow: hidden;
+        }
+
+        .sidebar .dropdown-menu.open {
+            display: block;
+        }
+
+        .sidebar .dropdown-menu a {
+            padding: 8px 16px 8px 28px;
+            font-size: 0.85rem;
+            border-left: none;
+            color: var(--gray-600);
+        }
+
+        .sidebar .dropdown-menu a:hover {
+            background: var(--white);
+            color: var(--purple-700);
+            border-left: 3px solid var(--purple-400);
+        }
+
+        .sidebar .dropdown-menu a.active {
+            background: var(--white);
+            color: var(--purple-800);
+            border-left: 3px solid var(--red-600);
+            font-weight: 600;
+        }
+
+        /* ----- CONTENT AREA ----- */
+        .fas-content {
+            flex: 1;
+            padding: 32px 40px 60px;
+            background: var(--white);
+            min-height: calc(100vh - 70px);
+        }
+
+        .fas-content .page-section {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .fas-content .page-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ----- DEPARTMENTS GRID (cards) ----- */
+        .dept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 16px;
+        }
+
+        .dept-card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--gray-200);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+            transition: transform 0.25s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .dept-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+        }
+
+        .dept-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .dept-card .info {
+            padding: 18px 20px 22px;
+        }
+
+        .dept-card .info h4 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--purple-800);
+            margin-bottom: 4px;
+        }
+
+        .dept-card .info p {
+            font-size: 0.9rem;
+            color: var(--gray-700);
+            line-height: 1.5;
+        }
+
+        .dept-card .info .dept-tag {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--white);
+            background: var(--purple-600);
+            padding: 3px 14px;
+            border-radius: 20px;
+            letter-spacing: 0.3px;
+        }
+
+        /* Division header in content */
+        .division-header {
+            margin-top: 32px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid var(--red-600);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .division-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--purple-800);
+        }
+
+        .division-header .badge {
+            background: var(--purple-100);
+            color: var(--purple-700);
+            padding: 2px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .division-desc {
+            color: var(--gray-700);
+            margin: 8px 0 16px;
+            font-size: 0.98rem;
+            line-height: 1.7;
+        }
+
+        /* ----- LEADERSHIP TABLE ----- */
+        .leadership-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+            font-size: 0.92rem;
+        }
+
+        .leadership-table thead {
+            background: var(--purple-800);
+            color: var(--white);
+        }
+
+        .leadership-table thead th {
+            padding: 12px 18px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .leadership-table tbody tr {
+            border-bottom: 1px solid var(--gray-200);
+            transition: background 0.2s ease;
+        }
+
+        .leadership-table tbody tr:hover {
+            background: var(--gray-100);
+        }
+
+        .leadership-table tbody td {
+            padding: 12px 18px;
+            vertical-align: middle;
+            color: var(--gray-800);
+        }
+
+        .leadership-table .role {
+            font-weight: 600;
+            color: var(--purple-700);
+        }
+
+        /* ----- DEPARTMENT DETAIL VIEW (when a dept is clicked) ----- */
+        .dept-detail-view {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .dept-detail-view.active {
+            display: block;
+        }
+
+        .dept-detail-view .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            background: var(--gray-100);
+            border: none;
+            border-radius: 30px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--gray-700);
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+            margin-bottom: 20px;
+        }
+
+        .dept-detail-view .back-btn:hover {
+            background: var(--purple-100);
+            color: var(--purple-800);
+        }
+
+        .dept-detail-view .detail-hero {
+            width: 100%;
+            max-height: 320px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            border: 1px solid var(--gray-200);
+        }
+
+        .dept-detail-view .detail-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--purple-800);
+            margin-bottom: 6px;
+        }
+
+        .dept-detail-view .detail-division {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .dept-detail-view .detail-body {
+            font-size: 1rem;
+            color: var(--gray-700);
+            line-height: 1.8;
+            max-width: 800px;
+        }
+
+        .dept-detail-view .detail-body p {
+            margin-bottom: 12px;
+        }
+
+        /* ----- RESPONSIVE ----- */
+        @media (max-width: 1024px) {
+            .fas-layout {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                top: 0;
+                border-right: none;
+                border-bottom: 1px solid var(--gray-200);
+                padding: 16px 0 12px;
+                max-height: 300px;
+                overflow-y: auto;
+            }
+
+            .sidebar .sidebar-title {
+                padding: 0 20px 8px;
+                font-size: 1rem;
+            }
+
+            .sidebar nav a,
+            .sidebar .dropdown-toggle {
+                padding: 8px 20px;
+                font-size: 0.85rem;
+            }
+
+            .fas-content {
+                padding: 24px 20px 40px;
+            }
+
+            .dept-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+        }
+
+        @media (max-width: 600px) {
+            .dept-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .fas-content {
+                padding: 16px 14px 32px;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .topbar .logo .brand {
+                font-size: 0.85rem;
+            }
+
+            .dept-detail-view .detail-title {
+                font-size: 1.6rem;
+            }
+
+            .leadership-table {
+                font-size: 0.82rem;
+            }
+
+            .leadership-table thead th,
+            .leadership-table tbody td {
+                padding: 8px 12px;
+            }
+        }
+
+        /* scrollable sidebar on mobile */
+        .sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: var(--purple-300);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== TOP BAR ===== -->
+    <!-- <header class="topbar">
+        <div class="container">
+            <div class="logo">
+                <img src="logo.png" alt="Miskatonic University" />
+                <span class="brand">Miskatonic <span>University</span></span>
+            </div>
+            <a href="index.html" class="back-link">&#8592; Back to Main</a>
+        </div>
+    </header> -->
+
+    <!-- ===== FAS LAYOUT ===== -->
+    <div class="fas-layout">
+
+        <!-- ===== SIDEBAR ===== -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-title">Faculty of <span>Arts &amp; Sciences</span></div>
+            <nav>
+                <a href="#" data-section="about" class="active">About FAS</a>
+                <a href="#" data-section="deans-message">Dean's Message</a>
+
+                <!-- Divisions dropdown -->
+                <button class="dropdown-toggle" id="divisionsToggle">
+                    <span>Divisions</span>
+                    <span class="arrow">&#9660;</span>
+                </button>
+                <div class="dropdown-menu" id="divisionsMenu">
+                    <a href="#" data-section="division-ah">Arts &amp; Humanities</a>
+                    <a href="#" data-section="division-life">Life &amp; Environmental Sciences</a>
+                    <a href="#" data-section="division-physical">Physical Sciences</a>
+                    <a href="#" data-section="division-social">Social Sciences</a>
+                </div>
+
+                <a href="#" data-section="research">Research</a>
+                <a href="#" data-section="culture">Culture &amp; Arts</a>
+                <a href="#" data-section="engagement">Engagement</a>
+                <a href="#" data-section="leadership">Leadership</a>
+            </nav>
+        </aside>
+
+        <!-- ===== CONTENT ===== -->
+        <main class="fas-content" id="fasContent">
+
+            <!-- ===================== ABOUT FAS ===================== -->
+            <section class="page-section active" id="section-about">
+                <h1 class="section-title">About the <span class="highlight">Faculty of Arts &amp; Sciences</span></h1>
+                <p class="section-subtitle">
+                    The largest academic unit at Miskatonic University, the Faculty of Arts and Sciences
+                    is the intellectual heart of the university, encompassing 39 departments and programs
+                    across four divisions.
+                </p>
+
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:24px;">
+                    <div style="background:var(--gray-100); padding:24px; border-radius:16px; border-left:5px solid var(--red-600);">
+                        <h3 style="font-family:'Playfair Display',serif; color:var(--purple-800); font-size:1.3rem;">Our Mission</h3>
+                        <p style="color:var(--gray-700); font-size:0.95rem; line-height:1.7;">
+                            The Faculty of Arts and Sciences advances knowledge across the humanities,
+                            social sciences, and natural sciences. We cultivate critical thinking,
+                            creativity, and a deep understanding of the human condition and the natural world.
+                        </p>
+                    </div>
+                    <div style="background:var(--gray-100); padding:24px; border-radius:16px; border-left:5px solid var(--purple-600);">
+                        <h3 style="font-family:'Playfair Display',serif; color:var(--purple-800); font-size:1.3rem;">By the Numbers</h3>
+                        <ul style="list-style:none; padding:0; color:var(--gray-700); font-size:0.95rem;">
+                            <li style="padding:4px 0;"><strong>39</strong> Departments &amp; Programs</li>
+                            <li style="padding:4px 0;"><strong>4</strong> Academic Divisions</li>
+                            <li style="padding:4px 0;"><strong>900+</strong> Faculty Members</li>
+                            <li style="padding:4px 0;"><strong>6,000+</strong> Undergraduate Students</li>
+                            <li style="padding:4px 0;"><strong>1,800+</strong> Graduate Students</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="margin-top:32px; background:var(--purple-100); padding:24px 28px; border-radius:16px;">
+                    <p style="font-style:italic; color:var(--purple-800); font-size:1.05rem;">
+                        &ldquo;The Faculty of Arts and Sciences is where Miskatonic's tradition of
+                        rigorous inquiry meets the urgent questions of our time. We prepare students
+                        not only for careers, but for lives of purpose and impact.&rdquo;
+                    </p>
+                    <p style="color:var(--purple-600); font-weight:600; margin-top:4px;">— Octavian B. Kessler, Ph.D., Dean</p>
+                </div>
+            </section>
+
+            <!-- ===================== DEAN'S MESSAGE ===================== -->
+            <section class="page-section" id="section-deans-message">
+                <h1 class="section-title">Dean's <span class="highlight">Message</span></h1>
+                <div style="max-width:800px;">
+                    <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=800&h=300&fit=crop&crop=face&facepad=2" alt="Dean Octavian B. Kessler" style="width:100%; border-radius:16px; margin-bottom:20px; border:1px solid var(--gray-200);" />
+                    <p style="font-size:1.1rem; color:var(--gray-700); line-height:1.8;">
+                        Dear Members of the Miskatonic Community,
+                    </p>
+                    <p style="font-size:1rem; color:var(--gray-700); line-height:1.8; margin-top:12px;">
+                        Welcome to the Faculty of Arts and Sciences. As Dean, I am honored to lead
+                        a community of scholars and students who are passionately engaged in the
+                        pursuit of knowledge across the full spectrum of human inquiry.
+                    </p>
+                    <p style="font-size:1rem; color:var(--gray-700); line-height:1.8; margin-top:12px;">
+                        Our faculty are leaders in their fields — from the humanities to the natural
+                        and social sciences. Our students are curious, driven, and committed to
+                        making a difference in the world. Together, we tackle the most pressing
+                        questions of our time, from climate change and public health to social
+                        justice and cultural preservation.
+                    </p>
+                    <p style="font-size:1rem; color:var(--gray-700); line-height:1.8; margin-top:12px;">
+                        I invite you to explore our departments, our research, and our vibrant
+                        intellectual community. Whether you are a prospective student, a current
+                        member of our community, or an alum, you are an essential part of the
+                        FAS story.
+                    </p>
+                    <p style="font-size:1rem; color:var(--gray-700); line-height:1.8; margin-top:16px; font-weight:600; color:var(--purple-800);">
+                        — Octavian B. Kessler, Ph.D.<br />
+                        <span style="font-weight:400; color:var(--gray-600);">Dean, Faculty of Arts and Sciences</span>
+                    </p>
+                </div>
+            </section>
+
+            <!-- ===================== DIVISIONS ===================== -->
+            <!-- We'll show all four divisions in one view, each with its departments -->
+            <section class="page-section" id="section-divisions">
+                <h1 class="section-title">Academic <span class="highlight">Divisions</span></h1>
+                <p class="section-subtitle">
+                    The Faculty of Arts and Sciences is organized into four divisions, each
+                    encompassing a family of related departments and programs.
+                </p>
+
+                <!-- DIVISION: Arts & Humanities -->
+                <div id="division-ah" style="scroll-margin-top:80px;">
+                    <div class="division-header">
+                        <h2>Arts &amp; Humanities</h2>
+                        <span class="badge">13 Departments</span>
+                    </div>
+                    <p class="division-desc">
+                        The Arts and Humanities Division explores the breadth of human expression,
+                        thought, and creativity. From literature and philosophy to music and visual arts,
+                        our departments investigate what it means to be human across time and culture.
+                    </p>
+                    <div class="dept-grid">
+                        <div class="dept-card" data-dept="dance">
+                            <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&h=400&fit=crop&crop=center" alt="Dance Program" />
+                            <div class="info">
+                                <h4>Dance Program</h4>
+                                <p>Exploring movement as artistic expression and cultural practice through performance and scholarship.</p>
+                                <span class="dept-tag">Service Unit</span>
+                            </div>
+                        </div>
+                        <div class="dept-card" data-dept="american">
+                            <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=400&fit=crop&crop=center" alt="American, Indigenous, and Africana Studies" />
+                            <div class="info">
+                                <h4>American, Indigenous, &amp; Africana Studies</h4>
+                                <p>Interdisciplinary study of American cultures, Indigenous peoples, and the African diaspora.</p>
+                                <span class="dept-tag">BA, MA, PhD</span>
+                            </div>
+                        </div>
+                        <div class="dept-card" data-dept="classics">
+                            <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600&h=400&fit=crop&crop=center" alt="Classics" />
+                            <div class="info">
+                                <h4>Classics</h4>
+                                <p>The languages, literature, and material culture of ancient Greece and Rome.</p>
+                                <span class="dept-tag">BA, MA, PhD</span>
+                            </div>
+                        </div>
+                        <div class="dept-card" data-dept="eastasian">
+                            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop&crop=center" alt="East Asian Studies" />
+                            <div class="info">
+                                <h4>East Asian Studies</h4>
+                                <p>Languages, cultures, and societies of China, Japan, Korea, and Central Asia.</p>
+                                <span class="dept-tag">BA, MA, PhD</span>
+                            </div>
+                        </div>
+                        <div class="dept-card" data-dept="english">
+                            <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&h=400&fit=crop&crop=center" alt="English and Comparative Literature" />
+                            <div class="info">
+                                <h4>English &amp; Comparative Literature</h4>
+                                <p>Literary traditions from across the globe, in English and in translation.</p>
+                                <span class="dept-tag">BA, MA, PhD</span>
+                            </div>
+                        </div>
+                        <div class="dept-card" data-dept="germanic">
+                            <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=400&fit=crop&crop=center" alt="Germanic and Nordic Studies" />
+                            <div class="info">
+                                <h4>Germanic &amp; Nordic Studies</h4>
+                                <p>Languages, literatures, and cultures of the Germanic and Nordic worlds.</p>
+                                <span class="dept-tag">BA, MA, PhD</span>
+                            </div>
+                        </div>
+                        <div class="dept-card" data-dept="middleeast">
+                            <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600&h=400&fit=crop&crop=center" alt="Middle Eastern and North African Studies" />
+                            <div class="info">
+                                <h4>Middle Eastern &amp; North African Studies</h4>
+                                <p>Languages, history, and cultures of the Middle East and North Africa.</p>
+                                <span class="dept-tag">BA, MA, PhD</span>
+                            </div>
+                        </div>
+                        <div class="dept-card" data-dept="music">
+                            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop&crop=center" alt="Music (Miskatonic Conservatory)" />
+                            <div class="info">
+                                <h4>Music (Miskatonic Conservatory)</h4>
+                                <p>Performance, composition, musicology, and music education.</p>
+                                <span class="dept-tag">BM, MM, PhD, DMA</span>
+                            </div>
+                        </div>
+                        <div class="dept-card" data-dept="philosophy">
+                            <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&h=400&fit=crop&crop=center" alt="Philosophy" />
+                            <div class="info">
+                                <h4>Philosophy</h4>
+                                <p>Fundamental questions about existence, knowledge, ethics, and reason.</p>
+                                <span class="dept-tag">BA, MA, PhD</span>
+                            </div>
+                        </div>
+                        <div class="dept-card" data-dept="romance">
+                            <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=400&fit=crop&crop=center" alt="Romance Languages and Literatures" />
+                            <div class="info">
+                                <h4>Romance Languages &amp; Literatures</h4>
+                                <p>French, Spanish, Italian, Portuguese, and their global literatures.</p>
+                                <span class="dept-tag">BA, MA, PhD</span>
+                            </div>
+                        </div>
+                        <div class="dept-card" data-dept="russian">
+                            <img src="Russian/slavic.jpg" />
+                            <div class="info">
+                                <h4>Russian, Balkan, &amp; Eastern European Studies</h4>
+                                <p>Languages, literatures, and cultures of Eastern Europe and Eurasia.</p>
+                                <span class="dept-tag">BA, MA, PhD</span>
+                            </div>
+                        </div>
+                        <div class="dept-card" data-dept="southasian">
+                            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop&crop=center" alt="South and Southeast Asian Studies" />
+                            <div class="info">
+                                <h4>South &amp; Southeast Asian Studies</h4>
+                                <p>Languages, cultures, and societies of South and Southeast Asia.</p>
+                                <span class="dept-tag">BA, MA, PhD</span>
+                            </div>
+                        </div>
+                        <div class="dept-card" data-dept="visualarts">
+                            <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&h=400&fit=crop&crop=center" alt="Visual Arts and Art History" />
+                            <div class="info">
+                                <h4>Visual Arts &amp; Art History</h4>
+                                <p>Studio art, art history, and visual culture across time and place.</p>
+                                <span class="dept-tag">BFA, MFA, PhD</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DIVISION: Life & Environmental Sciences -->
+                <div id="division-life" style="scroll-margin-top:80px; margin-top:48px;">
+                    <div class="division-header">
+                        <h2>Life &amp; Environmental Sciences</h2>
+                        <span class="badge">5 Departments</span>
+                    </div>
+                    <p class="division-desc">
+                        The Life and Environmental Sciences Division investigates the living world at
+                        every level — from molecules to ecosystems. Our departments conduct research
+                        that addresses global challenges in health, biodiversity, and sustainability.
+                    </p>
+                    <div class="dept-grid">
+                        <div class="dept-card" data-dept="biochem">
+                            <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=400&fit=crop&crop=center" alt="Biochemistry, Cellular and Molecular Biology" />
+                            <div class="info">
+                                <h4>Biochemistry, Cellular &amp; Molecular Biology</h4>
+                                <p>The molecular foundations of life, from genes to proteins to cellular systems.</p>
+                                <span class="dept-tag">BS, MS, PhD</span>
+                            </div>
+                        </div>
+                        <div class="dept-card" data-dept="ecology">
+                            <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&h=400&fit=crop&crop=center" alt="Ecology and Organismal Biology" />
+                            <div class="info">
+                                <h4>Ecology &amp; Organismal Biology</h4>
+                                <p>The study of organisms, their interactions, and the ecosystems they shape.</p>
+                                <span class="dept-tag">BS, MS, PhD</span>
+                            </div>
+                        </div>
+                        <div class="dept-card" data-dept="movement">
+                            <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=400&fit=crop&crop=center" alt="Human Movement Sciences" />
+                            <div class="info">
+                                <h4>Human Movement Sciences</h4>
+                                <p>Physical activity, exercise science, and human performance.</p>
+                                <span class="dept-tag">Service Unit</span>
+                            </div>
+                        </div>
+                        <div class="dept-card" data-dept="plantsci">
+                            <img src="Plant Sciences/banner.jpg" alt="Plant Sciences" />
+                            <div class="info">
+                                <h4>Plant Sciences (Wadsworth Estate)</h4>
+                                <p>Plant biology, agriculture, and sustainable food systems.</p>
+                                <span class="dept-tag">BS, MS, PhD</span>
+                            </div>
+                        </div>
+                        <div class="dept-card" data-dept="wildlife">
+                            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop&crop=center" alt="Wildlife and Forest Sciences" />
+                            <div class="info">
+                                <h4>Wildlife &amp; Forest Sciences</h4>
+                                <p>Conservation, forest ecology, and the sustainable management of natural resources.</p>
+                                <span class="dept-tag">BS, MS, PhD</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DIVISION: Physical Sciences -->
+                <div id="division-physical" style="scroll-margin-top:80px; margin-top:48px;">
+                    <div class="division-header">
+                        <h2>Physical Sciences</h2>
+                        <span class="badge">8 Departments</span>
+                    </div>
+                    <p class="division-desc">
+                        The Physical Sciences Division explores the fundamental laws of the universe
+                        — from the smallest particles to the largest structures in the cosmos.
+                        Our departments drive discovery in fields ranging from quantum physics to
+                        climate science.
+                    </p>
+                    <div class="dept-grid">
+                        <div class="dept-card" data-dept="astronomy">
+                            <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&h=400&fit=crop&crop=center" alt="Astronomy and Astrophysics" />
+                            <div class="info">
+                                <h4>Astronomy &amp; Astrophysics (Warren Observatory)</h4>
+                                <p>Studying the universe from nearby planets to distant galaxies.</p>
+                                <span class="dept-tag">BS, MS, PhD</span>
+                            </div>
+                        </div>
+                        <div class="dept-card" data-dept="atmos">
+                            <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=400&fit=crop&crop=center" alt="Atmospheric Sciences" />
+                            <div class="info">
+                                <h4>Atmospheric Sciences</h4>
+                                <p>Weather, climate, and the dynamic systems of Earth's atmosphere.</p>
+                                <span class="dept-tag">BS, MS, PhD</span>
+                            </div>
+                        </div>
+                        <div class="dept-card" data-dept="chemistry">
+                            <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600&h=400&fit=crop&crop=center" alt="Chemistry" />
+                            <div class="info">
+                                <h4>Chemistry</h4>
+                                <p>The molecular basis of matter and its transformations.</p>
+                                <span class="dept-tag">BS, MS, PhD</span>
+                            </div>
+                        </div>
+                        <div class="dept-card" data-dept="cs">
+                            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop&crop=center" alt="Computer Science" />
+                            <div class="info">
+                                <h4>Computer Science</h4>
+                                <p>Algorithms, systems, and the theory of computation.</p>
+                                <span class="dept-tag">BS, MS, PhD</span>
+                            </div>
+                        </div>
+                        <div class="dept-card" data-dept="geology">
+                            <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&h=400&fit=crop&crop=center" alt="Geological Sciences" />
+                            <div class="info">
+                                <h4>Geological Sciences</h4>
+                                <p>Earth's history, structure, and the processes that shape our planet.</p>
+                                <span class="dept-tag">BS, MS, PhD</span>
+                            </div>
+                        </div>
+                        <div class="dept-card" data-dept="marine">
+                            <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=400&fit=crop&crop=center" alt="Marine Sciences" />
+                            <div class="info">
+                                <h4>Marine Sciences (Sommerset Manor)</h4>
+                                <p>Oceans, marine life, and the dynamic coastal environment.</p>
+                                <span class="dept-tag">BS, MS, PhD</span>
+                            </div>
+                        </div>
+                        <div class="dept-card" data-dept="math">
+                            <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600&h=400&fit=crop&crop=center" alt="Mathematics" />
+                            <div class="info">
+                                <h4>Mathematics</h4>
+                                <p>The pure and applied study of structure, patterns, and quantity.</p>
+                                <span class="dept-tag">BS, MS, PhD</span>
+                            </div>
+                        </div>
+                        <div class="dept-card" data-dept="physics">
+                            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop&crop=center" alt="Physics" />
+                            <div class="info">
+                                <h4>Physics</h4>
+                                <p>The fundamental laws governing matter, energy, and the universe.</p>
+                                <span class="dept-tag">BS, MS, PhD</span>
+                            </div>
+                        </div>
+                        <div class="dept-card" data-dept="stats">
+                            <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&h=400&fit=crop&crop=center" alt="Statistics" />
+                            <div class="info">
+                                <h4>Statistics</h4>
+                                <p>Data analysis, probability, and statistical modeling.</p>
+                                <span class="dept-tag">BS, MS, PhD</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DIVISION: Social Sciences -->
+                <div id="division-social" style="scroll-margin-top:80px; margin-top:48px;">
+                    <div class="division-header">
+                        <h2>Social Sciences</h2>
+                        <span class="badge">9 Departments &amp; Programs</span>
+                    </div>
+                    <p class="division-desc">
+                        The Social Sciences Division examines human behavior, societies, and institutions.
+                        Our departments investigate the structures that shape our world — from economic
+                        systems and political institutions to cultural practices and individual psychology.
+                    </p>
+                    <div class="dept-grid">
+                        <div class="dept-card" data-dept="aerospace">
+                            <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=400&fit=crop&crop=center" alt="Aerospace Studies Program" />
+                            <div class="info">
+                                <h4>Aerospace Studies Program</h4>
+                                <p>Air and space power, leadership, and strategic studies.</p>
+                                <span class="dept-tag">Program</span>
+                            </div>
+                        </div>
+                        <div class="dept-card" data-dept="anthro">
+                            <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600&h=400&fit=crop&crop=center" alt="Anthropology and Archaeology" />
+                            <div class="info">
+                                <h4>Anthropology &amp; Archaeology</h4>
+                                <p>Human cultures, past and present, from material remains to living traditions.</p>
+                                <span class="dept-tag">BA, MA, PhD</span>
+                            </div>
+                        </div>
+                        <div class="dept-card" data-dept="crim">
+                            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop&crop=center" alt="Criminology" />
+                            <div class="info">
+                                <h4>Criminology</h4>
+                                <p>Crime, justice, and the systems that address them.</p>
+                                <span class="dept-tag">BA, MA, PhD</span>
+                            </div>
+                        </div>
+                        <div class="dept-card" data-dept="economics">
+                            <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&h=400&fit=crop&crop=center" alt="Economics" />
+                            <div class="info">
+                                <h4>Economics</h4>
+                                <p>The production, distribution, and consumption of goods and services.</p>
+                                <span class="dept-tag">BA, MA, PhD</span>
+                            </div>
+                        </div>
+                        <div class="dept-card" data-dept="history">
+                            <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=400&fit=crop&crop=center" alt="History" />
+                            <div class="info">
+                                <h4>History</h4>
+                                <p>The study of the past and its enduring influence on the present.</p>
+                                <span class="dept-tag">BA, MA, PhD</span>
+                            </div>
+                        </div>
+                        <div class="dept-card" data-dept="polisci">
+                            <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600&h=400&fit=crop&crop=center" alt="Political Science and International Relations" />
+                            <div class="info">
+                                <h4>Political Science &amp; International Relations</h4>
+                                <p>Power, governance, and the dynamics of global politics.</p>
+                                <span class="dept-tag">BA, MA, PhD, MPP</span>
+                            </div>
+                        </div>
+                        <div class="dept-card" data-dept="psych">
+                            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop&crop=center" alt="Psychology" />
+                            <div class="info">
+                                <h4>Psychology</h4>
+                                <p>The mind, behavior, and the neural basis of experience.</p>
+                                <span class="dept-tag">BA, BS, MS, PhD, PsyD</span>
+                            </div>
+                        </div>
+                        <div class="dept-card" data-dept="sociology">
+                            <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&h=400&fit=crop&crop=center" alt="Sociology and Social Policy" />
+                            <div class="info">
+                                <h4>Sociology &amp; Social Policy</h4>
+                                <p>Social structures, inequality, and the policies that shape society.</p>
+                                <span class="dept-tag">BA, MA, PhD, MSW</span>
+                            </div>
+                        </div>
+                        <div class="dept-card" data-dept="military">
+                            <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=400&fit=crop&crop=center" alt="Military Science Program" />
+                            <div class="info">
+                                <h4>Military Science Program</h4>
+                                <p>Leadership, tactics, and military history.</p>
+                                <span class="dept-tag">Program</span>
+                            </div>
+                        </div>
+                        <div class="dept-card" data-dept="naval">
+                            <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600&h=400&fit=crop&crop=center" alt="Naval Science Program" />
+                            <div class="info">
+                                <h4>Naval Science Program</h4>
+                                <p>Maritime strategy, naval leadership, and ocean operations.</p>
+                                <span class="dept-tag">Program</span>
+                            </div>
+                        </div>
+                        <div class="dept-card" data-dept="yoga">
+                            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop&crop=center" alt="Yoga Program" />
+                            <div class="info">
+                                <h4>Yoga Program</h4>
+                                <p>Mind-body wellness through the practice of yoga.</p>
+                                <span class="dept-tag">Service Unit</span>
+                            </div>
+                        </div>
+                        <div class="dept-card" data-dept="service">
+                            <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&h=400&fit=crop&crop=center" alt="Center for Service Learning" />
+                            <div class="info">
+                                <h4>Center for Service Learning</h4>
+                                <p>Community engagement and experiential education.</p>
+                                <span class="dept-tag">Center</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================== RESEARCH ===================== -->
+            <section class="page-section" id="section-research">
+                <h1 class="section-title">Research in the <span class="highlight">Faculty of Arts &amp; Sciences</span></h1>
+                <p class="section-subtitle">
+                    Our faculty and students pursue transformative research across the full spectrum
+                    of the humanities, social sciences, and natural sciences.
+                </p>
+
+                <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:24px; margin-top:20px;">
+                    <div style="background:var(--purple-100); padding:24px; border-radius:16px; border:1px solid var(--purple-300);">
+                        <h4 style="color:var(--purple-800); font-size:1.1rem; font-weight:700;">Humanities Research</h4>
+                        <p style="color:var(--gray-700); font-size:0.9rem; line-height:1.6; margin-top:6px;">
+                            Literary and linguistic analysis, historical studies, philosophical inquiry,
+                            and the preservation of cultural heritage through archival and digital methods.
+                        </p>
+                    </div>
+                    <div style="background:var(--purple-100); padding:24px; border-radius:16px; border:1px solid var(--purple-300);">
+                        <h4 style="color:var(--purple-800); font-size:1.1rem; font-weight:700;">Social Science Research</h4>
+                        <p style="color:var(--gray-700); font-size:0.9rem; line-height:1.6; margin-top:6px;">
+                            Empirical studies of human behavior, political systems, economic dynamics,
+                            social structures, and the institutions that shape society.
+                        </p>
+                    </div>
+                    <div style="background:var(--purple-100); padding:24px; border-radius:16px; border:1px solid var(--purple-300);">
+                        <h4 style="color:var(--purple-800); font-size:1.1rem; font-weight:700;">Natural Science Research</h4>
+                        <p style="color:var(--gray-700); font-size:0.9rem; line-height:1.6; margin-top:6px;">
+                            Discovery in physics, chemistry, biology, astronomy, and earth sciences —
+                            from the quantum scale to the cosmic.
+                        </p>
+                    </div>
+                </div>
+
+                <div style="margin-top:32px;">
+                    <h3 style="font-family:'Playfair Display',serif; color:var(--purple-800); font-size:1.4rem;">Research Highlights</h3>
+                    <ul style="list-style:none; padding:0; margin-top:12px;">
+                        <li style="padding:12px 0; border-bottom:1px solid var(--gray-200); display:flex; gap:12px;">
+                            <span style="color:var(--red-600); font-weight:700;">•</span>
+                            <span style="color:var(--gray-700);"><strong>Climate and Environmental Science:</strong> Interdisciplinary research on climate change, biodiversity loss, and sustainable solutions.</span>
+                        </li>
+                        <li style="padding:12px 0; border-bottom:1px solid var(--gray-200); display:flex; gap:12px;">
+                            <span style="color:var(--red-600); font-weight:700;">•</span>
+                            <span style="color:var(--gray-700);"><strong>Digital Humanities:</strong> Computational approaches to literary analysis, historical mapping, and cultural preservation.</span>
+                        </li>
+                        <li style="padding:12px 0; border-bottom:1px solid var(--gray-200); display:flex; gap:12px;">
+                            <span style="color:var(--red-600); font-weight:700;">•</span>
+                            <span style="color:var(--gray-700);"><strong>Social Inequality and Justice:</strong> Research on poverty, racism, gender equity, and the policies that address systemic injustice.</span>
+                        </li>
+                        <li style="padding:12px 0; border-bottom:1px solid var(--gray-200); display:flex; gap:12px;">
+                            <span style="color:var(--red-600); font-weight:700;">•</span>
+                            <span style="color:var(--gray-700);"><strong>Quantum and Materials Science:</strong> Fundamental research in quantum physics, materials chemistry, and photonics with applications in technology and medicine.</span>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- ===================== CULTURE & ARTS ===================== -->
+            <section class="page-section" id="section-culture">
+                <h1 class="section-title">Culture &amp; <span class="highlight">Arts</span></h1>
+                <p class="section-subtitle">
+                    The Faculty of Arts and Sciences is home to a vibrant cultural life that enriches
+                    both the university and the wider community.
+                </p>
+
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:20px;">
+                    <div style="background:var(--white); border:1px solid var(--gray-200); border-radius:16px; padding:24px;">
+                        <h4 style="color:var(--purple-800); font-size:1.1rem; font-weight:700;">Miskatonic Conservatory</h4>
+                        <p style="color:var(--gray-700); font-size:0.92rem; line-height:1.6; margin-top:4px;">
+                            The Conservatory presents over 200 concerts annually, featuring student,
+                            faculty, and guest artists in classical, jazz, and contemporary music.
+                        </p>
+                    </div>
+                    <div style="background:var(--white); border:1px solid var(--gray-200); border-radius:16px; padding:24px;">
+                        <h4 style="color:var(--purple-800); font-size:1.1rem; font-weight:700;">Miskatonic Museum</h4>
+                        <p style="color:var(--gray-700); font-size:0.92rem; line-height:1.6; margin-top:4px;">
+                            The museum houses extensive collections in natural history, archaeology,
+                            and cultural artifacts from around the world, with rotating exhibitions.
+                        </p>
+                    </div>
+                    <div style="background:var(--white); border:1px solid var(--gray-200); border-radius:16px; padding:24px;">
+                        <h4 style="color:var(--purple-800); font-size:1.1rem; font-weight:700;">Arnaud’s Miskatonic Gallery</h4>
+                        <p style="color:var(--gray-700); font-size:0.92rem; line-height:1.6; margin-top:4px;">
+                            A Beaux-Arts gallery showcasing student and faculty creative works alongside
+                            masterpieces from the old masters and contemporary artists.
+                        </p>
+                    </div>
+                    <div style="background:var(--white); border:1px solid var(--gray-200); border-radius:16px; padding:24px;">
+                        <h4 style="color:var(--purple-800); font-size:1.1rem; font-weight:700;">Bradley Abbot Performance Center</h4>
+                        <p style="color:var(--gray-700); font-size:0.92rem; line-height:1.6; margin-top:4px;">
+                            A 2,500-seat performing arts facility hosting theatre, dance, music, and
+                            lecture events throughout the academic year.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================== ENGAGEMENT ===================== -->
+            <section class="page-section" id="section-engagement">
+                <h1 class="section-title">Community <span class="highlight">Engagement</span></h1>
+                <p class="section-subtitle">
+                    The Faculty of Arts and Sciences is deeply committed to building bridges between
+                    the university and the wider community.
+                </p>
+
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:20px;">
+                    <div style="background:var(--gray-100); padding:24px; border-radius:16px;">
+                        <h4 style="color:var(--purple-800); font-size:1.1rem; font-weight:700;">Public Lectures &amp; Events</h4>
+                        <p style="color:var(--gray-700); font-size:0.92rem; line-height:1.6;">
+                            The FAS hosts a wide range of public events, including the Miskatonic Lecture
+                            Series, faculty panels, and community dialogues on pressing social issues.
+                        </p>
+                    </div>
+                    <div style="background:var(--gray-100); padding:24px; border-radius:16px;">
+                        <h4 style="color:var(--purple-800); font-size:1.1rem; font-weight:700;">K-12 Partnerships</h4>
+                        <p style="color:var(--gray-700); font-size:0.92rem; line-height:1.6;">
+                            Our faculty and students work with local schools through programs in science
+                            education, literacy, arts outreach, and college readiness.
+                        </p>
+                    </div>
+                    <div style="background:var(--gray-100); padding:24px; border-radius:16px;">
+                        <h4 style="color:var(--purple-800); font-size:1.1rem; font-weight:700;">Center for Service Learning</h4>
+                        <p style="color:var(--gray-700); font-size:0.92rem; line-height:1.6;">
+                            The Center connects students with community organizations, integrating
+                            service and civic engagement into the academic experience.
+                        </p>
+                    </div>
+                    <div style="background:var(--gray-100); padding:24px; border-radius:16px;">
+                        <h4 style="color:var(--purple-800); font-size:1.1rem; font-weight:700;">Arkham Cultural Exchange</h4>
+                        <p style="color:var(--gray-700); font-size:0.92rem; line-height:1.6;">
+                            A series of collaborative programs with Arkham's cultural institutions,
+                            including the Arkham Historical Society and the Arkham Public Library.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================== LEADERSHIP ===================== -->
+            <section class="page-section" id="section-leadership">
+                <h1 class="section-title"><span class="highlight">Leadership</span> of the Faculty of Arts &amp; Sciences</h1>
+                <p class="section-subtitle">
+                    The FAS is guided by a dedicated team of academic leaders who shape the vision
+                    and direction of the faculty.
+                </p>
+
+                <h3 style="font-family:'Playfair Display',serif; color:var(--purple-800); font-size:1.4rem; margin-top:20px;">Dean</h3>
+                <table class="leadership-table" style="max-width:700px;">
+                    <thead>
+                        <tr><th>Name</th><th>Title</th><th>Department</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Octavian B. Kessler, Ph.D.</td><td>Dean, FAS</td><td>Chemistry</td></tr>
+                    </tbody>
+                </table>
+
+                <h3 style="font-family:'Playfair Display',serif; color:var(--purple-800); font-size:1.4rem; margin-top:32px;">Associate Deans</h3>
+                <table class="leadership-table" style="max-width:700px;">
+                    <thead>
+                        <tr><th>Name</th><th>Division</th><th>Department</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Hans von Bolmer, Ph.D.</td><td>Arts &amp; Humanities</td><td>Art History</td></tr>
+                        <tr><td>Rodremer M. Maduka, Ph.D.</td><td>Life &amp; Environmental Sciences</td><td>Biological Sciences</td></tr>
+                        <tr><td>Jack O. Lan, Ph.D.</td><td>Physical Sciences</td><td>Engineering (courtesy)</td></tr>
+                        <tr><td>Miriam Umridge, Ph.D.</td><td>Social Sciences</td><td>Anthropology</td></tr>
+                    </tbody>
+                </table>
+
+                <h3 style="font-family:'Playfair Display',serif; color:var(--purple-800); font-size:1.4rem; margin-top:32px;">Department Chairs</h3>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px 24px; margin-top:12px; max-width:900px;">
+                    <div><strong style="color:var(--purple-700);">Dance:</strong> Randy Brown, M.F.A.</div>
+                    <div><strong style="color:var(--purple-700);">American, Indigenous, &amp; Africana Studies:</strong> Norma L. Waters, Ph.D.</div>
+                    <div><strong style="color:var(--purple-700);">Classics:</strong> Ivar F. Engleton, Ph.D.</div>
+                    <div><strong style="color:var(--purple-700);">East Asian Studies:</strong> Izumi Fujinuma, Ph.D.</div>
+                    <div><strong style="color:var(--purple-700);">English &amp; Comparative Literature:</strong> Elizabeth Y. Underhill, Ph.D.</div>
+                    <div><strong style="color:var(--purple-700);">Germanic &amp; Nordic Studies:</strong> Pierre Morgan, Ph.D.</div>
+                    <div><strong style="color:var(--purple-700);">Middle Eastern &amp; North African Studies:</strong> Armin Wolfson, Ph.D.</div>
+                    <div><strong style="color:var(--purple-700);">Music (Conservatory):</strong> Peter Langston, M.M.</div>
+                    <div><strong style="color:var(--purple-700);">Philosophy:</strong> Nigel Van E. Chambers, Ph.D.</div>
+                    <div><strong style="color:var(--purple-700);">Romance Languages &amp; Literatures:</strong> Tessy H. McGreevey, Ph.D.</div>
+                    <div><strong style="color:var(--purple-700);">Russian, Balkan, &amp; Eastern European Studies:</strong> Pavel Vasiliev, Ph.D.</div>
+                    <div><strong style="color:var(--purple-700);">South &amp; Southeast Asian Studies:</strong> Naneth Jeffersons, Ph.D.</div>
+                    <div><strong style="color:var(--purple-700);">Visual Arts &amp; Art History:</strong> Levi Morrison, M.F.A.</div>
+                    <div><strong style="color:var(--purple-700);">Biochemistry, Cellular &amp; Molecular Biology:</strong> Neil Young, D.V.M., Ph.D.</div>
+                    <div><strong style="color:var(--purple-700);">Ecology &amp; Organismal Biology:</strong> Arthur L. Brown, Ph.D.</div>
+                    <div><strong style="color:var(--purple-700);">Human Movement Sciences:</strong> Charles O'Neil, Ed.D.</div>
+                    <div><strong style="color:var(--purple-700);">Plant Sciences:</strong> Terrence Smith, Ph.D.</div>
+                    <div><strong style="color:var(--purple-700);">Wildlife &amp; Forest Sciences:</strong> Noah Rosenberg, Ph.D.</div>
+                    <div><strong style="color:var(--purple-700);">Astronomy &amp; Astrophysics:</strong> Peter V. Golden, Ph.D.</div>
+                    <div><strong style="color:var(--purple-700);">Atmospheric Sciences:</strong> Simeon Otwell Robertson, Ph.D.</div>
+                    <div><strong style="color:var(--purple-700);">Chemistry:</strong> Elena Romanova, Ph.D.</div>
+                    <div><strong style="color:var(--purple-700);">Computer Science:</strong> Logan H. Gilmore, Ph.D.</div>
+                    <div><strong style="color:var(--purple-700);">Geological Sciences:</strong> Glen V. Nelson, Ph.D.</div>
+                    <div><strong style="color:var(--purple-700);">Marine Sciences:</strong> William Batsingham, Ph.D.</div>
+                    <div><strong style="color:var(--purple-700);">Mathematics:</strong> William Folger, Ph.D.</div>
+                    <div><strong style="color:var(--purple-700);">Physics:</strong> Charles Truslow, Ph.D.</div>
+                    <div><strong style="color:var(--purple-700);">Statistics:</strong> Cassandra Malory, Ph.D.</div>
+                    <div><strong style="color:var(--purple-700);">Aerospace Studies:</strong> Reid Wynans, Lt. Col., USAF</div>
+                    <div><strong style="color:var(--purple-700);">Anthropology &amp; Archaeology:</strong> Eleanor Palmer, Ph.D.</div>
+                    <div><strong style="color:var(--purple-700);">Criminology:</strong> Nolan R. Sedgwick, Ph.D.</div>
+                    <div><strong style="color:var(--purple-700);">Economics:</strong> Rosemary L. Fink, Ph.D.</div>
+                    <div><strong style="color:var(--purple-700);">History:</strong> Angelique T. McNeilson, Ph.D.</div>
+                    <div><strong style="color:var(--purple-700);">Political Science &amp; International Relations:</strong> Ryder Hunter, Ph.D.</div>
+                    <div><strong style="color:var(--purple-700);">Psychology:</strong> Easton Moore, Psy.D.</div>
+                    <div><strong style="color:var(--purple-700);">Sociology &amp; Social Policy:</strong> Anastacia Caulkin, Ph.D.</div>
+                    <div><strong style="color:var(--purple-700);">Military Science:</strong> Arthur Clements, Lt. Col., U.S. Army</div>
+                    <div><strong style="color:var(--purple-700);">Naval Science:</strong> Sean M. McBride, Col., U.S. Marine Corps</div>
+                    <div><strong style="color:var(--purple-700);">Yoga Program:</strong> Thelma Nesbeth Walsh</div>
+                    <div><strong style="color:var(--purple-700);">Center for Service Learning:</strong> Cora M. Baelish, M.Ed.</div>
+                </div>
+            </section>
+
+            <!-- ============================================================ -->
+            <!-- ===== DEPARTMENT DETAIL VIEW (hidden by default) ===== -->
+            <!-- ============================================================ -->
+            <div class="dept-detail-view" id="deptDetailView">
+                <button class="back-btn" id="backFromDept">&#8592; Back to Departments</button>
+                <img src="" alt="Department" class="detail-hero" id="deptDetailImg" />
+                <h2 class="detail-title" id="deptDetailTitle">Department Name</h2>
+                <div class="detail-division" id="deptDetailDivision">Division</div>
+                <div class="detail-body" id="deptDetailBody">
+                    <p>Department description and information will appear here.</p>
+                    <p>This is a placeholder. In production, this would load from a database or CMS.</p>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ----- DOM refs -----
+            const sections = document.querySelectorAll('.page-section');
+            const sidebarLinks = document.querySelectorAll('.sidebar nav a');
+            const dropdownToggle = document.getElementById('divisionsToggle');
+            const dropdownMenu = document.getElementById('divisionsMenu');
+            const deptCards = document.querySelectorAll('.dept-card');
+            const deptDetailView = document.getElementById('deptDetailView');
+            const backBtn = document.getElementById('backFromDept');
+            const deptDetailTitle = document.getElementById('deptDetailTitle');
+            const deptDetailDivision = document.getElementById('deptDetailDivision');
+            const deptDetailBody = document.getElementById('deptDetailBody');
+            const deptDetailImg = document.getElementById('deptDetailImg');
+
+            // ----- Data for departments (mock) -----
+            const deptData = {
+                dance: {
+                    title: 'Dance Program',
+                    division: 'Arts & Humanities',
+                    img: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&h=400&fit=crop&crop=center',
+                    body: `
+                        <p>The Dance Program at Miskatonic University offers a comprehensive exploration of movement as artistic expression, cultural practice, and scholarly inquiry. Our curriculum integrates performance, choreography, dance history, and movement analysis.</p>
+                        <p>Students have opportunities to perform in faculty and student choreographed works, participate in master classes with visiting artists, and engage with the vibrant dance community of New England.</p>
+                        <p>The program serves as a service unit for undergraduate courses and does not offer degree-granting programs, but provides essential training for students across the university.</p>
+                        <p><strong>Chair:</strong> Randy Brown, M.F.A.</p>
+                    `
+                },
+                american: {
+                    title: 'American, Indigenous, & Africana Studies',
+                    division: 'Arts & Humanities',
+                    img: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=400&fit=crop&crop=center',
+                    body: `
+                        <p>The Department of American, Indigenous, and Africana Studies offers interdisciplinary programs that examine the histories, cultures, and contemporary experiences of Indigenous peoples, African Americans, and the diverse populations that make up the Americas.</p>
+                        <p>Our faculty specialize in Native American languages and cultures, African American literature, urban cultural studies, and diaspora studies. We engage students in critical conversations about race, identity, and social justice.</p>
+                        <p><strong>Chair:</strong> Norma L. Waters, Ph.D.</p>
+                        <p><strong>Degrees:</strong> BA, MA, PhD</p>
+                    `
+                },
+                classics: {
+                    title: 'Classics',
+                    division: 'Arts & Humanities',
+                    img: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=400&fit=crop&crop=center',
+                    body: `
+                        <p>The Department of Classics is dedicated to the study of the languages, literatures, and material cultures of ancient Greece and Rome. Our students engage with Greek, Latin, and Hebrew texts, archaeological remains, and the intellectual traditions that have shaped Western civilization.</p>
+                        <p>We offer courses in classical literature, ancient history, philosophy, and material culture, with opportunities for archaeological fieldwork and study abroad.</p>
+                        <p><strong>Chair:</strong> Ivar F. Engleton, Ph.D.</p>
+                        <p><strong>Degrees:</strong> BA, MA, PhD</p>
+                    `
+                },
+                eastasian: {
+                    title: 'East Asian Studies',
+                    division: 'Arts & Humanities',
+                    img: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=400&fit=crop&crop=center',
+                    body: `
+                        <p>The Department of East Asian Studies offers a comprehensive exploration of the languages, cultures, and societies of China, Japan, Korea, and Central Asia. Our faculty specialize in Chinese and Japanese literature, Buddhist studies, Mongolian history, Ainu studies, and contemporary Asia-Pacific geopolitics.</p>
+                        <p>Students develop advanced language skills and cultural competence through coursework, study abroad programs, and independent research.</p>
+                        <p><strong>Chair:</strong> Izumi Fujinuma, Ph.D.</p>
+                        <p><strong>Degrees:</strong> BA, MA, PhD</p>
+                    `
+                },
+                english: {
+                    title: 'English & Comparative Literature',
+                    division: 'Arts & Humanities',
+                    img: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&h=400&fit=crop&crop=center',
+                    body: `
+                        <p>The Department of English and Comparative Literature is one of the largest and most distinguished departments at Miskatonic. We offer a wide range of courses in British, American, and world literatures, creative writing, literary theory, and linguistics.</p>
+                        <p>Our faculty include award-winning writers, critics, and scholars whose work spans the medieval period to the present day. We are committed to fostering critical reading, analytical writing, and creative expression.</p>
+                        <p><strong>Chair:</strong> Elizabeth Y. Underhill, Ph.D.</p>
+                        <p><strong>Degrees:</strong> BA, MA, PhD</p>
+                    `
+                },
+                germanic: {
+                    title: 'Germanic & Nordic Studies',
+                    division: 'Arts & Humanities',
+                    img: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=400&fit=crop&crop=center',
+                    body: `
+                        <p>The Department of Germanic and Nordic Studies examines the languages, literatures, and cultures of the Germanic and Nordic worlds — from medieval Scandinavia to modern Germany, Austria, and the Low Countries.</p>
+                        <p>Our faculty specialize in Old Norse, German literature, Scandinavian folklore, and the linguistic traditions of the region, including Afrikaans and Yiddish.</p>
+                        <p><strong>Chair:</strong> Pierre Morgan, Ph.D.</p>
+                        <p><strong>Degrees:</strong> BA, MA, PhD</p>
+                    `
+                },
+                middleeast: {
+                    title: 'Middle Eastern & North African Studies',
+                    division: 'Arts & Humanities',
+                    img: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=400&fit=crop&crop=center',
+                    body: `
+                        <p>The Department of Middle Eastern and North African Studies offers a comprehensive exploration of the languages, histories, and cultures of a region that has been at the crossroads of civilization for millennia. Our faculty specialize in Arabic, Persian, Turkish, Hebrew, and ancient languages such as Akkadian and Coptic.</p>
+                        <p>Students engage with the literary, religious, and political traditions of the Middle East and North Africa, preparing for careers in academia, diplomacy, and international affairs.</p>
+                        <p><strong>Chair:</strong> Armin Wolfson, Ph.D.</p>
+                        <p><strong>Degrees:</strong> BA, MA, PhD</p>
+                    `
+                },
+                music: {
+                    title: 'Music (Miskatonic Conservatory)',
+                    division: 'Arts & Humanities',
+                    img: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=400&fit=crop&crop=center',
+                    body: `
+                        <p>The Miskatonic Conservatory is a world-class center for musical education and performance. We offer comprehensive training in performance, composition, musicology, and music education across a wide range of traditions and genres.</p>
+                        <p>Our facilities include a state-of-the-art auditorium, performance halls, and practice facilities. Students perform in ensembles including the Symphony Orchestra, Jazz Ensemble, and Choral Union.</p>
+                        <p><strong>Chair:</strong> Peter Langston, M.M.</p>
+                        <p><strong>Degrees:</strong> BM, MM, PhD, DMA</p>
+                    `
+                },
+                philosophy: {
+                    title: 'Philosophy',
+                    division: 'Arts & Humanities',
+                    img: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&h=400&fit=crop&crop=center',
+                    body: `
+                        <p>The Department of Philosophy engages with fundamental questions about existence, knowledge, ethics, and reason. Our faculty work in all major areas of philosophy, including metaphysics, epistemology, ethics, political philosophy, and the history of philosophy.</p>
+                        <p>We are known for our strengths in continental philosophy, philosophy of science, and ethics, and we maintain close connections with the Miskatonic Ethics Lab.</p>
+                        <p><strong>Chair:</strong> Nigel Van E. Chambers, Ph.D.</p>
+                        <p><strong>Degrees:</strong> BA, MA, PhD</p>
+                    `
+                },
+                romance: {
+                    title: 'Romance Languages & Literatures',
+                    division: 'Arts & Humanities',
+                    img: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=400&fit=crop&crop=center',
+                    body: `
+                        <p>The Department of Romance Languages and Literatures offers a rich exploration of the languages and literatures of the Romance-speaking world, including French, Spanish, Italian, Portuguese, and their global variants.</p>
+                        <p>Our faculty specialize in medieval literature, contemporary Latin American fiction, Francophone studies, and the cultural histories of the Iberian Peninsula.</p>
+                        <p><strong>Chair:</strong> Tessy H. McGreevey, Ph.D.</p>
+                        <p><strong>Degrees:</strong> BA, MA, PhD</p>
+                    `
+                },
+                russian: {
+                    title: 'Russian, Balkan, & Eastern European Studies',
+                    division: 'Arts & Humanities',
+                    img: 'Russian/slavic.jpg',
+                    body: `
+                        <p>The Department of Russian, Balkan, and Eastern European Studies offers...</p>
+                        <p><strong>Chair:</strong> Pavel Vasiliev, Ph.D.</p>
+                        <p><strong>Degrees:</strong> BA, MA, PhD</p>
+                        <!-- ADD THIS BUTTON -->
+                        <div style="margin-top: 20px;">
+                             <button onclick="viewFullDepartment('russian')" style="background: var(--red-600); color: white; padding: 12px 30px; border: none; border-radius: 50px; font-weight: 600; cursor: pointer;">
+                                View Full Department Page →
+                            </button>
+                        </div>`
+                },
+                southasian: {
+                    title: 'South & Southeast Asian Studies',
+                    division: 'Arts & Humanities',
+                    img: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=400&fit=crop&crop=center',
+                    body: `
+                        <p>The Department of South and Southeast Asian Studies is a leading center for the study of one of the world's most culturally rich and dynamic regions. Our faculty specialize in Sanskrit, Tamil, Hindi, Indonesian, Thai, and other languages of the region.</p>
+                        <p>We offer courses in literature, religion, history, and contemporary society, with opportunities for fieldwork and study abroad in South and Southeast Asia.</p>
+                        <p><strong>Chair:</strong> Naneth Jeffersons, Ph.D.</p>
+                        <p><strong>Degrees:</strong> BA, MA, PhD</p>
+                    `
+                },
+                visualarts: {
+                    title: 'Visual Arts & Art History',
+                    division: 'Arts & Humanities',
+                    img: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&h=400&fit=crop&crop=center',
+                    body: `
+                        <p>The Department of Visual Arts and Art History offers a dynamic program that combines studio art practice with the critical study of art history and visual culture. Our students work in painting, sculpture, ceramics, and digital media, while engaging with the history of art from the ancient world to the present.</p>
+                        <p>Our faculty include practicing artists, art historians, and critics who are leaders in their fields.</p>
+                        <p><strong>Chair:</strong> Levi Morrison, M.F.A.</p>
+                        <p><strong>Degrees:</strong> BFA, MFA, PhD</p>
+                    `
+                },
+                biochem: {
+                    title: 'Biochemistry, Cellular & Molecular Biology',
+                    division: 'Life & Environmental Sciences',
+                    img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=800&h=400&fit=crop&crop=center',
+                    body: `
+                        <p>The Department of Biochemistry, Cellular and Molecular Biology is at the forefront of research into the molecular foundations of life. Our faculty investigate the structure and function of proteins, the regulation of gene expression, and the mechanisms of cellular signaling.</p>
+                        <p>Students engage in cutting-edge research in areas such as genomics, proteomics, and drug discovery.</p>
+                        <p><strong>Chair:</strong> Neil Young, D.V.M., Ph.D.</p>
+                        <p><strong>Degrees:</strong> BS, MS, PhD</p>
+                    `
+                },
+                ecology: {
+                    title: 'Ecology & Organismal Biology',
+                    division: 'Life & Environmental Sciences',
+                    img: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&h=400&fit=crop&crop=center',
+                    body: `
+                        <p>The Department of Ecology and Organismal Biology explores the diversity of life and the interactions between organisms and their environments. Our research spans the fields of evolutionary biology, disease ecology, conservation, and ecosystem dynamics.</p>
+                        <p>Students have opportunities for fieldwork in forests, wetlands, and coastal ecosystems, and engage with pressing issues in biodiversity conservation.</p>
+                        <p><strong>Chair:</strong> Arthur L. Brown, Ph.D.</p>
+                        <p><strong>Degrees:</strong> BS, MS, PhD</p>
+                    `
+                },
+                movement: {
+                    title: 'Human Movement Sciences',
+                    division: 'Life & Environmental Sciences',
+                    img: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=400&fit=crop&crop=center',
+                    body: `
+                        <p>The Human Movement Sciences program is a service unit that provides courses in physical education, exercise science, and human performance. Our faculty are experts in kinesiology, biomechanics, and sports science.</p>
+                        <p>We support the university's athletic programs and offer classes that promote lifelong health and wellness.</p>
+                        <p><strong>Chair:</strong> Charles O'Neil, Ed.D.</p>
+                        <p><strong>Degrees:</strong> Service Unit</p>
+                    `
+                },
+                plantsci: {
+                    title: 'Plant Sciences (Wadsworth Estate)',
+                    division: 'Life & Environmental Sciences',
+                    img: 'Plant Sciences/banner.jpg',
+                    body: `
+                        <p>The Department of Plant Sciences is located at the Wadsworth Estate, a 910-acre research and teaching facility dedicated to plant biology and sustainable agriculture. Our faculty conduct research in plant genetics, soil science, horticulture, and agroecology.</p>
+                        <p>Students gain hands-on experience in greenhouses, field stations, and research plantations.</p>
+                        <p><strong>Chair:</strong> Terrence Smith, Ph.D.</p>
+                        <p><strong>Degrees:</strong> BS, MS, PhD</p>
+                        <div style="margin-top: 20px;">
+                             <button onclick="viewFullDepartment('plantsci')" style="background: var(--red-600); color: white; padding: 12px 30px; border: none; border-radius: 50px; font-weight: 600; cursor: pointer;">
+                                View Full Department Page →
+                            </button>
+                        </div>`
+                    
+                },
+                wildlife: {
+                    title: 'Wildlife & Forest Sciences',
+                    division: 'Life & Environmental Sciences',
+                    img: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=400&fit=crop&crop=center',
+                    body: `
+                        <p>The Department of Wildlife and Forest Sciences is dedicated to the study of forest ecosystems, wildlife populations, and the sustainable management of natural resources. Our faculty conduct research in forest ecology, wildlife biology, and conservation.</p>
+                        <p>Students gain field experience in the forests of New England and beyond, preparing for careers in environmental science, conservation, and land management.</p>
+                        <p><strong>Chair:</strong> Noah Rosenberg, Ph.D.</p>
+                        <p><strong>Degrees:</strong> BS, MS, PhD</p>
+                    `
+                },
+                astronomy: {
+                    title: 'Astronomy & Astrophysics (Warren Observatory)',
+                    division: 'Physical Sciences',
+                    img: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&h=400&fit=crop&crop=center',
+                    body: `
+                        <p>The Department of Astronomy and Astrophysics is a leading center for research on the universe, from exoplanets to cosmology. Our faculty conduct research in stellar evolution, galaxy formation, gravitational waves, and exoplanet detection.</p>
+                        <p>Students have access to the Warren Observatory, one of the premier observatory facilities in the Northeast, as well as collaborations with major observatories worldwide.</p>
+                        <p><strong>Chair:</strong> Peter V. Golden, Ph.D.</p>
+                        <p><strong>Degrees:</strong> BS, MS, PhD</p>
+                    `
+                },
+                atmos: {
+                    title: 'Atmospheric Sciences',
+                    division: 'Physical Sciences',
+                    img: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=400&fit=crop&crop=center',
+                    body: `
+                        <p>The Department of Atmospheric Sciences investigates the physical and chemical processes that govern Earth's atmosphere, including weather, climate, and air quality. Our faculty conduct research in atmospheric physics, climate modeling, and environmental chemistry.</p>
+                        <p>Students engage with pressing issues such as climate change, severe weather prediction, and atmospheric pollution.</p>
+                        <p><strong>Chair:</strong> Simeon Otwell Robertson, Ph.D.</p>
+                        <p><strong>Degrees:</strong> BS, MS, PhD</p>
+                    `
+                },
+                chemistry: {
+                    title: 'Chemistry',
+                    division: 'Physical Sciences',
+                    img: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=400&fit=crop&crop=center',
+                    body: `
+                        <p>The Department of Chemistry is a world-renowned center for research and education in the molecular sciences. Our faculty are leaders in organic synthesis, inorganic chemistry, physical chemistry, analytical chemistry, and chemical biology.</p>
+                        <p>Students have access to state-of-the-art facilities, including NMR spectroscopy, mass spectrometry, and X-ray diffraction instruments.</p>
+                        <p><strong>Chair:</strong> Elena Romanova, Ph.D.</p>
+                        <p><strong>Degrees:</strong> BS, MS, PhD</p>
+                    `
+                },
+                cs: {
+                    title: 'Computer Science',
+                    division: 'Physical Sciences',
+                    img: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=400&fit=crop&crop=center',
+                    body: `
+                        <p>The Department of Computer Science is a leader in research on algorithms, systems, and the theory of computation. Our faculty conduct research in artificial intelligence, machine learning, cybersecurity, robotics, and distributed systems.</p>
+                        <p>Students develop expertise in computational thinking and programming, preparing for careers in technology, research, and innovation.</p>
+                        <p><strong>Chair:</strong> Logan H. Gilmore, Ph.D. (Turing Award winner)</p>
+                        <p><strong>Degrees:</strong> BS, MS, PhD</p>
+                    `
+                },
+                geology: {
+                    title: 'Geological Sciences',
+                    division: 'Physical Sciences',
+                    img: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&h=400&fit=crop&crop=center',
+                    body: `
+                        <p>The Department of Geological Sciences explores the history and dynamics of Earth through the study of rocks, minerals, fossils, and landforms. Our faculty conduct research in geochemistry, paleontology, structural geology, and planetary science.</p>
+                        <p>Students engage in fieldwork, laboratory analysis, and data modeling to understand the processes that have shaped our planet.</p>
+                        <p><strong>Chair:</strong> Glen V. Nelson, Ph.D.</p>
+                        <p><strong>Degrees:</strong> BS, MS, PhD</p>
+                    `
+                },
+                marine: {
+                    title: 'Marine Sciences (Sommerset Manor)',
+                    division: 'Physical Sciences',
+                    img: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=400&fit=crop&crop=center',
+                    body: `
+                        <p>The Department of Marine Sciences is based at the Sommerset Manor facility in Innsmouth, a coastal research station dedicated to the study of ocean systems and marine life. Our faculty conduct research in oceanography, marine biology, and coastal geology.</p>
+                        <p>Students have access to research vessels, submersibles, and state-of-the-art marine laboratories.</p>
+                        <p><strong>Chair:</strong> William Batsingham, Ph.D.</p>
+                        <p><strong>Degrees:</strong> BS, MS, PhD</p>
+                    `
+                },
+                math: {
+                    title: 'Mathematics',
+                    division: 'Physical Sciences',
+                    img: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=400&fit=crop&crop=center',
+                    body: `
+                        <p>The Department of Mathematics offers a rigorous program in pure and applied mathematics, covering areas such as algebra, analysis, topology, number theory, and mathematical modeling. Our faculty are leaders in their fields and contribute to the broader mathematical community.</p>
+                        <p>Students develop critical thinking and problem-solving skills through coursework and independent research.</p>
+                        <p><strong>Chair:</strong> William Folger, Ph.D.</p>
+                        <p><strong>Degrees:</strong> BS, MS, PhD</p>
+                    `
+                },
+                physics: {
+                    title: 'Physics',
+                    division: 'Physical Sciences',
+                    img: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=400&fit=crop&crop=center',
+                    body: `
+                        <p>The Department of Physics is a world-class center for research on the fundamental laws of the universe. Our faculty conduct research in quantum physics, cosmology, particle physics, condensed matter physics, and high-energy physics.</p>
+                        <p>Students have access to the Arkham National Laboratory, the Warren Observatory, and collaborations with major research facilities such as CERN and Fermilab.</p>
+                        <p><strong>Chair:</strong> Charles Truslow, Ph.D.</p>
+                        <p><strong>Degrees:</strong> BS, MS, PhD</p>
+                    `
+                },
+                stats: {
+                    title: 'Statistics',
+                    division: 'Physical Sciences',
+                    img: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&h=400&fit=crop&crop=center',
+                    body: `
+                        <p>The Department of Statistics offers a comprehensive program in data analysis, probability, and statistical modeling. Our faculty are experts in Bayesian inference, machine learning, and biostatistics.</p>
+                        <p>Students develop quantitative skills that are essential for careers in research, industry, and government.</p>
+                        <p><strong>Chair:</strong> Cassandra Malory, Ph.D.</p>
+                        <p><strong>Degrees:</strong> BS, MS, PhD</p>
+                    `
+                },
+                aerospace: {
+                    title: 'Aerospace Studies Program',
+                    division: 'Social Sciences',
+                    img: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=400&fit=crop&crop=center',
+                    body: `
+                        <p>The Aerospace Studies Program offers courses in air and space power, leadership, and strategic studies. The program is part of the Air Force ROTC, providing students with the skills and knowledge needed for careers in the U.S. Air Force.</p>
+                        <p>Students develop leadership abilities, physical fitness, and a deep understanding of aerospace operations.</p>
+                        <p><strong>Chair:</strong> Reid Wynans, Lt. Col., USAF</p>
+                    `
+                },
+                anthro: {
+                    title: 'Anthropology & Archaeology',
+                    division: 'Social Sciences',
+                    img: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=400&fit=crop&crop=center',
+                    body: `
+                        <p>The Department of Anthropology and Archaeology offers a comprehensive study of human cultures, past and present. Our faculty specialize in archaeology, biological anthropology, linguistic anthropology, and sociocultural anthropology.</p>
+                        <p>Students engage in fieldwork, laboratory analysis, and ethnographic research, exploring the diversity of human experience across time and space.</p>
+                        <p><strong>Chair:</strong> Eleanor Palmer, Ph.D.</p>
+                        <p><strong>Degrees:</strong> BA, MA, PhD</p>
+                    `
+                },
+                crim: {
+                    title: 'Criminology',
+                    division: 'Social Sciences',
+                    img: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=400&fit=crop&crop=center',
+                    body: `
+                        <p>The Department of Criminology examines crime, justice, and the systems that address them. Our faculty are experts in criminal justice, forensic psychology, and security studies, with a focus on evidence-based policy and practice.</p>
+                        <p>Students develop skills in data analysis, policy evaluation, and investigative methods, preparing for careers in law enforcement, law, and public policy.</p>
+                        <p><strong>Chair:</strong> Nolan R. Sedgwick, Ph.D.</p>
+                        <p><strong>Degrees:</strong> BA, MA, PhD</p>
+                    `
+                },
+                economics: {
+                    title: 'Economics',
+                    division: 'Social Sciences',
+                    img: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&h=400&fit=crop&crop=center',
+                    body: `
+                        <p>The Department of Economics studies the production, distribution, and consumption of goods and services. Our faculty are experts in microeconomics, macroeconomics, econometrics, and development economics.</p>
+                        <p>Students analyze economic systems, evaluate policies, and develop quantitative skills for careers in business, government, and academia.</p>
+                        <p><strong>Chair:</strong> Rosemary L. Fink, Ph.D.</p>
+                        <p><strong>Degrees:</strong> BA, MA, PhD</p>
+                    `
+                },
+                history: {
+                    title: 'History',
+                    division: 'Social Sciences',
+                    img: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=400&fit=crop&crop=center',
+                    body: `
+                        <p>The Department of History offers a comprehensive program in the study of the past and its influence on the present. Our faculty specialize in American history, European history, Asian history, and global history, with expertise in social, political, and cultural history.</p>
+                        <p>Students develop skills in archival research, historical analysis, and historical writing.</p>
+                        <p><strong>Chair:</strong> Angelique T. McNeilson, Ph.D.</p>
+                        <p><strong>Degrees:</strong> BA, MA, PhD</p>
+                    `
+                },
+                polisci: {
+                    title: 'Political Science & International Relations',
+                    division: 'Social Sciences',
+                    img: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=400&fit=crop&crop=center',
+                    body: `
+                        <p>The Department of Political Science and International Relations examines power, governance, and the dynamics of global politics. Our faculty are experts in international relations, comparative politics, political theory, and public policy.</p>
+                        <p>Students engage with the most pressing issues of our time, from conflict and cooperation to democracy and human rights.</p>
+                        <p><strong>Chair:</strong> Ryder Hunter, Ph.D.</p>
+                        <p><strong>Degrees:</strong> BA, MA, PhD, MPP</p>
+                    `
+                },
+                psych: {
+                    title: 'Psychology',
+                    division: 'Social Sciences',
+                    img: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=400&fit=crop&crop=center',
+                    body: `
+                        <p>The Department of Psychology explores the mind, behavior, and the neural basis of experience. Our faculty conduct research in clinical psychology, cognitive psychology, developmental psychology, and neuroscience.</p>
+                        <p>Students gain a deep understanding of human behavior and mental processes, preparing for careers in mental health, research, and education.</p>
+                        <p><strong>Chair:</strong> Easton Moore, Psy.D.</p>
+                        <p><strong>Degrees:</strong> BA, BS, MS, PhD, PsyD</p>
+                    `
+                },
+                sociology: {
+                    title: 'Sociology & Social Policy',
+                    division: 'Social Sciences',
+                    img: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&h=400&fit=crop&crop=center',
+                    body: `
+                        <p>The Department of Sociology and Social Policy examines social structures, inequality, and the policies that shape society. Our faculty are experts in social stratification, family studies, urban sociology, and public policy.</p>
+                        <p>Students develop skills in social research, data analysis, and policy evaluation.</p>
+                        <p><strong>Chair:</strong> Anastacia Caulkin, Ph.D.</p>
+                        <p><strong>Degrees:</strong> BA, MA, PhD, MSW</p>
+                    `
+                },
+                military: {
+                    title: 'Military Science Program',
+                    division: 'Social Sciences',
+                    img: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=400&fit=crop&crop=center',
+                    body: `
+                        <p>The Military Science Program offers courses in leadership, tactics, and military history. The program is part of the Army ROTC, providing students with the skills and knowledge needed for careers as officers in the U.S. Army.</p>
+                        <p>Students develop leadership abilities, physical fitness, and a deep understanding of military operations.</p>
+                        <p><strong>Chair:</strong> Arthur Clements, Lt. Col., U.S. Army</p>
+                    `
+                },
+                naval: {
+                    title: 'Naval Science Program',
+                    division: 'Social Sciences',
+                    img: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=400&fit=crop&crop=center',
+                    body: `
+                        <p>The Naval Science Program offers courses in maritime strategy, naval leadership, and ocean operations. The program is part of the Naval ROTC, preparing students for careers as officers in the U.S. Navy and Marine Corps.</p>
+                        <p>Students develop leadership skills, naval knowledge, and a commitment to service.</p>
+                        <p><strong>Chair:</strong> Sean M. McBride, Col., U.S. Marine Corps</p>
+                    `
+                },
+                yoga: {
+                    title: 'Yoga Program',
+                    division: 'Social Sciences',
+                    img: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=400&fit=crop&crop=center',
+                    body: `
+                        <p>The Yoga Program offers courses in the practice and philosophy of yoga, promoting mind-body wellness and holistic health. Our instructors are certified yoga educators who guide students through physical postures, breathing techniques, and meditation.</p>
+                        <p>The program serves as a service unit, providing wellness opportunities for students across the university.</p>
+                        <p><strong>Chair:</strong> Thelma Nesbeth Walsh</p>
+                    `
+                },
+                service: {
+                    title: 'Center for Service Learning',
+                    division: 'Social Sciences',
+                    img: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&h=400&fit=crop&crop=center',
+                    body: `
+                        <p>The Center for Service Learning connects students with community organizations, integrating service and civic engagement into the academic experience. Our programs foster civic responsibility, community partnerships, and experiential education.</p>
+                        <p>Students engage in meaningful community service that complements their academic studies, developing skills in leadership, collaboration, and social justice.</p>
+                        <p><strong>Chair:</strong> Cora M. Baelish, M.Ed.</p>
+                    `
+                }
+            };
+
+            
+
+            // ----- SIDEBAR NAVIGATION -----
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = this.getAttribute('data-section');
+                    if (!target) return;
+
+                    // Hide all sections
+                    sections.forEach(sec => sec.classList.remove('active'));
+
+                    // Show target section
+                    const targetSection = document.getElementById('section-' + target);
+                    if (targetSection) {
+                        targetSection.classList.add('active');
+                    }
+
+                    // Update active link
+                    sidebarLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+
+                    // If we are in dept detail view, hide it
+                    deptDetailView.classList.remove('active');
+
+                    // Close dropdown menu if open (on mobile)
+                    dropdownMenu.classList.remove('open');
+                    dropdownToggle.classList.remove('open');
+
+                    // Scroll to top of content
+                    document.querySelector('.fas-content').scrollTop = 0;
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+
+            // ----- DIVISIONS DROPDOWN -----
+            dropdownToggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                this.classList.toggle('open');
+                dropdownMenu.classList.toggle('open');
+            });
+
+            // Click on a division link in dropdown scrolls to that division
+            document.querySelectorAll('.dropdown-menu a[data-section]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = this.getAttribute('data-section');
+                    if (!target) return;
+
+                    // First switch to the divisions page
+                    sections.forEach(sec => sec.classList.remove('active'));
+                    const divisionsSection = document.getElementById('section-divisions');
+                    if (divisionsSection) divisionsSection.classList.add('active');
+
+                    // Update sidebar links
+                    sidebarLinks.forEach(l => l.classList.remove('active'));
+                    // Find the "Divisions" link in the sidebar (the dropdown toggle itself)
+                    // We'll highlight the Divisions toggle
+                    document.querySelectorAll('.sidebar nav a, .sidebar .dropdown-toggle').forEach(el => {
+                        el.classList.remove('active');
+                    });
+                    dropdownToggle.classList.add('active');
+
+                    // Close dropdown on mobile
+                    dropdownMenu.classList.remove('open');
+                    dropdownToggle.classList.remove('open');
+
+                    // Scroll to the division
+                    const divisionEl = document.getElementById(target);
+                    if (divisionEl) {
+                        // We need to scroll the content area
+                        const contentArea = document.querySelector('.fas-content');
+                        const offset = divisionEl.offsetTop - 20;
+                        contentArea.scrollTop = offset;
+                        window.scrollTo({ top: offset + 100, behavior: 'smooth' });
+                    }
+                });
+            });
+
+            // ----- DEPARTMENT CARDS -----
+            deptCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const deptKey = this.getAttribute('data-dept');
+                    if (!deptKey) return;
+                    const data = deptData[deptKey];
+                    if (!data) return;
+
+                    // Hide all sections
+                    sections.forEach(sec => sec.classList.remove('active'));
+
+                    // Show department detail view
+                    deptDetailView.classList.add('active');
+
+                    // Populate data
+                    deptDetailTitle.textContent = data.title;
+                    deptDetailDivision.textContent = data.division;
+                    deptDetailImg.src = data.img;
+                    deptDetailBody.innerHTML = data.body;
+
+                    // Scroll to top
+                    document.querySelector('.fas-content').scrollTop = 0;
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+
+            // ----- BACK BUTTON -----
+            backBtn.addEventListener('click', function() {
+                deptDetailView.classList.remove('active');
+                // Show the divisions section again
+                sections.forEach(sec => sec.classList.remove('active'));
+                const divisionsSection = document.getElementById('section-divisions');
+                if (divisionsSection) divisionsSection.classList.add('active');
+
+                // Update sidebar
+                sidebarLinks.forEach(l => l.classList.remove('active'));
+                // Highlight the Divisions toggle
+                document.querySelectorAll('.sidebar nav a, .sidebar .dropdown-toggle').forEach(el => {
+                    el.classList.remove('active');
+                });
+                dropdownToggle.classList.add('active');
+
+                // Close dropdown on mobile
+                dropdownMenu.classList.remove('open');
+                dropdownToggle.classList.remove('open');
+            });
+
+            // ----- INITIAL STATE: ensure about is visible -----
+            // The 'about' section is active by default (via class in HTML)
+            // But we need to ensure the sidebar link is active
+            document.querySelector('.sidebar nav a[data-section="about"]').classList.add('active');
+
+            // ----- Fix for dropdown links on mobile: close when clicked -----
+            document.querySelectorAll('.dropdown-menu a').forEach(link => {
+                link.addEventListener('click', function() {
+                    dropdownMenu.classList.remove('open');
+                    dropdownToggle.classList.remove('open');
+                });
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.sidebar')) {
+                    dropdownMenu.classList.remove('open');
+                    dropdownToggle.classList.remove('open');
+                }
+            });
+
+        }
+    )();
+    // Define globally accessible function
+    window.viewFullDepartment = function(pageKey) {
+        if (!pageKey) {
+            console.error('No page key provided to viewFullDepartment');
+            return;
+        }
+        // If embedded inside an iframe (e.g., on index.html)
+        if (window.parent !== window) {
+            window.parent.postMessage({
+                type: 'navigateTo',
+                page: pageKey
+            }, '*');
+        } else {
+            window.location.href = pageKey + '.html';
+        }
+    };
+
+    </script>
+
+</body>
+</html>

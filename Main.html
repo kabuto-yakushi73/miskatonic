@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Miskatonic University – Home</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet" />
+
+    <style>
+        /* ----- RESET & BASE ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f4f2f0;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        /* ----- COLOR TOKENS ----- */
+        :root {
+            --purple-900: #2b1a4a;
+            --purple-800: #3d2a6a;
+            --purple-700: #5a3d8a;
+            --purple-600: #7a52a8;
+            --purple-500: #9a72c0;
+            --purple-300: #cfbae6;
+            --purple-100: #f0e8f8;
+
+            --red-700: #a31c1c;
+            --red-600: #c42020;
+            --red-500: #d94a4a;
+
+            --gray-900: #1a1a1a;
+            --gray-800: #2d2d2d;
+            --gray-700: #4a4a4a;
+            --gray-600: #6c757d;
+            --gray-400: #b0b0b0;
+            --gray-200: #e0ddd8;
+            --gray-100: #f4f2f0;
+
+            --white: #ffffff;
+        }
+
+        /* ----- UTILITY ----- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.6rem;
+            font-weight: 700;
+            color: var(--purple-800);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .section-title .highlight {
+            color: var(--red-600);
+            font-style: italic;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--gray-700);
+            max-width: 640px;
+            margin-bottom: 2.5rem;
+            font-weight: 400;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 36px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            letter-spacing: 0.3px;
+            background: var(--red-600);
+            color: var(--white);
+            box-shadow: 0 6px 20px rgba(196, 32, 32, 0.30);
+        }
+
+        .btn:hover {
+            background: var(--red-700);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(196, 32, 32, 0.40);
+        }
+
+        /* ----- HEADER / NAV ----- */
+        .header {
+            background: var(--gray-900);
+            padding: 8px 0;
+            border-bottom: 4px solid var(--red-600);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px 16px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        .logo .brand {
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1.3rem;
+            letter-spacing: -0.5px;
+        }
+
+        .logo .brand span {
+            color: var(--red-500);
+        }
+
+        /* ----- NAVIGATION ----- */
+        .nav {
+            display: flex;
+            gap: 0;
+            list-style: none;
+        }
+
+        .nav > li {
+            position: relative;
+        }
+
+        .nav > li > a {
+            display: block;
+            padding: 12px 18px;
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.25s, background 0.25s;
+            border-radius: 4px 4px 0 0;
+            letter-spacing: 0.2px;
+        }
+
+        .nav > li > a:hover,
+        .nav > li > a.active {
+            color: var(--white);
+            background: var(--purple-700);
+        }
+
+        /* Dropdown */
+        .nav .dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 240px;
+            background: var(--gray-800);
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+            padding: 8px 0;
+            list-style: none;
+            z-index: 100;
+            border-top: 3px solid var(--red-600);
+        }
+
+        .nav > li:hover .dropdown {
+            display: block;
+        }
+
+        .nav .dropdown li a {
+            display: block;
+            padding: 8px 20px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background 0.2s, color 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .nav .dropdown li a:hover {
+            background: var(--purple-700);
+            color: var(--white);
+            border-left-color: var(--red-500);
+        }
+
+        .nav .dropdown li a.active {
+            background: var(--purple-600);
+            color: var(--white);
+            border-left-color: var(--red-500);
+        }
+
+        /* Mobile menu toggle (hidden on desktop) */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 0 8px;
+        }
+
+        /* ----- MAIN CONTENT ----- */
+        #main-content {
+            min-height: 70vh;
+            padding: 40px 0;
+        }
+
+        /* ----- HOMEPAGE SPECIFIC STYLES ----- */
+        .hero {
+            background: linear-gradient(145deg, var(--purple-900) 0%, var(--purple-800) 60%, var(--purple-700) 100%);
+            padding: 80px 0 70px;
+            color: var(--white);
+            border-radius: 0 0 40px 40px;
+            margin: -40px 0 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(196, 32, 32, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.6rem;
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+
+        .hero-content h1 .highlight {
+            color: var(--red-500);
+            font-style: italic;
+        }
+
+        .hero-content p {
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 540px;
+            margin-bottom: 28px;
+            line-height: 1.7;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-height: 380px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .hero-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px 50px;
+            margin-top: 20px;
+        }
+
+        .hero-stats .stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero-stats .stat .number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            font-family: 'Playfair Display', serif;
+            color: var(--red-500);
+        }
+
+        .hero-stats .stat .label {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* At a Glance */
+        .glance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin-top: 16px;
+        }
+
+        .glance-grid .item {
+            background: var(--white);
+            padding: 24px 16px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+            border: 1px solid var(--gray-200);
+            transition: transform 0.25s ease;
+        }
+
+        .glance-grid .item:hover {
+            transform: translateY(-4px);
+        }
+
+        .glance-grid .item .number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--purple-800);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .glance-grid .item .label {
+            font-size: 0.9rem;
+            color: var(--gray-700);
+            font-weight: 500;
+        }
+
+        /* Why Miskatonic */
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 28px;
+            margin-top: 16px;
+        }
+
+        .why-grid .card {
+            background: var(--white);
+            padding: 28px 24px;
+            border-radius: 16px;
+            border-left: 5px solid var(--red-600);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+        }
+
+        .why-grid .card h3 {
+            font-size: 1.2rem;
+            color: var(--purple-800);
+            margin-bottom: 6px;
+            font-weight: 700;
+        }
+
+        .why-grid .card p {
+            font-size: 0.95rem;
+            color: var(--gray-700);
+            line-height: 1.6;
+        }
+
+        /* ----- FOOTER ----- */
+        .footer {
+            background: var(--gray-900);
+            padding: 32px 0 28px;
+            border-top: 4px solid var(--red-600);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.92rem;
+            margin-top: 40px;
+        }
+
+        .footer .container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px 24px;
+        }
+
+        .footer a {
+            color: var(--red-400);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: var(--red-300);
+            text-decoration: underline;
+        }
+
+        .footer .small-print {
+            font-size: 0.82rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* ----- RESPONSIVE ----- */
+        @media (max-width: 1024px) {
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero-content p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .hero-stats {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header .container {
+                flex-wrap: nowrap;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .nav {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background: var(--gray-800);
+                border-radius: 8px;
+                padding: 8px 0;
+                margin-top: 8px;
+            }
+            .nav.open {
+                display: flex;
+            }
+            .nav > li {
+                width: 100%;
+            }
+            .nav > li > a {
+                padding: 10px 20px;
+                border-radius: 0;
+            }
+            .nav .dropdown {
+                position: static;
+                box-shadow: none;
+                border-radius: 0;
+                padding-left: 16px;
+                background: var(--gray-900);
+                border-top: none;
+            }
+            .nav > li:hover .dropdown {
+                display: none;
+            }
+            .nav > li .dropdown.open {
+                display: block;
+            }
+            .hero-content h1 {
+                font-size: 2.4rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .glance-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .glance-grid {
+                grid-template-columns: 1fr;
+            }
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="logo.png" alt="Miskatonic University logo" />
+                <span class="brand">Miskatonic <span>University</span></span>
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+            <ul class="nav" id="mainNav">
+                <!-- About -->
+                <li>
+                    <a href="#" data-page="about">About</a>
+                    <ul class="dropdown">
+                        <li><a href="#" data-page="about">History &amp; Founding</a></li>
+                        <li><a href="#" data-page="about">Mission &amp; Motto</a></li>
+                        <li><a href="#" data-page="about">Leadership &amp; Governance</a></li>
+                        <li><a href="#" data-page="about">Campuses &amp; Maps</a></li>
+                        <li><a href="#" data-page="about">Accreditations &amp; Rankings</a></li>
+                        <li><a href="#" data-page="about">Town of Arkham</a></li>
+                    </ul>
+                </li>
+                <!-- Academics -->
+                <li>
+                    <a href="#" data-page="academics">Academics</a>
+                    <ul class="dropdown">
+                        <li><a href="#" data-page="academics">Colleges &amp; Degree Bodies</a></li>
+                        <li><a href="fas.html">Faculty of Arts &amp; Sciences</a></li>
+                        <li><a href="#" data-page="academics">Professional Schools</a></li>
+                        <li><a href="#" data-page="academics">Specialized Institutes</a></li>
+                        <li><a href="#" data-page="academics">Academic Calendar</a></li>
+                        <li><a href="#" data-page="academics">Course Catalog</a></li>
+                    </ul>
+                </li>
+                <!-- Research -->
+                <li>
+                    <a href="#" data-page="research">Research</a>
+                    <ul class="dropdown">
+                        <li><a href="#" data-page="research">Core Facilities</a></li>
+                        <li><a href="#" data-page="research">Arkham National Laboratory</a></li>
+                        <li><a href="#" data-page="research">Observatories &amp; Field Stations</a></li>
+                        <li><a href="#" data-page="research">Funding &amp; Partnerships</a></li>
+                        <li><a href="#" data-page="research">Technology Transfer</a></li>
+                    </ul>
+                </li>
+                <!-- Admissions -->
+                <li>
+                    <a href="#" data-page="admissions">Admissions</a>
+                    <ul class="dropdown">
+                        <li><a href="#" data-page="admissions">Undergraduate</a></li>
+                        <li><a href="#" data-page="admissions">Graduate &amp; Professional</a></li>
+                        <li><a href="#" data-page="admissions">Transfer &amp; Visiting</a></li>
+                        <li><a href="#" data-page="admissions">International Students</a></li>
+                        <li><a href="#" data-page="admissions">Financial Aid</a></li>
+                        <li><a href="#" data-page="admissions">Visit Arkham</a></li>
+                    </ul>
+                </li>
+                <!-- Campus Life -->
+                <li>
+                    <a href="#" data-page="campus-life">Campus Life</a>
+                    <ul class="dropdown">
+                        <li><a href="#" data-page="campus-life">Housing &amp; Dining</a></li>
+                        <li><a href="#" data-page="campus-life">Student Organizations</a></li>
+                        <li><a href="#" data-page="campus-life">Arts &amp; Culture</a></li>
+                        <li><a href="#" data-page="campus-life">Health &amp; Wellness</a></li>
+                        <li><a href="#" data-page="campus-life">Spiritual &amp; Religious Life</a></li>
+                    </ul>
+                </li>
+                <!-- Athletics -->
+                <li>
+                    <a href="#" data-page="athletics">Athletics</a>
+                    <ul class="dropdown">
+                        <li><a href="#" data-page="athletics">Miskatonic Squids</a></li>
+                        <li><a href="#" data-page="athletics">Men's Sports</a></li>
+                        <li><a href="#" data-page="athletics">Women's Sports</a></li>
+                        <li><a href="#" data-page="athletics">Squid Squad</a></li>
+                        <li><a href="#" data-page="athletics">Fitness &amp; Recreation</a></li>
+                        <li><a href="#" data-page="athletics">Tickets &amp; Schedules</a></li>
+                    </ul>
+                </li>
+                <!-- Libraries & Museums -->
+                <li>
+                    <a href="#" data-page="libraries">Libraries &amp; Museums</a>
+                    <ul class="dropdown">
+                        <li><a href="#" data-page="libraries">Orne Library</a></li>
+                        <li><a href="#" data-page="libraries">Medieval Library</a></li>
+                        <li><a href="#" data-page="libraries">Miskatonic Museum</a></li>
+                        <li><a href="#" data-page="libraries">Rare Books &amp; Special Collections</a></li>
+                        <li><a href="#" data-page="libraries">Digital Repositories</a></li>
+                    </ul>
+                </li>
+                <!-- Alumni & Giving -->
+                <li>
+                    <a href="#" data-page="alumni">Alumni &amp; Giving</a>
+                    <ul class="dropdown">
+                        <li><a href="#" data-page="alumni">Notable Alumni</a></li>
+                        <li><a href="#" data-page="alumni">Alumni Events</a></li>
+                        <li><a href="#" data-page="alumni">Alumni Network</a></li>
+                        <li><a href="#" data-page="alumni">Make a Gift</a></li>
+                        <li><a href="#" data-page="alumni">Career Services</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main id="main-content">
+        <!-- Initial homepage content (will be replaced on navigation) -->
+        <div id="homepage">
+            <!-- Hero -->
+            <section class="hero">
+                <div class="container">
+                    <div class="hero-content">
+                        <h1>
+                            <span class="highlight">Ex Ignorantia</span><br />
+                            Ad Sapientiam
+                        </h1>
+                        <p>
+                            For over three centuries, Miskatonic University has been a
+                            beacon of knowledge and discovery. We prepare the world's
+                            most capable minds to confront the challenges of our time —
+                            and those beyond.
+                        </p>
+                        <div class="hero-stats">
+                            <div class="stat">
+                                <span class="number">1710</span>
+                                <span class="label">Founded</span>
+                            </div>
+                            <div class="stat">
+                                <span class="number">44<sup>th</sup></span>
+                                <span class="label">QS World Ranking</span>
+                            </div>
+                            <div class="stat">
+                                <span class="number">$19.8B</span>
+                                <span class="label">Endowment</span>
+                            </div>
+                            <div class="stat">
+                                <span class="number">12%</span>
+                                <span class="label">Acceptance Rate</span>
+                            </div>
+                        </div>
+                        <div style="margin-top:24px;">
+                            <a href="#" class="btn" data-page="about">Explore Our Story</a>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <img
+                        src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&h=500&fit=crop&crop=center"
+                        alt="Miskatonic University campus"
+                        />
+                    </div>
+                </div>
+            </section>
+
+            <!-- University at a Glance -->
+            <section style="padding:40px 0;">
+                <div class="container">
+                    <h2 class="section-title">University <span class="highlight">at a Glance</span></h2>
+                    <p class="section-subtitle">A community of scholars, innovators, and leaders shaping the future.</p>
+                    <div class="glance-grid">
+                        <div class="item">
+                            <div class="number">55,000+</div>
+                            <div class="label">Total Population (incl. Arkham)</div>
+                        </div>
+                        <div class="item">
+                            <div class="number">15,000</div>
+                            <div class="label">Undergraduate Students</div>
+                        </div>
+                        <div class="item">
+                            <div class="number">4,000</div>
+                            <div class="label">Faculty &amp; Staff</div>
+                        </div>
+                        <div class="item">
+                            <div class="number">9</div>
+                            <div class="label">Nobel Laureates (Alumni)</div>
+                        </div>
+                        <div class="item">
+                            <div class="number">12</div>
+                            <div class="label">Nobel Laureates (Faculty)</div>
+                        </div>
+                        <div class="item">
+                            <div class="number">780M</div>
+                            <div class="label">Annual Research Expenditures</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Why Miskatonic -->
+            <section style="padding:40px 0; background:var(--gray-100);">
+                <div class="container">
+                    <h2 class="section-title">Why <span class="highlight">Miskatonic</span></h2>
+                    <p class="section-subtitle">A tradition of excellence, a culture of inquiry, a commitment to the world.</p>
+                    <div class="why-grid">
+                        <div class="card">
+                            <h3>Rigorous Academics</h3>
+                            <p>
+                                With over 40 departments and professional schools, our
+                                curriculum spans the arts, sciences, and professions,
+                                preparing students for leadership in every field.
+                            </p>
+                        </div>
+                        <div class="card">
+                            <h3>World-Class Research</h3>
+                            <p>
+                                From the Arkham National Laboratory to the Antarctic,
+                                our researchers push the boundaries of knowledge in
+                                fields critical to humanity's future.
+                            </p>
+                        </div>
+                        <div class="card">
+                            <h3>Historic Campus</h3>
+                            <p>
+                                Our main campus in Arkham blends centuries-old Gothic
+                                architecture with state-of-the-art facilities, creating
+                                an inspiring environment for learning and discovery.
+                            </p>
+                        </div>
+                        <div class="card">
+                            <h3>Global Community</h3>
+                            <p>
+                                With students and faculty from over 100 countries and
+                                partnerships with leading institutions worldwide,
+                                Miskatonic is truly a global university.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Call to Action -->
+            <section style="padding:50px 0; background:var(--purple-900); color:var(--white); text-align:center;">
+                <div class="container">
+                    <h2 style="font-family:'Playfair Display',serif; font-size:2.4rem;">Join the <span style="color:var(--red-500);">Legacy</span></h2>
+                    <p style="max-width:600px; margin:12px auto 28px; color:rgba(255,255,255,0.8);">
+                        Whether you're a prospective student, a researcher, or an alum,
+                        your journey begins here.
+                    </p>
+                    <a href="#" class="btn" data-page="admissions">Apply Now</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <span>
+                &copy; 2026 Miskatonic University &middot; Arkham, Massachusetts
+            </span>
+            <span>
+                <a href="#">Ex Ignorantia Ad Sapientiam</a>
+                &nbsp;·&nbsp;
+                <span class="small-print">Est. 1710</span>
+            </span>
+        </div>
+    </footer>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ----- PAGE CONTENT (embedded for demonstration) -----
+            // In a real deployment, these would be separate HTML files.
+            // We simulate loading by storing content in an object.
+            const pageContent = {
+                // About page
+                about: `
+                    <div style="max-width:900px; margin:0 auto;">
+                        <h1 class="section-title">About <span class="highlight">Miskatonic</span></h1>
+                        <p style="font-size:1.1rem; margin-bottom:1.5rem;">Founded in 1710, Miskatonic University is one of the oldest and most prestigious institutions of higher learning in the United States. Our motto, <em>Ex Ignorantia Ad Sapientiam; Ex Luce Ad Tenebras</em> (Out of Ignorance into Wisdom; Out of Light into Darkness), reflects our commitment to the pursuit of knowledge in all its forms.</p>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">History &amp; Founding</h2>
+                        <p>Miskatonic was established as a school for the elite of Arkham, but quickly grew into a center of learning that attracted scholars from across New England. Over the centuries, it has evolved into a research powerhouse while maintaining its historic character.</p>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">Leadership</h2>
+                        <p><strong>President:</strong> Arthur H. Smith, Ph.D. (Materials Science, Cantab)<br />
+                        <strong>Provost:</strong> Alfredo D. Santana, Ed.L.D.<br />
+                        The university is governed by a Board of Trustees and an Academic Senate.</p>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">Campuses</h2>
+                        <ul style="list-style:none; padding:0;">
+                            <li style="padding:6px 0;"><strong>Arkham Main Campus</strong> – 555 Eerie Street, Arkham, MA</li>
+                            <li style="padding:6px 0;"><strong>Boston Back Bay Campus</strong> – Chandler College and professional schools</li>
+                            <li style="padding:6px 0;"><strong>Wadsworth Estate</strong> – Agricultural research and organic farming</li>
+                            <li style="padding:6px 0;"><strong>Arkham Hills</strong> – Observatory and research facilities</li>
+                            <li style="padding:6px 0;"><strong>Innsmouth Research Station</strong> – Marine studies</li>
+                            <li style="padding:6px 0;"><strong>Pabodie Research Station</strong> – Antarctica, co-managed with NOAA</li>
+                        </ul>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">Accreditations &amp; Rankings</h2>
+                        <p>Miskatonic is accredited by NECHE. QS World Ranking: #44 overall; ARWU: #89. Our programs consistently rank among the top in the nation.</p>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">Town of Arkham</h2>
+                        <p>Arkham is a historic New England town with a vibrant community. The university maintains strong ties with local residents, supporting cultural events, economic development, and public services.</p>
+                    </div>
+                `,
+
+                // Academics page
+                academics: `
+                    <div style="max-width:900px; margin:0 auto;">
+                        <h1 class="section-title"><span class="highlight">Academics</span> at Miskatonic</h1>
+                        <p style="font-size:1.1rem; margin-bottom:1.5rem;">Miskatonic offers a comprehensive range of undergraduate, graduate, and professional programs through its colleges and schools.</p>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">Colleges &amp; Degree-Granting Bodies</h2>
+                        <ul style="list-style:none; padding:0;">
+                            <li style="padding:4px 0;"><strong>Miskatonic College</strong> – Undergraduate degrees</li>
+                            <li style="padding:4px 0;"><strong>Miskatonic Honors College</strong> – Advanced distinction</li>
+                            <li style="padding:4px 0;"><strong>Miskatonic Graduate College</strong> – Master's and doctoral degrees</li>
+                            <li style="padding:4px 0;"><strong>Chandler College</strong> – Liberal arts in Boston</li>
+                        </ul>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">Faculty of Arts &amp; Sciences</h2>
+                        <p>The largest academic unit, divided into four divisions: Arts &amp; Humanities, Life &amp; Environmental Sciences, Physical Sciences, and Social Sciences. It comprises 39 departments and programs.</p>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">Professional Schools</h2>
+                        <ul style="list-style:none; padding:0;">
+                            <li style="padding:4px 0;">Miskatonic Medical School</li>
+                            <li style="padding:4px 0;">School of Pharmacy</li>
+                            <li style="padding:4px 0;">School of Population Health</li>
+                            <li style="padding:4px 0;">Miskatonic Business School</li>
+                            <li style="padding:4px 0;">Miskatonic Law School</li>
+                            <li style="padding:4px 0;">Miskatonic Divinity School</li>
+                            <li style="padding:4px 0;">School of Film, Media &amp; Drama</li>
+                        </ul>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">Specialized Institutes</h2>
+                        <ul style="list-style:none; padding:0;">
+                            <li style="padding:4px 0;">Medieval Institute (Chamberlain Castle)</li>
+                            <li style="padding:4px 0;">Institute for Data Science (MIDaS)</li>
+                            <li style="padding:4px 0;">Salem Institute (Historical &amp; Cultural Heritage)</li>
+                            <li style="padding:4px 0;">Sterling Brain Institute</li>
+                        </ul>
+
+                        <p style="margin-top:1.5rem;"><a href="#" class="btn" data-page="academics">View Full Course Catalog</a></p>
+                    </div>
+                `,
+
+                // Research page
+                research: `
+                    <div style="max-width:900px; margin:0 auto;">
+                        <h1 class="section-title">Research &amp; <span class="highlight">Innovation</span></h1>
+                        <p style="font-size:1.1rem; margin-bottom:1.5rem;">Miskatonic is a global leader in research, with core facilities and partnerships that span the globe.</p>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">Core Facilities</h2>
+                        <ul style="list-style:none; padding:0;">
+                            <li style="padding:4px 0;"><strong>Analytical Core Facilities (ACF)</strong> – Advanced instrumentation for materials and molecular analysis</li>
+                            <li style="padding:4px 0;"><strong>Miskatonic Fabrication Services (MFS)</strong> – Bespoke instrumentation and engineering</li>
+                            <li style="padding:4px 0;"><strong>University Vivarium</strong> – State-of-the-art animal research facilities</li>
+                        </ul>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">Arkham National Laboratory</h2>
+                        <p>Operated by Miskatonic Arkham LLC for the U.S. Department of Energy, ANL is home to the Advanced Materials Research Institute (AMRI), the Miskatonic Light Source (synchrotron), and a massive data center.</p>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">Observatories &amp; Field Stations</h2>
+                        <ul style="list-style:none; padding:0;">
+                            <li style="padding:4px 0;">Warren Observatory (Arkham Hills)</li>
+                            <li style="padding:4px 0;">Wadsworth Agricultural Research Station</li>
+                            <li style="padding:4px 0;">Innsmouth Marine Station (Somerset Manor)</li>
+                            <li style="padding:4px 0;">Pabodie Research Station (Antarctica, co-managed with NOAA)</li>
+                        </ul>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">Funding &amp; Partnerships</h2>
+                        <p>Major funding from DoE, NIH, NSF, and industry partners including Pfizer, IBM, and Google. Annual R&D expenditures exceed $780 million.</p>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">Technology Transfer</h2>
+                        <p>Our Technology Transfer Office facilitates commercialisation of university discoveries, with over 330 patents filed annually.</p>
+                    </div>
+                `,
+
+                // Admissions page
+                admissions: `
+                    <div style="max-width:900px; margin:0 auto;">
+                        <h1 class="section-title">Admissions &amp; <span class="highlight">Aid</span></h1>
+                        <p style="font-size:1.1rem; margin-bottom:1.5rem;">Miskatonic seeks bright, motivated students from all backgrounds. Our admissions process is holistic and needs-blind.</p>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">Undergraduate Admissions</h2>
+                        <ul style="list-style:none; padding:0;">
+                            <li style="padding:4px 0;"><strong>Acceptance Rate:</strong> 12%</li>
+                            <li style="padding:4px 0;"><strong>Needs-Blind:</strong> Yes</li>
+                            <li style="padding:4px 0;"><strong>SAT/ACT:</strong> Required</li>
+                            <li style="padding:4px 0;"><strong>Psychological Test:</strong> Strictly Required</li>
+                        </ul>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">Graduate &amp; Professional Admissions</h2>
+                        <p>Programs include PhD, MD, JD, MBA, PharmD, and more. Each school has its own requirements.</p>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">Transfer &amp; Visiting Students</h2>
+                        <p>We welcome transfer students and visiting scholars from accredited institutions.</p>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">International Students</h2>
+                        <p>Miskatonic is home to students from over 100 countries. We offer comprehensive support for international applicants.</p>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">Financial Aid &amp; Scholarships</h2>
+                        <p>With an endowment of $19.8 billion, Miskatonic is committed to making education affordable. Over 60% of students receive financial aid.</p>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">Visit Arkham</h2>
+                        <p>Schedule a campus tour or attend one of our open houses. See for yourself what makes Miskatonic unique.</p>
+                    </div>
+                `,
+
+                // Campus Life
+                'campus-life': `
+                    <div style="max-width:900px; margin:0 auto;">
+                        <h1 class="section-title">Campus <span class="highlight">Life</span></h1>
+                        <p style="font-size:1.1rem; margin-bottom:1.5rem;">Miskatonic offers a vibrant, supportive community where students grow intellectually, socially, and personally.</p>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">Housing &amp; Dining</h2>
+                        <p>On-campus housing includes Gilman Habitation, Campbell University Village, and Derby Commons. Dining options range from campus diners to cafés.</p>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">Student Organizations</h2>
+                        <p>With over 300 clubs and organizations, including the S-5 Team, The Smarties, and the Barbie Club, there's something for everyone.</p>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">Arts &amp; Culture</h2>
+                        <p>The Miskatonic Conservatory, Miskatonic Museum, Arnaud’s Gallery, and Bradley Abbot Performance Center host concerts, exhibitions, and performances year-round.</p>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">Health &amp; Wellness</h2>
+                        <p>St. Mary’s Hospital (affiliated) provides comprehensive medical care. Counseling and psychological services are available to all students.</p>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">Spiritual &amp; Religious Life</h2>
+                        <p>The Miskatonic University Church and Catholic Charities offer spiritual support and community engagement opportunities.</p>
+                    </div>
+                `,
+
+                // Athletics
+                athletics: `
+                    <div style="max-width:900px; margin:0 auto;">
+                        <h1 class="section-title"><span class="highlight">Athletics</span> at Miskatonic</h1>
+                        <p style="font-size:1.1rem; margin-bottom:1.5rem;">The Miskatonic Squids compete in NCAA Division I, with a proud tradition of excellence.</p>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">Miskatonic Squids</h2>
+                        <p>Our athletic teams are known for their competitive spirit and the unwavering support of the Squid Squad.</p>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">Men's Sports</h2>
+                        <ul style="list-style:none; padding:0;">
+                            <li style="padding:4px 0;">Football (American)</li>
+                            <li style="padding:4px 0;">Basketball</li>
+                            <li style="padding:4px 0;">Baseball</li>
+                            <li style="padding:4px 0;">Soccer, Lacrosse, Swimming &amp; Diving, Track &amp; Field</li>
+                        </ul>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">Women's Sports</h2>
+                        <ul style="list-style:none; padding:0;">
+                            <li style="padding:4px 0;">Basketball</li>
+                            <li style="padding:4px 0;">Volleyball</li>
+                            <li style="padding:4px 0;">Soccer, Softball, Tennis, Swimming &amp; Diving, Track &amp; Field</li>
+                        </ul>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">Squid Squad</h2>
+                        <p>The student section is famous for its creative spirit and tentacle-themed displays.</p>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">Fitness &amp; Recreation</h2>
+                        <p>The Fitness and Recreation Center features a hydrotherapy facility, climbing wall, strength training area, and more.</p>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">Tickets &amp; Schedules</h2>
+                        <p>Purchase tickets online or at the gate. Check the website for game schedules.</p>
+                    </div>
+                `,
+
+                // Libraries & Museums
+                libraries: `
+                    <div style="max-width:900px; margin:0 auto;">
+                        <h1 class="section-title">Libraries &amp; <span class="highlight">Museums</span></h1>
+                        <p style="font-size:1.1rem; margin-bottom:1.5rem;">Miskatonic's libraries and museums house some of the world's most significant collections.</p>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">Orne Library</h2>
+                        <p>The main library with over 5 million volumes, including extensive special collections.</p>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">Albert Richmond Medieval Library</h2>
+                        <p>Located in Chamberlain Castle, this library holds rare manuscripts and incunabula from the medieval period.</p>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">Miskatonic Museum</h2>
+                        <p>Collections span natural history, archaeology, and cultural artifacts from around the world.</p>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">Rare Books &amp; Special Collections</h2>
+                        <p>Includes restricted archival materials, such as the Necronomicon and other unique texts.</p>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">Digital Repositories &amp; Journals</h2>
+                        <p>Access thousands of digitized manuscripts, rare books, and academic journals online.</p>
+                    </div>
+                `,
+
+                // Alumni & Giving
+                alumni: `
+                    <div style="max-width:900px; margin:0 auto;">
+                        <h1 class="section-title">Alumni &amp; <span class="highlight">Giving</span></h1>
+                        <p style="font-size:1.1rem; margin-bottom:1.5rem;">Our alumni network spans the globe and includes leaders in every field. Your support makes Miskatonic possible.</p>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">Notable Alumni</h2>
+                        <ul style="list-style:none; padding:0;">
+                            <li style="padding:4px 0;">9 Nobel Laureates, 14 Pulitzer Prize winners, 4 Grammy Award winners</li>
+                            <li style="padding:4px 0;">Olympic medalists, NASA astronauts, CEOs of Fortune 500 companies</li>
+                        </ul>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">Alumni Events</h2>
+                        <p>Homecoming, the River Run, and the Commencement Regatta are just a few of the events that bring alumni back to campus.</p>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">Alumni Network &amp; Chapters</h2>
+                        <p>Stay connected through regional chapters, online communities, and mentorship programs.</p>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">Make a Gift</h2>
+                        <p>Your gift supports scholarships, research, and the future of Miskatonic. Every donation makes a difference.</p>
+
+                        <h2 style="color:var(--purple-800); font-family:'Playfair Display',serif; margin-top:2rem;">Career Services &amp; Alumni Mentorship</h2>
+                        <p>Our Career Services office offers lifelong support to alumni, including job placement, networking, and mentoring opportunities.</p>
+                    </div>
+                `
+            };
+
+            // ----- DOM ELEMENTS -----
+            const mainContent = document.getElementById('main-content');
+            const navLinks = document.querySelectorAll('.nav a[data-page]');
+            const navItems = document.querySelectorAll('.nav > li');
+            const menuToggle = document.querySelector('.menu-toggle');
+            const nav = document.getElementById('mainNav');
+
+            // ----- FUNCTIONS -----
+            function loadPage(pageKey) {
+                // Hide homepage if visible
+                const homepage = document.getElementById('homepage');
+                if (homepage) homepage.style.display = 'none';
+
+                // Check if we have content for this page
+                let content = pageContent[pageKey];
+                if (!content) {
+                    // fallback: show a message
+                    content = `<div style="max-width:900px; margin:0 auto; padding:40px 0;"><h2>Page not found</h2><p>We're sorry, the page you requested is not available.</p></div>`;
+                }
+
+                // Replace main content
+                mainContent.innerHTML = content;
+
+                // Re-bind any data-page links within the loaded content
+                mainContent.querySelectorAll('a[data-page]').forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const target = this.getAttribute('data-page');
+                        loadPage(target);
+                        updateActiveNav(target);
+                    });
+                });
+
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                // Update active nav
+                updateActiveNav(pageKey);
+            }
+
+            function updateActiveNav(pageKey) {
+                // Remove active class from all top-level links and dropdown items
+                document.querySelectorAll('.nav a').forEach(a => a.classList.remove('active'));
+                // Add active to matching links (top-level and dropdown)
+                document.querySelectorAll(`.nav a[data-page="${pageKey}"]`).forEach(a => a.classList.add('active'));
+            }
+
+            function showHomepage() {
+                // Restore homepage if not present
+                if (!document.getElementById('homepage')) {
+                    // Re-insert homepage content (we stored it initially)
+                    // For simplicity, we'll reload the entire page by navigating to a default state.
+                    // Since we can't easily restore, we'll use a trick: if homepage is not present,
+                    // we'll reload the page.
+                    location.reload();
+                    return;
+                }
+                document.getElementById('homepage').style.display = 'block';
+                // Remove any other content
+                // But we need to keep the homepage; we can just set innerHTML to the homepage content again?
+                // Actually we can store the homepage HTML and restore.
+                // We'll store it in a variable.
+                // We'll do that at load.
+            }
+
+            // ----- EVENT LISTENERS -----
+            // Navigation clicks
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const page = this.getAttribute('data-page');
+                    if (page) {
+                        loadPage(page);
+                    }
+                });
+            });
+
+            // Dropdown links: we need to handle clicks on dropdown items too (they have data-page)
+            document.querySelectorAll('.dropdown a[data-page]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const page = this.getAttribute('data-page');
+                    if (page) {
+                        loadPage(page);
+                    }
+                });
+            });
+
+            // Also handle any links with data-page inside main content (for buttons)
+            // This will be handled after loadPage because we re-bind.
+
+            // Mobile menu toggle
+            menuToggle.addEventListener('click', function() {
+                nav.classList.toggle('open');
+            });
+
+            // Close mobile menu on link click
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    nav.classList.remove('open');
+                });
+            });
+
+            // Also close any dropdowns on mobile when clicking a parent link
+            document.querySelectorAll('.nav > li > a').forEach(parentLink => {
+                parentLink.addEventListener('click', function(e) {
+                    // If we are on mobile and the dropdown exists, toggle it
+                    if (window.innerWidth <= 768) {
+                        const dropdown = this.nextElementSibling;
+                        if (dropdown && dropdown.classList.contains('dropdown')) {
+                            e.preventDefault();
+                            dropdown.classList.toggle('open');
+                        }
+                    }
+                });
+            });
+
+            // ----- INITIAL STATE -----
+            // Ensure homepage is visible
+            // The homepage is already present in the HTML, so we just keep it.
+            // But we want to ensure any data-page links inside homepage work
+            document.querySelectorAll('#homepage a[data-page]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const page = this.getAttribute('data-page');
+                    if (page) {
+                        loadPage(page);
+                    }
+                });
+            });
+
+            // Set active state for the current page (home)
+            // We'll mark the "About" as active by default? Actually no, home has no nav item.
+            // We could add a "Home" link but we don't have one in the nav. So we leave none active.
+
+            // Handle window resize to close mobile menu if needed
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    nav.classList.remove('open');
+                    // Also close any open dropdowns
+                    document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
+                }
+            });
+
+            console.log('Miskatonic University main page loaded.');
+        })();
+    </script>
+
+</body>
+</html>
