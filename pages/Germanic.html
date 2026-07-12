@@ -1,0 +1,1580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Germanic &amp; Nordic Studies – Miskatonic University</title>
+    <style>
+        /* ─── RESET & BASE ─── */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: #f6f2ec;
+            color: #2e241e;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* ─── THEME COLORS ─── */
+        :root {
+            --brown-dark: #3d2b1e;
+            --brown-mid: #5a3e2b;
+            --brown-light: #7a5a40;
+            --brown-pale: #b5927a;
+            --cream: #f5f0e8;
+            --cream-warm: #ede6dc;
+            --gold-soft: #c4a77d;
+            --gold-pale: #e6dac8;
+            --text-dark: #2e241e;
+            --text-medium: #4a3a30;
+            --card-bg: #ffffff;
+            --shadow: 0 8px 32px rgba(61, 43, 30, 0.15);
+            --radius: 12px;
+            --transition: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* ─── SIDEBAR ─── */
+        #sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            background: var(--brown-dark);
+            color: #f0ebe4;
+            padding: 2rem 1.5rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            z-index: 1000;
+            border-right: 3px solid var(--gold-soft);
+            box-shadow: 4px 0 24px rgba(61, 43, 30, 0.25);
+        }
+
+        #sidebar .brand {
+            text-align: center;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(196, 167, 125, 0.2);
+            margin-bottom: 1.5rem;
+        }
+
+        #sidebar .brand .shield {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: var(--brown-mid);
+            border: 2px solid var(--gold-soft);
+            margin: 0 auto 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        #sidebar .brand .shield img {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+        }
+
+        #sidebar .brand h2 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            color: var(--gold-soft);
+            margin-bottom: 0.2rem;
+        }
+
+        #sidebar .brand p {
+            font-size: 0.7rem;
+            opacity: 0.6;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            font-family: 'Arial', sans-serif;
+        }
+
+        #sidebar .nav {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        #sidebar .nav button {
+            background: transparent;
+            border: none;
+            color: #e8dfd6;
+            font-size: 0.95rem;
+            font-family: 'Georgia', serif;
+            padding: 0.7rem 1rem;
+            border-radius: 8px;
+            text-align: left;
+            cursor: pointer;
+            transition: var(--transition);
+            border-left: 3px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        #sidebar .nav button:hover {
+            background: rgba(196, 167, 125, 0.12);
+            border-left-color: var(--gold-soft);
+            color: var(--gold-soft);
+        }
+
+        #sidebar .nav button.active {
+            background: rgba(196, 167, 125, 0.16);
+            border-left-color: var(--gold-soft);
+            color: #f0e6d8;
+            font-weight: 600;
+        }
+
+        #sidebar .nav button .nav-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        #sidebar .nav button .nav-icon img {
+            width: 18px;
+            height: 18px;
+            object-fit: contain;
+            opacity: 0.6;
+            transition: var(--transition);
+        }
+
+        #sidebar .nav button:hover .nav-icon img,
+        #sidebar .nav button.active .nav-icon img {
+            opacity: 1;
+        }
+
+        #sidebar .bottom-text {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(196, 167, 125, 0.12);
+            font-size: 0.6rem;
+            opacity: 0.4;
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            letter-spacing: 0.04em;
+        }
+
+        /* ─── MAIN CONTENT ─── */
+        #main-content {
+            margin-left: 280px;
+            flex: 1;
+            min-height: 100vh;
+            background: var(--cream);
+            padding: 0;
+            position: relative;
+        }
+
+        .section-container {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .section-container.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ─── BANNER ─── */
+        .banner {
+            width: 100%;
+            height: 320px;
+            background: var(--brown-dark);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.65;
+        }
+
+        .banner .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(61, 43, 30, 0.8), rgba(90, 62, 43, 0.6));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .banner .overlay h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            letter-spacing: 0.04em;
+            margin-bottom: 0.5rem;
+        }
+
+        .banner .overlay .sub {
+            font-size: 1.1rem;
+            color: var(--gold-soft);
+            font-family: 'Arial', sans-serif;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+
+        .banner .overlay .sub span {
+            display: inline-block;
+            background: rgba(196, 167, 125, 0.15);
+            padding: 0.2rem 1.2rem;
+            border-radius: 30px;
+            border: 1px solid rgba(196, 167, 125, 0.25);
+        }
+
+        /* ─── SECTION CONTENT ─── */
+        .section-content {
+            padding: 3rem 4rem;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .section-content h2 {
+            font-size: 2rem;
+            color: var(--brown-dark);
+            margin-bottom: 0.5rem;
+            border-bottom: 3px solid var(--gold-soft);
+            padding-bottom: 0.6rem;
+            display: inline-block;
+        }
+
+        .section-content .lead {
+            font-size: 1.15rem;
+            color: var(--text-medium);
+            margin: 1.2rem 0 1.8rem;
+            line-height: 1.7;
+            max-width: 800px;
+        }
+
+        .section-content .lead strong {
+            color: var(--brown-mid);
+        }
+
+        /* ─── CARDS GRID ─── */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.8rem;
+            margin: 2rem 0;
+        }
+
+        .card-grid .card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+            border: 1px solid rgba(90, 62, 43, 0.08);
+        }
+
+        .card-grid .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(61, 43, 30, 0.2);
+            border-color: var(--gold-soft);
+        }
+
+        .card-grid .card .card-img {
+            height: 170px;
+            overflow: hidden;
+            background: var(--brown-dark);
+        }
+
+        .card-grid .card .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .card-grid .card:hover .card-img img {
+            transform: scale(1.04);
+        }
+
+        .card-grid .card .card-body {
+            padding: 1.4rem 1.6rem 1.8rem;
+        }
+
+        .card-grid .card .card-body h3 {
+            font-size: 1.2rem;
+            color: var(--brown-dark);
+            margin-bottom: 0.4rem;
+        }
+
+        .card-grid .card .card-body p {
+            font-size: 0.92rem;
+            color: var(--text-medium);
+            line-height: 1.6;
+            margin-bottom: 0.8rem;
+        }
+
+        .card-grid .card .card-body .badge {
+            display: inline-block;
+            background: var(--gold-pale);
+            color: var(--brown-dark);
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.2rem 0.9rem;
+            border-radius: 30px;
+            font-family: 'Arial', sans-serif;
+            letter-spacing: 0.04em;
+            border: 1px solid rgba(196, 167, 125, 0.3);
+        }
+
+        .card-grid .card .card-body .btn-detail {
+            display: inline-block;
+            margin-top: 0.6rem;
+            padding: 0.4rem 1.4rem;
+            background: var(--brown-mid);
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-family: 'Arial', sans-serif;
+            cursor: pointer;
+            transition: var(--transition);
+            letter-spacing: 0.04em;
+        }
+
+        .card-grid .card .card-body .btn-detail:hover {
+            background: var(--brown-dark);
+            transform: scale(1.03);
+        }
+
+        /* ─── FACULTY TABLE ─── */
+        .table-wrap {
+            overflow-x: auto;
+            margin: 2rem 0;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            background: #fff;
+        }
+
+        .table-wrap table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .table-wrap table thead {
+            background: var(--brown-dark);
+            color: #f0ebe4;
+        }
+
+        .table-wrap table th {
+            padding: 1rem 1.2rem;
+            text-align: left;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            font-family: 'Arial', sans-serif;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+        }
+
+        .table-wrap table td {
+            padding: 0.9rem 1.2rem;
+            border-bottom: 1px solid rgba(61, 43, 30, 0.06);
+            vertical-align: top;
+            line-height: 1.5;
+        }
+
+        .table-wrap table tbody tr:hover {
+            background: var(--gold-pale);
+        }
+
+        .table-wrap table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .table-wrap .position {
+            font-weight: 600;
+            color: var(--brown-mid);
+        }
+
+        .table-wrap .expertise {
+            font-size: 0.82rem;
+            color: var(--text-medium);
+        }
+
+        .table-wrap .lab {
+            font-size: 0.82rem;
+            color: var(--brown-mid);
+            font-style: italic;
+        }
+
+        /* ─── DETAIL VIEWS ─── */
+        .facility-detail,
+        .program-detail,
+        .research-detail {
+            display: none;
+            animation: fadeIn 0.45s ease;
+        }
+
+        .facility-detail.active,
+        .program-detail.active,
+        .research-detail.active {
+            display: block;
+        }
+
+        .facility-detail .detail-banner,
+        .program-detail .detail-banner,
+        .research-detail .detail-banner {
+            width: 100%;
+            height: 280px;
+            overflow: hidden;
+            border-radius: var(--radius);
+            margin-bottom: 2rem;
+            background: var(--brown-dark);
+            position: relative;
+        }
+
+        .facility-detail .detail-banner img,
+        .program-detail .detail-banner img,
+        .research-detail .detail-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .facility-detail .detail-banner .detail-overlay,
+        .program-detail .detail-banner .detail-overlay,
+        .research-detail .detail-banner .detail-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(61, 43, 30, 0.7), rgba(90, 62, 43, 0.5));
+            display: flex;
+            align-items: flex-end;
+            padding: 2rem 2.5rem;
+        }
+
+        .facility-detail .detail-banner .detail-overlay h2,
+        .program-detail .detail-banner .detail-overlay h2,
+        .research-detail .detail-banner .detail-overlay h2 {
+            color: #fff;
+            font-size: 2.2rem;
+            text-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+            border: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .facility-detail .detail-body,
+        .program-detail .detail-body,
+        .research-detail .detail-body {
+            background: #fff;
+            padding: 2.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .facility-detail .detail-body h3,
+        .program-detail .detail-body h3,
+        .research-detail .detail-body h3 {
+            color: var(--brown-dark);
+            font-size: 1.3rem;
+            margin: 1.5rem 0 0.5rem;
+        }
+
+        .facility-detail .detail-body h3:first-of-type,
+        .program-detail .detail-body h3:first-of-type,
+        .research-detail .detail-body h3:first-of-type {
+            margin-top: 0;
+        }
+
+        .facility-detail .detail-body p,
+        .program-detail .detail-body p,
+        .research-detail .detail-body p {
+            line-height: 1.8;
+            color: var(--text-medium);
+            margin-bottom: 0.8rem;
+        }
+
+        .facility-detail .detail-body ul,
+        .program-detail .detail-body ul,
+        .research-detail .detail-body ul {
+            list-style: none;
+            padding: 0;
+            margin: 0.5rem 0 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.4rem 1.5rem;
+        }
+
+        .facility-detail .detail-body ul li,
+        .program-detail .detail-body ul li,
+        .research-detail .detail-body ul li {
+            padding: 0.3rem 0 0.3rem 1.6rem;
+            position: relative;
+            font-size: 0.92rem;
+            color: var(--text-medium);
+        }
+
+        .facility-detail .detail-body ul li::before,
+        .program-detail .detail-body ul li::before,
+        .research-detail .detail-body ul li::before {
+            content: "◆";
+            position: absolute;
+            left: 0;
+            color: var(--gold-soft);
+            font-size: 0.7rem;
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.6rem;
+            background: var(--brown-mid);
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-family: 'Arial', sans-serif;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 1.5rem;
+        }
+
+        .btn-back:hover {
+            background: var(--brown-dark);
+            transform: translateX(-4px);
+        }
+
+        .btn-back img {
+            width: 16px;
+            height: 16px;
+            filter: invert(1);
+        }
+
+        /* ─── CONTACT ─── */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin: 2rem 0;
+        }
+
+        .contact-grid .contact-card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border-top: 4px solid var(--gold-soft);
+        }
+
+        .contact-grid .contact-card h3 {
+            color: var(--brown-dark);
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .contact-grid .contact-card p {
+            line-height: 1.7;
+            color: var(--text-medium);
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-grid .contact-card .label {
+            font-weight: 600;
+            color: var(--brown-mid);
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 1024px) {
+            .section-content {
+                padding: 2rem 2rem;
+            }
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            .facility-detail .detail-body ul,
+            .program-detail .detail-body ul,
+            .research-detail .detail-body ul {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 820px) {
+            #sidebar {
+                width: 220px;
+                padding: 1.2rem 1rem;
+            }
+            #sidebar .brand h2 {
+                font-size: 0.95rem;
+            }
+            #sidebar .nav button {
+                font-size: 0.85rem;
+                padding: 0.5rem 0.8rem;
+            }
+            #main-content {
+                margin-left: 220px;
+            }
+            .section-content {
+                padding: 1.5rem 1.2rem;
+            }
+            .banner .overlay h1 {
+                font-size: 2rem;
+            }
+            .card-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            #sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                flex-direction: row;
+                flex-wrap: wrap;
+                padding: 0.8rem 1rem;
+                border-right: none;
+                border-bottom: 3px solid var(--gold-soft);
+                box-shadow: 0 4px 16px rgba(61, 43, 30, 0.2);
+            }
+            #sidebar .brand {
+                display: flex;
+                align-items: center;
+                gap: 0.8rem;
+                padding: 0;
+                border: none;
+                margin: 0;
+                flex: 1;
+            }
+            #sidebar .brand .shield {
+                width: 44px;
+                height: 44px;
+                margin: 0;
+            }
+            #sidebar .brand .shield img {
+                width: 32px;
+                height: 32px;
+            }
+            #sidebar .brand h2 {
+                font-size: 0.85rem;
+                margin: 0;
+            }
+            #sidebar .brand p {
+                display: none;
+            }
+            #sidebar .nav {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 0.2rem;
+                flex: 0 1 auto;
+                margin: 0;
+            }
+            #sidebar .nav button {
+                font-size: 0.65rem;
+                padding: 0.3rem 0.5rem;
+                border-left: none;
+                border-bottom: 2px solid transparent;
+                gap: 0.3rem;
+            }
+            #sidebar .nav button .nav-icon {
+                width: 16px;
+                height: 16px;
+            }
+            #sidebar .nav button .nav-icon img {
+                width: 12px;
+                height: 12px;
+            }
+            #sidebar .bottom-text {
+                display: none;
+            }
+            #main-content {
+                margin-left: 0;
+            }
+            .banner {
+                height: 200px;
+            }
+            .banner .overlay h1 {
+                font-size: 1.6rem;
+            }
+            .banner .overlay .sub {
+                font-size: 0.8rem;
+            }
+            .section-content {
+                padding: 1rem 0.8rem;
+            }
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+            .table-wrap table {
+                font-size: 0.75rem;
+            }
+            .table-wrap table th,
+            .table-wrap table td {
+                padding: 0.5rem 0.6rem;
+            }
+            .facility-detail .detail-body,
+            .program-detail .detail-body,
+            .research-detail .detail-body {
+                padding: 1.2rem;
+            }
+            .facility-detail .detail-banner .detail-overlay h2,
+            .program-detail .detail-banner .detail-overlay h2,
+            .research-detail .detail-banner .detail-overlay h2 {
+                font-size: 1.4rem;
+            }
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e8e0d6;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--brown-mid);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--brown-dark);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ════════════════════════════════ SIDEBAR ════════════════════════════════ -->
+    <aside id="sidebar">
+        <div class="brand">
+            <!-- <div class="shield">
+                <img src="https://img.icons8.com/?size=100&id=61vB0DlK8CYK&format=png&color=C4A77D" alt="MU Shield" />
+            </div> -->
+            <h2>Germanic &amp; Nordic</h2>
+            <!-- <p>Miskatonic University</p> -->
+        </div>
+        <nav class="nav" id="navMenu">
+            <button class="active" data-section="home">
+                <!-- <span class="nav-icon"><img src="https://img.icons8.com/?size=100&id=7930&format=png&color=f0ebe4" alt="Home" /></span> -->
+                Home
+            </button>
+            <button data-section="about">
+                <!-- <span class="nav-icon"><img src="https://img.icons8.com/?size=100&id=45466&format=png&color=f0ebe4" alt="About" /></span> -->
+                About
+            </button>
+            <button data-section="research">
+                <!-- <span class="nav-icon"><img src="https://img.icons8.com/?size=100&id=6GXcKX7KSpby&format=png&color=f0ebe4" alt="Research" /></span> -->
+                Research
+            </button>
+            <button data-section="faculty">
+                <!-- <span class="nav-icon"><img src="https://img.icons8.com/?size=100&id=16424&format=png&color=f0ebe4" alt="Faculty" /></span> -->
+                Faculty
+            </button>
+            <button data-section="facilities">
+                <!-- <span class="nav-icon"><img src="https://img.icons8.com/?size=100&id=37646&format=png&color=f0ebe4" alt="Facilities" /></span> -->
+                Facilities
+            </button>
+            <button data-section="programs">
+                <!-- <span class="nav-icon"><img src="https://img.icons8.com/?size=100&id=54AV3TLtdXaw&format=png&color=f0ebe4" alt="Programs" /></span> -->
+                Programs
+            </button>
+            <button data-section="contact">
+                <!-- <span class="nav-icon"><img src="https://img.icons8.com/?size=100&id=75911&format=png&color=f0ebe4" alt="Contact" /></span> -->
+                Contact
+            </button>
+        </nav>
+        <div class="bottom-text">Est. 1892 &bull; Germanic Philology &amp; Nordic Studies</div>
+    </aside>
+
+    <!-- ════════════════════════════════ MAIN CONTENT ════════════════════════════════ -->
+    <main id="main-content">
+
+        <!-- ─── HOME ─── -->
+        <section class="section-container active" id="sec-home">
+            <div class="banner">
+                <img src="Germanic/banner.jpg" alt="Nordic landscape banner" />
+                <div class="overlay">
+                    <h1>Germanic &amp; Nordic Studies</h1>
+                    <div class="sub"><span>Language &bull; Literature &bull; Culture</span></div>
+                </div>
+            </div>
+            <div class="section-content">
+                <h2>Welcome</h2>
+                <p class="lead">
+                    The <strong>Department of Germanic and Nordic Studies</strong> at Miskatonic University is a
+                    vibrant center for the study of the languages, literatures, and cultures of Northern Europe.
+                    From Old Norse sagas to contemporary Scandinavian cinema, from the philology of Gothic to
+                    the poetry of Rilke, our faculty and students explore the full breadth of Germanic and Nordic
+                    heritage.
+                </p>
+                <p style="font-size:1.05rem; line-height:1.8; color:var(--text-medium); max-width:800px;">
+                    With <strong>19 regular faculty</strong>, <strong>119 students</strong>, and a curriculum that
+                    spans medieval to modern, the department is one of the most comprehensive programs of its kind
+                    in North America. Our research strengths include Germanic philology, Old Norse literature,
+                    Finno-Ugric studies, and the cultural history of the Nordic world.
+                </p>
+                <div style="display:flex; gap:1.2rem; flex-wrap:wrap; margin-top:2rem;">
+                    <span style="background:var(--brown-dark); color:#f0ebe4; padding:0.4rem 1.2rem; border-radius:30px; font-size:0.8rem; font-family:Arial,sans-serif;">44 faculty members</span>
+                    <span style="background:var(--brown-mid); color:#f0ebe4; padding:0.4rem 1.2rem; border-radius:30px; font-size:0.8rem; font-family:Arial,sans-serif;">PhD • MA • BA</span>
+                    <span style="background:var(--gold-soft); color:var(--brown-dark); padding:0.4rem 1.2rem; border-radius:30px; font-size:0.8rem; font-family:Arial,sans-serif; font-weight:600;">12 Nordic languages</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── ABOUT ─── -->
+        <section class="section-container" id="sec-about">
+            <div class="banner">
+                <img src="Germanic/banner.jpg" alt="Medieval manuscript banner" />
+                <div class="overlay">
+                    <h1>About the Department</h1>
+                    <div class="sub"><span>History &bull; Mission &bull; Legacy</span></div>
+                </div>
+            </div>
+            <div class="section-content">
+                <h2>Our Story</h2>
+                <p class="lead">
+                    Founded in <strong>1892</strong> as the Department of Germanic Philology, our department has
+                    grown to encompass the full range of Germanic and Nordic languages and cultures. We are home to
+                    one of the oldest continuously operating programs in Germanic linguistics in the United States.
+                </p>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin:2rem 0;">
+                    <div style="background:#fff; padding:1.8rem; border-radius:var(--radius); box-shadow:var(--shadow); border-left:4px solid var(--gold-soft);">
+                        <h3 style="color:var(--brown-dark); font-size:1.1rem; margin-bottom:0.5rem;">Mission</h3>
+                        <p style="line-height:1.7; color:var(--text-medium);">To advance the study of Germanic and Nordic languages, literatures, and cultures through rigorous scholarship, innovative teaching, and a commitment to preserving and interpreting the textual and oral traditions of Northern Europe.</p>
+                    </div>
+                    <div style="background:#fff; padding:1.8rem; border-radius:var(--radius); box-shadow:var(--shadow); border-left:4px solid var(--brown-mid);">
+                        <h3 style="color:var(--brown-dark); font-size:1.1rem; margin-bottom:0.5rem;">Vision</h3>
+                        <p style="line-height:1.7; color:var(--text-medium);">To be the leading center for Germanic and Nordic studies in the Americas, recognized for our expertise in historical linguistics, medieval literature, and the cultural heritage of the Nordic and Germanic-speaking worlds.</p>
+                    </div>
+                </div>
+                <div style="background:var(--gold-pale); padding:1.8rem 2rem; border-radius:var(--radius); border:1px solid rgba(196,167,125,0.3);">
+                    <p style="font-size:1rem; color:var(--brown-dark); line-height:1.7;">
+                        <strong>Areas of Strength:</strong> Germanic Philology &bull; Old Norse &amp; Medieval Scandinavian &bull;
+                        Finno-Ugric Studies &bull; German Literature from the Middle Ages to the Present &bull;
+                        Nordic Cultural Studies &bull; Yiddish and Ashkenazi Cultural History &bull; Dutch and Low Countries Studies
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── RESEARCH ─── -->
+        <section class="section-container" id="sec-research">
+            <div class="banner">
+                <img src="Germanic/banner.jpg" alt="Research banner" />
+                <div class="overlay">
+                    <h1>Research Areas</h1>
+                    <div class="sub"><span>Exploring Northern European heritage</span></div>
+                </div>
+            </div>
+            <div class="section-content">
+                <h2>Research Excellence</h2>
+                <p class="lead">
+                    Our faculty pursue research across the full spectrum of Germanic and Nordic studies, from
+                    historical linguistics to contemporary cultural analysis. Below are our primary research clusters.
+                </p>
+                <div class="card-grid" id="researchGrid"></div>
+                <div id="researchDetailContainer"></div>
+            </div>
+        </section>
+
+        <!-- ─── FACULTY ─── -->
+        <section class="section-container" id="sec-faculty">
+            <div class="banner">
+                <img src="Germanic/banner.jpg" alt="Faculty banner" />
+                <div class="overlay">
+                    <h1>Faculty</h1>
+                    <div class="sub"><span>Scholars &amp; mentors</span></div>
+                </div>
+            </div>
+            <div class="section-content">
+                <h2>Our Faculty</h2>
+                <p class="lead">
+                    The Department of Germanic and Nordic Studies is home to <strong>19 regular faculty</strong>,
+                    supported by emeriti, postdoctoral fellows, and adjunct instructors. Our professors are leaders
+                    in their fields, with expertise spanning historical linguistics, medieval literature, and modern
+                    cultural studies.
+                </p>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Position</th>
+                                <th>Education</th>
+                                <th>Area(s) of Expertise</th>
+                                <th>Lab / Group</th>
+                            </tr>
+                        </thead>
+                        <tbody id="facultyTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── FACILITIES ─── -->
+        <section class="section-container" id="sec-facilities">
+            <div class="banner">
+                <img src="Germanic/banner.jpg" alt="Facilities banner" />
+                <div class="overlay">
+                    <h1>Facilities</h1>
+                    <div class="sub"><span>Resources for research &amp; teaching</span></div>
+                </div>
+            </div>
+            <div class="section-content">
+                <h2>Our Facilities</h2>
+                <p class="lead">
+                    The department maintains a range of specialized facilities to support research and teaching
+                    in Germanic and Nordic studies, including libraries, seminar rooms, and language labs.
+                </p>
+                <div class="card-grid" id="facilitiesGrid"></div>
+                <div id="facilityDetailContainer"></div>
+            </div>
+        </section>
+
+        <!-- ─── PROGRAMS ─── -->
+        <section class="section-container" id="sec-programs">
+            <div class="banner">
+                <img src="Germanic/banner.jpg" alt="Programs banner" />
+                <div class="overlay">
+                    <h1>Academic Programs</h1>
+                    <div class="sub"><span>Degrees in Germanic &amp; Nordic Studies</span></div>
+                </div>
+            </div>
+            <div class="section-content">
+                <h2>Degree Programs</h2>
+                <p class="lead">
+                    The Department offers undergraduate, master's, and doctoral programs that combine rigorous
+                    coursework with deep engagement with primary texts, languages, and cultural traditions.
+                </p>
+                <div class="card-grid" id="programsGrid"></div>
+                <div id="programDetailContainer"></div>
+            </div>
+        </section>
+
+        <!-- ─── CONTACT ─── -->
+        <section class="section-container" id="sec-contact">
+            <div class="banner">
+                <img src="Germanic/banner.jpg" alt="Contact banner" />
+                <div class="overlay">
+                    <h1>Contact Us</h1>
+                    <div class="sub"><span>Get in touch with the Department</span></div>
+                </div>
+            </div>
+            <div class="section-content">
+                <h2>Reach Out</h2>
+                <p class="lead">
+                    We welcome inquiries from prospective students, researchers, and collaborators. Visit our
+                    offices on the Miskatonic Main Campus or contact our departmental administrator.
+                </p>
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <h3>📍 Main Office</h3>
+                        <p><span class="label">Address:</span> 555 Eerie Street, Arkham, MA 01945</p>
+                        <p><span class="label">Building:</span> Germanic Hall, 3rd Floor</p>
+                        <p><span class="label">Phone:</span> +1 (555) 567‑8900</p>
+                        <p><span class="label">Email:</span> germanic.nordic@miskatonic.edu</p>
+                    </div>
+                    <div class="contact-card">
+                        <h3>📬 Departmental Leadership</h3>
+                        <p><span class="label">Chair:</span> Prof. Pierre Morgan, Ph.D.</p>
+                        <p><span class="label">Graduate Director:</span> Prof. Liisa M. Korhonen, Ph.D.</p>
+                        <p><span class="label">Undergraduate Director:</span> Prof. Anika S. Krüger, Ph.D.</p>
+                        <p style="margin-top:0.8rem;"><span class="label">Office Hours:</span> Mon–Fri 9:00 AM – 5:00 PM EST</p>
+                    </div>
+                    <div class="contact-card" style="grid-column:1 / -1;">
+                        <h3>📚 Special Collections &amp; Archives</h3>
+                        <p><span class="label">Germanic Philology Library:</span> Over 50,000 volumes, including rare editions of medieval German, Old Norse, and Yiddish texts.</p>
+                        <p><span class="label">Nordic Cultural Archive:</span> Manuscripts, sound recordings, and ephemera documenting Nordic folk traditions.</p>
+                        <p><span class="label">Finno-Ugric Resource Center:</span> A specialized collection of materials on the languages and cultures of the Finno-Ugric peoples.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // ════════════════════════════════════════════════════════════════
+        // DATA
+        // ════════════════════════════════════════════════════════════════
+
+        const facultyData = [{
+            name: "Pierre Morgan",
+            position: "Professor & Chair",
+            education: "Ph.D. Germanic Philology, Columbia",
+            expertise: "Germanic Philology, Historical Linguistics",
+            lab: "Germanic Philology Lab"
+        }, {
+            name: "Aino K. Virtanen",
+            position: "Assistant Professor",
+            education: "Ph.D. Finnish Literature, Helsinki",
+            expertise: "Finnish Literature, Kalevala Studies",
+            lab: "Finnish Studies Group"
+        }, {
+            name: "Anders H. Lindberg",
+            position: "Assistant Professor",
+            education: "Ph.D. Danish Literature, Copenhagen",
+            expertise: "Danish Literature, Modern Scandinavian",
+            lab: "Nordic Literary Cultures Lab"
+        }, {
+            name: "Anika S. Krüger",
+            position: "Assistant Professor",
+            education: "Ph.D. German Literature, Munich",
+            expertise: "German Literature, Old Norse",
+            lab: "Medieval German Studies"
+        }, {
+            name: "Annelie J. van der Merwe",
+            position: "Assistant Professor",
+            education: "Ph.D. Afrikaans Literature, Stellenbosch",
+            expertise: "Afrikaans Literature, South African Culture",
+            lab: "Dutch & Afrikaans Studies"
+        }, {
+            name: "Anu Kivinen",
+            position: "Assistant Professor",
+            education: "Ph.D. Estonian Literature, Tartu",
+            expertise: "Estonian Literature, Finno-Ugric",
+            lab: "Finno-Ugric Studies"
+        }, {
+            name: "Briony M. Quayle",
+            position: "Assistant Professor",
+            education: "Ph.D. German/Swedish, Edinburgh",
+            expertise: "German-Swedish Comparative Literature",
+            lab: "Nordic Cultural Exchange"
+        }, {
+            name: "Charles R. Wilmot",
+            position: "Professor",
+            education: "Ph.D. German, LSE",
+            expertise: "Modern German Literature, Intellectual History",
+            lab: "Modern German Studies"
+        }, {
+            name: "Elin M. Forsberg",
+            position: "Assistant Professor",
+            education: "Ph.D. Swedish Literature, Uppsala",
+            expertise: "Swedish Literature, Nordic Modernism",
+            lab: "Swedish Literary Studies"
+        }, {
+            name: "Emmanuel Spalding",
+            position: "Professor",
+            education: "Ph.D. Germanic Philology, Wisconsin–Madison",
+            expertise: "Germanic Philology, Gothic, Old High German",
+            lab: "Historical Linguistics Lab"
+        }, {
+            name: "Femke L. van Dijk",
+            position: "Assistant Professor",
+            education: "Ph.D. Dutch Literature, Leiden",
+            expertise: "Dutch Literature, Low Countries",
+            lab: "Dutch & Afrikaans Studies"
+        }, {
+            name: "Frederikke M. Sørensen",
+            position: "Assistant Professor",
+            education: "Ph.D. Scandinavian Linguistics, Aarhus",
+            expertise: "Scandinavian Linguistics, Old East Norse",
+            lab: "Nordic Linguistics Lab"
+        }, {
+            name: "Freyja K. Halvorsen",
+            position: "Assistant Professor",
+            education: "Ph.D. Norwegian Literature, Oslo",
+            expertise: "Norwegian Literature, Saga Studies",
+            lab: "Old Norse & Medieval Studies"
+        }, {
+            name: "Gustav P. Lindqvist",
+            position: "Assistant Professor",
+            education: "Ph.D. Nordic Linguistics, Stockholm",
+            expertise: "Nordic Linguistics, Language Contact",
+            lab: "Nordic Linguistics Lab"
+        }, {
+            name: "Hanna T. Petersen",
+            position: "Assistant Professor",
+            education: "Ph.D. Faroese Language, University of the Faroe Islands",
+            expertise: "Faroese Language, Nordic Dialectology",
+            lab: "Nordic Dialectology Group"
+        }, {
+            name: "Jamil Morrison",
+            position: "Assistant Professor",
+            education: "Ph.D. Northern European Linguistics, Cambridge",
+            expertise: "Islenska, Faroese, Old West Norse",
+            lab: "Old Norse & Medieval Studies"
+        }, {
+            name: "Liisa M. Korhonen",
+            position: "Professor",
+            education: "Ph.D. Finno-Ugric Studies, Tampere",
+            expertise: "Finno-Ugric Studies, Uralic Languages",
+            lab: "Finno-Ugric Studies"
+        }, {
+            name: "Mariska K. Smith",
+            position: "Assistant Professor",
+            education: "Ph.D. South African Cultural Studies, Cape Town",
+            expertise: "Afrikaans, South African Culture",
+            lab: "Dutch & Afrikaans Studies"
+        }, {
+            name: "Saskia R. de Vries",
+            position: "Assistant Professor",
+            education: "Ph.D. Low Countries Cultural Studies, Groningen",
+            expertise: "Low Countries Culture, Dutch Literature",
+            lab: "Dutch & Afrikaans Studies"
+        }, {
+            name: "Simon T. Barraclough",
+            position: "Assistant Professor",
+            education: "Ph.D. Yiddish Anthropological Linguistics, Warwick",
+            expertise: "Yiddish, Anthropological Linguistics",
+            lab: "Jewish & Yiddish Studies"
+        }];
+
+        const researchData = [{
+            id: 'r1',
+            name: 'Germanic Philology & Historical Linguistics',
+            desc: 'Investigating the evolution of Germanic languages from Proto-Germanic to modern varieties, with a focus on phonological and morphological change.',
+            image: 'https://picsum.photos/id/104/800/400',
+            details: [
+                'Proto-Germanic reconstruction and sound laws',
+                'Gothic and Old High German textual traditions',
+                'Dialectology of modern Germanic languages',
+                'Historical sociolinguistics and language contact'
+            ]
+        }, {
+            id: 'r2',
+            name: 'Old Norse & Medieval Scandinavian Studies',
+            desc: 'Exploring the literature, history, and culture of the Viking Age and medieval Scandinavia through sagas, eddas, and skaldic poetry.',
+            image: 'https://picsum.photos/id/101/800/400',
+            details: [
+                'Eddic and skaldic poetry analysis',
+                'Saga literature and narrative traditions',
+                'Viking Age history and archaeology',
+                'Medieval Scandinavian manuscript studies'
+            ]
+        }, {
+            id: 'r3',
+            name: 'Finno-Ugric & Uralic Studies',
+            desc: 'Researching the languages, folklore, and cultural traditions of the Finno-Ugric and Uralic peoples, from the Baltic to Siberia.',
+            image: 'https://picsum.photos/id/106/800/400',
+            details: [
+                'Comparative Uralic linguistics',
+                'Finnish and Estonian literary traditions',
+                'Sámi and other Indigenous languages of the North',
+                'Folklore and oral epic traditions'
+            ]
+        }, {
+            id: 'r4',
+            name: 'German Literature from Medieval to Modern',
+            desc: 'Examining the rich literary heritage of the German-speaking world, from the Nibelungenlied to contemporary German fiction.',
+            image: 'https://picsum.photos/id/103/800/400',
+            details: [
+                'Medieval German epic and courtly literature',
+                'Early modern German drama and poetry',
+                'Romanticism and 19th-century German literature',
+                '20th-century and contemporary German fiction'
+            ]
+        }, {
+            id: 'r5',
+            name: 'Nordic Cultural Studies',
+            desc: 'Investigating the cultural, social, and political dimensions of Nordic societies, past and present, through interdisciplinary approaches.',
+            image: 'https://picsum.photos/id/107/800/400',
+            details: [
+                'Nordic identity and nationalism',
+                'Scandinavian cinema and visual culture',
+                'Nordic folklore and folk traditions',
+                'Contemporary Nordic social and political movements'
+            ]
+        }, {
+            id: 'r6',
+            name: 'Yiddish & Ashkenazi Cultural Studies',
+            desc: 'Exploring the language, literature, and cultural heritage of Ashkenazi Jewry, with a focus on Yiddish and Eastern European Jewish traditions.',
+            image: 'https://picsum.photos/id/108/800/400',
+            details: [
+                'Yiddish linguistics and dialectology',
+                'Yiddish literature and theatre',
+                'Ashkenazi folk culture and music',
+                'Holocaust memory and post-war Yiddish writing'
+            ]
+        }];
+
+        const facilityData = [{
+            id: 'f1',
+            name: 'Germanic Philology Library',
+            desc: 'A specialized research library housing over 50,000 volumes in Germanic philology, historical linguistics, and medieval studies.',
+            image: 'https://picsum.photos/id/102/800/400',
+            details: [
+                'Over 50,000 volumes in Germanic philology',
+                'Rare editions of medieval German and Old Norse texts',
+                'Comprehensive holdings in Gothic, Old Saxon, and Old High German',
+                'Subscription to 200+ scholarly journals',
+                'Digital archives and manuscript facsimiles'
+            ]
+        }, {
+            id: 'f2',
+            name: 'Nordic Cultural Center',
+            desc: 'A dedicated space for the study of Nordic cultures, featuring seminar rooms, exhibition space, and a specialized reference collection.',
+            image: 'https://picsum.photos/id/104/800/400',
+            details: [
+                'Exhibition gallery for Nordic art and artifacts',
+                'Seminar rooms for small-group instruction',
+                'Reference collection on Nordic history and culture',
+                'Archive of Nordic folklore and oral traditions',
+                'Study spaces for graduate students'
+            ]
+        }, {
+            id: 'f3',
+            name: 'Scandinavian Language Lab',
+            desc: 'A state-of-the-art language learning facility with audio, video, and digital resources for the study of Scandinavian languages.',
+            image: 'https://picsum.photos/id/105/800/400',
+            details: [
+                '20 individual language learning carrels',
+                'Audio and video recording capabilities',
+                'Digital language learning software suite',
+                'Collection of Scandinavian films and media',
+                'Language tutoring and conversation practice'
+            ]
+        }, {
+            id: 'f4',
+            name: 'Old Norse Research Collection',
+            desc: 'A specialized collection of Old Norse and Icelandic texts, including sagas, eddas, and skaldic poetry in manuscript and printed editions.',
+            image: 'https://picsum.photos/id/106/800/400',
+            details: [
+                'Complete set of Íslenzk fornrit (Saga editions)',
+                'Facsimiles of major Icelandic manuscripts',
+                'Skaldic poetry corpus and reference works',
+                'Digital Old Norse–English dictionary tools',
+                'Onomastic and toponymic reference materials'
+            ]
+        }, {
+            id: 'f5',
+            name: 'Finno-Ugric Studies Archive',
+            desc: 'A unique collection of materials on the languages and cultures of the Finno-Ugric peoples, including fieldwork recordings and rare publications.',
+            image: 'https://picsum.photos/id/107/800/400',
+            details: [
+                'Fieldwork recordings of Finno-Ugric languages',
+                'Rare publications in Finnish, Estonian, Hungarian, and Sámi',
+                'Ethnographic materials from Uralic communities',
+                'Archive of folklore and oral epic recordings',
+                'Specialized linguistics reference collection'
+            ]
+        }, {
+            id: 'f6',
+            name: 'Medieval Germanic Seminar Room',
+            desc: 'A dedicated seminar and reading room for the study of medieval Germanic texts, with a reference collection and display of facsimiles.',
+            image: 'https://picsum.photos/id/108/800/400',
+            details: [
+                'Seating for 20 scholars',
+                'Reference collection of medieval texts',
+                'Display cases for manuscript facsimiles',
+                'Digital projection and document camera',
+                'Climate-controlled environment for rare materials'
+            ]
+        }];
+
+        const programData = [{
+            id: 'p1',
+            name: 'Ph.D. in Germanic Studies',
+            desc: 'A research-intensive doctoral program preparing students for academic careers in Germanic languages, literatures, and philology.',
+            image: 'https://picsum.photos/id/101/800/400',
+            details: [
+                '4–5 year program with dissertation research',
+                'Specializations in philology, literature, or cultural studies',
+                'Comprehensive language requirements in two Germanic languages',
+                'Teaching assistantships and pedagogical training',
+                'Opportunities for research abroad in Germany, Austria, and Scandinavia'
+            ]
+        }, {
+            id: 'p2',
+            name: 'Ph.D. in Nordic Studies',
+            desc: 'A doctoral program focusing on the languages, literatures, and cultures of the Nordic world, from the Viking Age to the present.',
+            image: 'https://picsum.photos/id/103/800/400',
+            details: [
+                '4–5 year program with dissertation research',
+                'Specializations in Old Norse, Scandinavian literature, or Nordic cultural studies',
+                'Language requirements in Old Norse and a modern Scandinavian language',
+                'Fieldwork and archival research opportunities',
+                'Joint seminars with the Old Norse Research Group'
+            ]
+        }, {
+            id: 'p3',
+            name: 'M.A. in Germanic & Nordic Studies',
+            desc: 'A flexible master\'s program combining coursework with either a thesis or a comprehensive examination in Germanic and Nordic studies.',
+            image: 'https://picsum.photos/id/104/800/400',
+            details: [
+                '2-year program with thesis or exam option',
+                'Core curriculum in Germanic philology and Nordic literature',
+                'Electives in German, Nordic, and Finno-Ugric studies',
+                'Language study in one or more Germanic/Nordic languages',
+                'Preparation for doctoral study or professional careers'
+            ]
+        }, {
+            id: 'p4',
+            name: 'B.A. in Germanic & Nordic Studies',
+            desc: 'An interdisciplinary undergraduate program providing a foundation in the languages, literatures, and cultures of the Germanic and Nordic worlds.',
+            image: 'https://picsum.photos/id/106/800/400',
+            details: [
+                '4-year program with language and literature core',
+                'Study of two Germanic/Nordic languages',
+                'Courses in medieval, modern, and contemporary literature',
+                'Study abroad opportunities in Germany, Scandinavia, and the Baltic',
+                'Senior thesis or capstone project'
+            ]
+        }, {
+            id: 'p5',
+            name: 'Graduate Certificate in Old Norse',
+            desc: 'A graduate-level certificate program for students seeking expertise in Old Norse language, literature, and Viking Age culture.',
+            image: 'https://picsum.photos/id/107/800/400',
+            details: [
+                '15-credit graduate certificate',
+                'Courses in Old Norse grammar, sagas, and eddas',
+                'Intensive language instruction in Old Norse and Icelandic',
+                'Capstone translation or research project',
+                'Open to M.A. and Ph.D. students across the university'
+            ]
+        }];
+
+        // ════════════════════════════════════════════════════════════════
+        // RENDER FUNCTIONS
+        // ════════════════════════════════════════════════════════════════
+
+        function renderFaculty() {
+            const tbody = document.getElementById('facultyTableBody');
+            tbody.innerHTML = facultyData.map(f =>
+                `<tr>
+              <td><strong>${f.name}</strong></td>
+              <td class="position">${f.position}</td>
+              <td>${f.education}</td>
+              <td class="expertise">${f.expertise}</td>
+              <td class="lab">${f.lab}</td>
+            </tr>`
+            ).join('');
+        }
+
+        function renderResearchCards() {
+            const grid = document.getElementById('researchGrid');
+            grid.innerHTML = researchData.map(r =>
+                `<div class="card" data-research="${r.id}">
+              <div class="card-img"><img src="${r.image}" alt="${r.name}" /></div>
+              <div class="card-body">
+                <h3>${r.name}</h3>
+                <p>${r.desc}</p>
+                <button class="btn-detail" data-research="${r.id}">Explore →</button>
+              </div>
+            </div>`
+            ).join('');
+
+            grid.querySelectorAll('[data-research]').forEach(el => {
+                el.addEventListener('click', function(e) {
+                    const id = this.dataset.research || this.closest('[data-research]')?.dataset.research;
+                    if (id) showResearchDetail(id);
+                });
+            });
+        }
+
+        function renderFacilities() {
+            const grid = document.getElementById('facilitiesGrid');
+            grid.innerHTML = facilityData.map(f =>
+                `<div class="card" data-facility="${f.id}">
+              <div class="card-img"><img src="${f.image}" alt="${f.name}" /></div>
+              <div class="card-body">
+                <h3>${f.name}</h3>
+                <p>${f.desc}</p>
+                <button class="btn-detail" data-facility="${f.id}">View Details →</button>
+              </div>
+            </div>`
+            ).join('');
+
+            grid.querySelectorAll('[data-facility]').forEach(el => {
+                el.addEventListener('click', function(e) {
+                    const id = this.dataset.facility || this.closest('[data-facility]')?.dataset.facility;
+                    if (id) showFacilityDetail(id);
+                });
+            });
+        }
+
+        function renderPrograms() {
+            const grid = document.getElementById('programsGrid');
+            grid.innerHTML = programData.map(p =>
+                `<div class="card" data-program="${p.id}">
+              <div class="card-img"><img src="${p.image}" alt="${p.name}" /></div>
+              <div class="card-body">
+                <h3>${p.name}</h3>
+                <p>${p.desc}</p>
+                <button class="btn-detail" data-program="${p.id}">Learn More →</button>
+              </div>
+            </div>`
+            ).join('');
+
+            grid.querySelectorAll('[data-program]').forEach(el => {
+                el.addEventListener('click', function(e) {
+                    const id = this.dataset.program || this.closest('[data-program]')?.dataset.program;
+                    if (id) showProgramDetail(id);
+                });
+            });
+        }
+
+        // ─── RESEARCH DETAIL ───
+        function showResearchDetail(id) {
+            const r = researchData.find(d => d.id === id);
+            if (!r) return;
+            const container = document.getElementById('researchDetailContainer');
+            container.innerHTML = `
+            <div class="research-detail active">
+              <div class="detail-banner">
+                <img src="${r.image}" alt="${r.name}" />
+                <div class="detail-overlay"><h2>${r.name}</h2></div>
+              </div>
+              <div class="detail-body">
+                <p style="font-size:1.1rem; line-height:1.8;">${r.desc}</p>
+                <h3>Key Research Themes</h3>
+                <ul>${r.details.map(d => `<li>${d}</li>`).join('')}</ul>
+                <button class="btn-back" onclick="backToResearch()">
+                  <img src="https://img.icons8.com/?size=100&id=24637&format=png&color=ffffff" alt="Back" /> Back to Research Areas
+                </button>
+              </div>
+            </div>
+          `;
+            document.getElementById('researchGrid').style.display = 'none';
+        }
+
+        function backToResearch() {
+            document.getElementById('researchGrid').style.display = 'grid';
+            document.getElementById('researchDetailContainer').innerHTML = '';
+        }
+
+        // ─── FACILITY DETAIL ───
+        function showFacilityDetail(id) {
+            const f = facilityData.find(d => d.id === id);
+            if (!f) return;
+            const container = document.getElementById('facilityDetailContainer');
+            container.innerHTML = `
+            <div class="facility-detail active">
+              <div class="detail-banner">
+                <img src="${f.image}" alt="${f.name}" />
+                <div class="detail-overlay"><h2>${f.name}</h2></div>
+              </div>
+              <div class="detail-body">
+                <p style="font-size:1.1rem; line-height:1.8;">${f.desc}</p>
+                <h3>Facility Features</h3>
+                <ul>${f.details.map(d => `<li>${d}</li>`).join('')}</ul>
+                <button class="btn-back" onclick="backToFacilities()">
+                  <img src="https://img.icons8.com/?size=100&id=24637&format=png&color=ffffff" alt="Back" /> Back to Facilities
+                </button>
+              </div>
+            </div>
+          `;
+            document.getElementById('facilitiesGrid').style.display = 'none';
+        }
+
+        function backToFacilities() {
+            document.getElementById('facilitiesGrid').style.display = 'grid';
+            document.getElementById('facilityDetailContainer').innerHTML = '';
+        }
+
+        // ─── PROGRAM DETAIL ───
+        function showProgramDetail(id) {
+            const p = programData.find(d => d.id === id);
+            if (!p) return;
+            const container = document.getElementById('programDetailContainer');
+            container.innerHTML = `
+            <div class="program-detail active">
+              <div class="detail-banner">
+                <img src="${p.image}" alt="${p.name}" />
+                <div class="detail-overlay"><h2>${p.name}</h2></div>
+              </div>
+              <div class="detail-body">
+                <p style="font-size:1.1rem; line-height:1.8;">${p.desc}</p>
+                <h3>Program Highlights</h3>
+                <ul>${p.details.map(d => `<li>${d}</li>`).join('')}</ul>
+                <button class="btn-back" onclick="backToPrograms()">
+                  <img src="https://img.icons8.com/?size=100&id=24637&format=png&color=ffffff" alt="Back" /> Back to Programs
+                </button>
+              </div>
+            </div>
+          `;
+            document.getElementById('programsGrid').style.display = 'none';
+        }
+
+        function backToPrograms() {
+            document.getElementById('programsGrid').style.display = 'grid';
+            document.getElementById('programDetailContainer').innerHTML = '';
+        }
+
+        // ─── NAVIGATION ───
+        function navigateTo(sectionId) {
+            document.querySelectorAll('.section-container').forEach(el => el.classList.remove('active'));
+            const target = document.getElementById('sec-' + sectionId);
+            if (target) target.classList.add('active');
+
+            document.querySelectorAll('#navMenu button').forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`#navMenu button[data-section="${sectionId}"]`)?.classList.add('active');
+
+            // Reset detail views
+            if (sectionId !== 'research') {
+                document.getElementById('researchGrid').style.display = 'grid';
+                document.getElementById('researchDetailContainer').innerHTML = '';
+            }
+            if (sectionId !== 'facilities') {
+                document.getElementById('facilitiesGrid').style.display = 'grid';
+                document.getElementById('facilityDetailContainer').innerHTML = '';
+            }
+            if (sectionId !== 'programs') {
+                document.getElementById('programsGrid').style.display = 'grid';
+                document.getElementById('programDetailContainer').innerHTML = '';
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ─── SIDEBAR EVENTS ───
+        document.querySelectorAll('#navMenu button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const section = this.dataset.section;
+                if (section) navigateTo(section);
+            });
+        });
+
+        // ─── GLOBAL EXPOSE ───
+        window.showResearchDetail = showResearchDetail;
+        window.backToResearch = backToResearch;
+        window.showFacilityDetail = showFacilityDetail;
+        window.backToFacilities = backToFacilities;
+        window.showProgramDetail = showProgramDetail;
+        window.backToPrograms = backToPrograms;
+        window.navigateTo = navigateTo;
+
+        // ─── INIT ───
+        renderFaculty();
+        renderResearchCards();
+        renderFacilities();
+        renderPrograms();
+        navigateTo('home');
+    </script>
+</body>
+</html>
